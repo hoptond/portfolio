@@ -15,6 +15,7 @@ nav {
     top: 0;
     color: #dddddd;
     font-family: 'Lato', sans-serif;
+    z-index: 0;
 }
 #navwrapper {
     display:flex;
@@ -74,7 +75,7 @@ header p {
     background-size: 100% 100%;
     background-image: url(headerbackground.jpg);
     opacity: 0.2;
-    z-index: 0;
+    z-index: 1;
 }
 #showcase {
     margin: 0;
