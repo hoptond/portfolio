@@ -28,17 +28,18 @@ nav {
 }
 .navitem>h4 {
     font-size:1.4rem;
-    margin: 10px 0px 2px 0px;
+    margin: 10px 0 2px 0;
 }
 .navitem>p {
     font-size:0.6rem;
-    margin: 2px 0px 10px 0px;
+    margin: 2px 0 10px 0;
 }
 header {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: #eeeeee;
     width:100%;
+    height:274px
 }
 #headerwrapper {
     width: 80%;
@@ -47,53 +48,76 @@ header {
 }
 header h1 {
     font-family: 'Mukta', sans-serif;
-    margin: 0px;
+    margin: 0;
     font-size:2.4rem;
-    padding: 40px 0px 0px 0px;
+    padding: 40px 0 0 0;
 }
 header h2 {
     font-family: 'Poppins', sans-serif;
     font-size:1.8rem;
     font-weight:600;
-    margin: 0px;
-    padding:20px 0px 10px 0px;
+    margin: 0;
+    padding:20px 0 10px 0;
 }
 header p {
     font-size:0.8rem;
     width:40%;
-    margin:0px;
-    padding:0px 0px 30px 0px;
+    margin:0;
+    padding:0 0 30px 0;
 }
 #headerimg {
-    position:relative;
+    position: relative;
     float:right;
     width: 40%;
     height:274px;
     background-size: 100% 100%;
     background-image: url(headerbackground.jpg);
     opacity: 0.2;
+    z-index: 0;
 }
-
 #showcase {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: #bbbbbb;
     width:100%;
-    height:300px;
 }
 #showcasewrapper {
     width:80%;
     display: flex;
+    margin: 0 auto;
 }
 #showcasetext {
-
+    width:40%
+}
+#showcasetext>h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size:1.8rem;
+    font-weight:600;
+    margin: 0;
+    padding:40px 0 10px 0;
+}
+#showcasetext>h3 {
+    font-size:0.75rem;
+    width:90%;
+    margin:0;
+    padding:4px 0 4px 0;
+}
+#showcasetext>p {
+    font-size:0.9rem;
+    width:90%;
+    margin:0;
+    padding:4px 0 40px 0;
 }
 #showcaseviewer {
-
+    width:50%;
+    height:266px;
+    border: 1px solid #111111;
+    margin:40px 0 40px 0;
+    background-image: url(projectexample.jpg);
 }
 #contact {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: #222222;
     width: 100%;
     height:60px;
