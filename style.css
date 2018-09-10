@@ -179,7 +179,7 @@ ul>li{
         width: 100%;
     }
     #showcasetext p {
-        padding: 4px 0 20px 0px;
+        padding: 4px 0 20px 0;
     }
     #showcaseviewer {
         width: 100%;
@@ -188,4 +188,7 @@ ul>li{
     #showcasewrapper {
         flex-direction: column;
     }
+}
+@media screen and (max-width: 500px) {
+    /* selector for mobile/tiny potato devices */
 }
