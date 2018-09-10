@@ -13,11 +13,26 @@ nav {
     width: 100%;
     position: sticky;
     top: 0px;
-    height:40px;
+    color: #dddddd;
+    font-family: 'Lato', sans-serif;
 }
 #navwrapper {
     display:flex;
     width: 80%;
+    margin: 0 auto;
+    justify-content: center;
+}
+.navitem {
+    margin:0;
+    padding: 0 20px 0px 20px;
+}
+.navitem>h4 {
+    font-size:1.4rem;
+    margin: 10px 0px 10px 0px;
+}
+.navitem>p {
+    font-size:0.6rem;
+    margin: 10px 0px 10px 0px;
 }
 header {
     margin: 0px;
