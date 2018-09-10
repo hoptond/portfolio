@@ -190,5 +190,16 @@ ul>li{
     }
 }
 @media screen and (max-width: 500px) {
-    /* selector for mobile/tiny potato devices */
+    #navwrapper {
+        width:90%;
+    }
+    #headerwrapper {
+        width:90%;
+    }
+    #showcasewrapper {
+        width: 90%;
+    }
+    #contactwrapper {
+        width: 90%;
+    }
 }
