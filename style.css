@@ -19,9 +19,9 @@ nav {
 }
 #navwrapper {
     display:flex;
-    width: 80%;
+    width: 65%;
     margin: 0 auto;
-    justify-content: center;
+    justify-content: space-between;
 }
 .navitem {
     margin:0;
@@ -43,7 +43,7 @@ header {
     height:274px
 }
 #headerwrapper {
-    width: 80%;
+    width: 65%;
     margin: 0 auto;
     background-size: 100% auto;
 }
@@ -83,7 +83,7 @@ header p {
     width:100%;
 }
 #showcasewrapper {
-    width:80%;
+    width:65%;
     display: flex;
     margin: 0 auto;
 }
@@ -154,7 +154,7 @@ header p {
     color:#ffffff;
 }
 #contactwrapper {
-    width:80%;
+    width:65%;
     margin:0 auto;
 }
 ul {
