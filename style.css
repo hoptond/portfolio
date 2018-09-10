@@ -90,21 +90,21 @@ header p {
 #showcasetext {
     width:40%
 }
-#showcasetext>h2 {
+#showcasetext h2 {
     font-family: 'Poppins', sans-serif;
     font-size:1.8rem;
     font-weight:600;
     margin: 0;
     padding:40px 0 10px 0;
 }
-#showcasetext>h3 {
+#showcasetext h3 {
     font-family: 'Poppins', sans-serif;
     font-size:0.75rem;
     width:90%;
     margin:0;
     padding:4px 0 4px 0;
 }
-#showcasetext>p {
+#showcasetext p {
     font-family: 'Mukta', sans-serif;
     font-size:0.9rem;
     width:90%;
@@ -168,4 +168,19 @@ ul>li{
     line-height:0.8rem;
     font-size:0.8rem;
     font-family: 'Mukta', sans-serif;
+}
+@media screen and (max-width: 1114px) {
+    #showcasetext {
+        width: 100%;
+    }
+    #showcasetext p {
+        padding: 4px 0 20px 0px;
+    }
+    #showcaseviewer {
+        width: 100%;
+        margin:20px 0 40px 0;
+    }
+    #showcasewrapper {
+        flex-direction: column;
+    }
 }
