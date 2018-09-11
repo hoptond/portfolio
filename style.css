@@ -38,12 +38,12 @@ nav {
     -ms-flex: 0 1 auto
 }
 
-.navitem>h4 {
+.navitem h4 {
     font-size: 1.4rem;
     margin: 10px 0 2px 0;
 }
 
-.navitem>p {
+.navitem p {
     font-size: 0.6rem;
     margin: 2px 0 10px 0;
 }
@@ -204,7 +204,7 @@ ul {
     margin: 0 auto;
     padding: 10px 0 10px 0;
 }
-ul>li{
+ul li{
     padding :2px 0 2px 0;
     line-height: 0.8rem;
     font-size: 0.8rem;
@@ -277,11 +277,11 @@ ul>li{
         margin:0;
         padding:0 10px 0 10px;
     }
-    .navitem>h4 {
+    .navitem h4 {
         font-size:0.8rem;
         margin:10px 0 2px 0;
     }
-    .navitem>p {
+    .navitem p {
         font-size:0.775rem;
         margin:2px 0 10px 0;
     }
