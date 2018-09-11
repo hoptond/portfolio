@@ -223,3 +223,29 @@ ul>li{
         width: 90%;
     }
 }
+@media screen and (max-width: 366px) {
+    #navwrapper {
+        width:97.5%;
+    }
+    .navitem {
+        margin:0;
+        padding: 0 10px 0 10px;
+    }
+    .navitem>h4 {
+        font-size:0.8rem;
+        margin: 10px 0 2px 0;
+    }
+    .navitem>p {
+        font-size:0.775rem;
+        margin: 2px 0 10px 0;
+    }
+    #headerwrapper {
+        width:97.5%;
+    }
+    #showcasewrapper {
+        width:97.5%;
+    }
+    #contactwrapper {
+        width:97.5%;
+    }
+}
