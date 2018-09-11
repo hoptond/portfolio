@@ -25,7 +25,7 @@ nav {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    width: 65%;
+    max-width: 65%;
     margin:0 auto;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
@@ -57,7 +57,7 @@ header {
 }
 
 #headerwrapper {
-    width: 65%;
+    max-width: 65%;
     height: 100%;
     margin: 0 auto;
     background-size: auto 100%;
@@ -109,7 +109,7 @@ header p {
 }
 
 #showcasewrapper {
-    width: 65%;
+    max-width: 65%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -196,7 +196,7 @@ header p {
     color: #ffffff;
 }
 #contactwrapper {
-    width: 65%;
+    max-width: 65%;
     margin: 0 auto;
 }
 ul {
@@ -251,24 +251,20 @@ ul li{
     }
 }
 
-@media screen and (max-width: 402px) {
-    #showcaseviewer {
-        background-size:auto 100%;
-    }
-}
-
-@media screen and (max-width: 366px) {
+@media screen and (max-width: 438px) {
     .navitem {
         margin:0;
         padding:0 10px 0 10px;
     }
     .navitem h4 {
-        font-size:0.8rem;
+        font-size:1.2rem;
         margin:10px 0 2px 0;
     }
     .navitem p {
-        font-size:0.775rem;
-        margin:2px 0 10px 0;
+        display: none;
+    }
+    #showcaseviewer {
+        background-size:auto 100%;
     }
     #navwrapper,
     #headerwrapper,
