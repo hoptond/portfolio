@@ -20,6 +20,7 @@ nav {
 }
 #navwrapper {
     display:flex;
+    display: -ms-flexbox;
     width: 65%;
     margin: 0 auto;
     justify-content: space-between;
@@ -78,6 +79,7 @@ header p {
 }
 #badges {
     display: flex;
+    display: -ms-flexbox;
     padding: 8px 0 20px 0;
     font-size:2.6rem;
 }
@@ -90,6 +92,7 @@ header p {
 #showcasewrapper {
     width:65%;
     display: flex;
+    display: -ms-flexbox;
     margin: 0 auto;
 }
 #showcasetext {
@@ -127,7 +130,7 @@ header p {
 }
 .showcasenav {
     margin: 20% 0 25% 0;
-    background-color:#66666699;
+    background-color:rgba(102, 102, 102, 0.66);
     color: #ffffff;
     width: 40px;
     height:30px;
@@ -141,7 +144,7 @@ header p {
 }
 #showcasebottom {
     margin-top:224px;
-    background-color:#33333399;
+    background-color:rgba(51, 51, 51, 0.66);
     text-align:center;
 
 }
