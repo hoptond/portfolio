@@ -14,7 +14,8 @@ nav {
     padding: 0;
     background-color: #111111;
     width: 100%;
-    position: sticky;
+    height:auto;
+    position: fixed;
     top: 0;
     color: #dddddd;
     font-family: 'Lato', sans-serif;
@@ -49,7 +50,7 @@ nav {
 }
 
 header {
-    margin: 0;
+    margin: 61.5px 0 0 0;
     padding: 0;
     background-color: #eeeeee;
     height: auto;
@@ -212,6 +213,9 @@ ul li{
 }
 
 @media screen and (max-width: 992px) {
+    header {
+        margin: 89px 0 0 0;
+    }
     #headertext p {
         width: 70%;
     }
@@ -232,7 +236,6 @@ ul li{
         flex-direction: column;
     }
 }
-
 @media screen and (max-width: 674px) {
     #navwrapper,
     #headerwrapper,
@@ -252,13 +255,16 @@ ul li{
 }
 
 @media screen and (max-width: 438px) {
+    header {
+        margin: 67px 0 0 0;
+    }
     .navitem {
         margin:0;
         padding:0 10px 0 10px;
     }
     .navitem h4 {
         font-size:1.2rem;
-        margin:10px 0 2px 0;
+        margin:10px 0 10px 0;
     }
     .navitem p {
         display: none;
