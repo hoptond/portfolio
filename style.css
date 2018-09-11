@@ -54,7 +54,7 @@ header {
     overflow:hidden;
 }
 #headertext {
-    width:50%;
+    width:100%;
 }
 header h1 {
     font-family: 'Mukta', sans-serif;
@@ -72,7 +72,7 @@ header h2 {
 header p {
     font-family: 'Mukta', sans-serif;
     font-size:0.8rem;
-    width:80%;
+    width:50%;
     margin:0;
     padding:0 0 10px 0;
 }
@@ -174,7 +174,10 @@ ul>li{
     font-size:0.8rem;
     font-family: 'Mukta', sans-serif;
 }
-@media screen and (max-width: 1114px) {
+@media screen and (max-width: 992px) {
+    #headertext p {
+        width: 70%;
+    }
     #showcasetext {
         width: 100%;
     }
@@ -189,7 +192,21 @@ ul>li{
         flex-direction: column;
     }
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 674px) {
+    #navwrapper {
+        width:78.5%;
+    }
+    #headerwrapper {
+        width:78.5%;
+    }
+    #showcasewrapper {
+        width:78.5%;
+    }
+    #contactwrapper {
+        width:75.5%;
+    }
+}
+@media screen and (max-width: 576px) {
     #navwrapper {
         width:90%;
     }
