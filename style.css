@@ -136,6 +136,8 @@ header p {
     margin:40px 0 40px 0;
     background-image: url(projectexample.jpg);
     background-size: 100% auto;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 .showcasenav {
     margin: 20% 0 25% 0;
@@ -231,6 +233,11 @@ ul>li{
     }
     #contactwrapper {
         width: 90%;
+    }
+}
+@media screen and (max-width: 402px) {
+    #showcaseviewer {
+        background-size: auto 100%;
     }
 }
 @media screen and (max-width: 366px) {
