@@ -1,2 +1,2 @@
 # portfolio
-A portfolio for prospective employers to showcase my skills and projects 
+A portfolio to showcase my developer skills and projects I have worked on 
