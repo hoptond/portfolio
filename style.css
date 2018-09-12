@@ -5,7 +5,7 @@
 }
 
 body {
-    margin:0 auto;
+    margin: 0 auto;
     height: 100%;
 }
 
@@ -237,6 +237,13 @@ ul li{
     .showcaseviewer {
         width: 100%;
         margin: 20px 0 40px 0;
+    }
+}
+@media screen and (max-width: 688px) {
+    .headerwrapper {
+        background-position: center;
+        -webkit-background-size: auto 100%;
+        background-size: auto 100%;
     }
 }
 @media screen and (max-width: 674px) {
