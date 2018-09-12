@@ -22,7 +22,7 @@ nav {
     z-index: 5;
 }
 
-#navwrapper {
+.navwrapper {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -57,7 +57,7 @@ header {
     overflow: hidden;
 }
 
-#headerwrapper {
+.headerwrapper {
     max-width: 65%;
     height: 100%;
     margin: 0 auto;
@@ -68,7 +68,7 @@ header {
     overflow: hidden;
 }
 
-#headertext {
+.headertext {
     width: 100%;
 }
 
@@ -95,21 +95,21 @@ header p {
     padding: 0 0 10px 0;
 }
 
-#badges {
+.badges {
     -ms-display: flex;
     display: flex;
     padding: 8px 0 20px 0;
     font-size: 2.6rem;
 }
 
-#showcase {
+.showcase {
     margin: 0;
     padding: 0;
     background-color: #bbbbbb;
     width: 100%;
 }
 
-#showcasewrapper {
+.showcasewrapper {
     max-width: 65%;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -121,11 +121,11 @@ header p {
     margin: 0 auto;
 }
 
-#showcasetext {
+.showcasetext {
     width: 40%
 }
 
-#showcasetext h2 {
+.showcasetext h2 {
     font-family:'Poppins', sans-serif;
     font-size: 1.8rem;
     font-weight: 600;
@@ -133,7 +133,7 @@ header p {
     padding: 40px 0 10px 0;
 }
 
-#showcasetext h3 {
+.showcasetext h3 {
     font-family: 'Poppins', sans-serif;
     font-size: 0.75rem;
     width: 90%;
@@ -141,7 +141,7 @@ header p {
     padding: 4px 0 4px 0;
 }
 
-#showcasetext p {
+.showcasetext p {
     font-family:'Mukta', sans-serif;
     font-size: 0.9rem;
     width: 90%;
@@ -149,7 +149,7 @@ header p {
     padding: 4px 0 40px 0;
 }
 
-#showcaseviewer {
+.showcaseviewer {
     position:relative;
     width: 60%;
     height: 266px;
@@ -171,15 +171,15 @@ header p {
     border: 0;
 }
 
-#showcaseprev {
+.showcaseprev {
     float: left;
 }
 
-#showcasenext {
+.showcasenext {
     float: right;
 }
 
-#showcasebottom {
+.showcasebottom {
     position:absolute;
     bottom: 0;
     width:100%;
@@ -187,19 +187,19 @@ header p {
     text-align: center;
     padding: 2px 0;
 }
-#showcaseview {
+.showcaseview {
     font-family:'Mukta', sans-serif;
     color: #ffffff;
     font-size: 1.4rem;
 }
-#contact {
+.contact {
     margin: 0;
     padding: 0;
     background-color: #222222;
     width: 100%;
     color: #ffffff;
 }
-#contactwrapper {
+.contactwrapper {
     max-width: 65%;
     margin: 0 auto;
 }
@@ -219,40 +219,40 @@ ul li{
     header {
         margin: 89px 0 0 0;
     }
-    #headertext p {
+    .headertext p {
         width: 70%;
     }
-    #showcasetext {
-        width: 100%;
-    }
-    #showcasetext p {
-        padding: 4px 0 20px 0;
-    }
-    #showcaseviewer {
-        width: 100%;
-        margin: 20px 0 40px 0;
-    }
-    #showcasewrapper {
+    .showcasewrapper {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
         -ms-flex-direction: column;
         flex-direction: column;
     }
+    .showcasetext {
+        width: 100%;
+    }
+    .showcasetext p {
+        padding: 4px 0 20px 0;
+    }
+    .showcaseviewer {
+        width: 100%;
+        margin: 20px 0 40px 0;
+    }
 }
 @media screen and (max-width: 674px) {
-    #navwrapper,
-    #headerwrapper,
-    #showcasewrapper,
-    #contactwrapper {
+    .navwrapper,
+    .headerwrapper,
+    .showcasewrapper,
+    .contactwrapper {
         width: 78.5%;
     }
 }
 
 @media screen and (max-width: 576px) {
-    #navwrapper,
-    #headerwrapper,
-    #showcasewrapper,
-    #contactwrapper {
+    .navwrapper,
+    .headerwrapper,
+    .showcasewrapper,
+    .contactwrapper {
         width: 90%;
     }
 }
@@ -272,13 +272,13 @@ ul li{
     .navitem p {
         display: none;
     }
-    #showcaseviewer {
+    .showcaseviewer {
         background-size:auto 100%;
     }
-    #navwrapper,
-    #headerwrapper,
-    #showcasewrapper,
-    #contactwrapper {
+    .navwrapper,
+    .headerwrapper,
+    .showcasewrapper,
+    .contactwrapper {
         width:97.5%;
     }
 }
