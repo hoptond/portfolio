@@ -217,7 +217,7 @@ ul li{
 
 @media screen and (max-width: 992px) {
     header {
-        margin: 89px 0 0 0;
+        margin: 61.5px 0 0 0;
     }
     .headertext p {
         width: 70%;
@@ -254,6 +254,9 @@ ul li{
     .showcasewrapper,
     .contactwrapper {
         width: 90%;
+    }
+    .navitem p {
+        display: none;
     }
 }
 
