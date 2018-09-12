@@ -150,6 +150,7 @@ header p {
 }
 
 #showcaseviewer {
+    position:relative;
     width: 60%;
     height: 266px;
     border: 8px solid #111111;
@@ -179,11 +180,15 @@ header p {
 }
 
 #showcasebottom {
-    margin-top: 224px;
+    position:absolute;
+    bottom: 0;
+    width:100%;
     background-color: rgba(51, 51, 51, 0.66);
     text-align: center;
+    padding: 0 2px;
 }
 #showcaseview {
+    font-family:'Mukta', sans-serif;
     background-color: transparent;
     color: #ffffff;
     border: 0;
