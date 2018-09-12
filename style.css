@@ -170,11 +170,11 @@ header p {
     border: 0;
 }
 
-#showcaseleft {
+#showcaseprev {
     float: left;
 }
 
-#showcaseright {
+#showcasenext {
     float: right;
 }
 
