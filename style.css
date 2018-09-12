@@ -214,6 +214,10 @@ ul li{
     font-size: 0.8rem;
     font-family: 'Mukta', sans-serif;
 }
+ul li a{
+    text-decoration: none;
+    color: #ffffff;
+}
 
 @media screen and (max-width: 992px) {
     header {
