@@ -62,7 +62,7 @@ header {
     height: 100%;
     margin: 0 auto;
     background-size: auto 100%;
-    background-image: url(headerbackground.png);
+    background-image: url('headerbackground.png');
     background-repeat: no-repeat;
     background-position: right;
     overflow: hidden;
@@ -155,7 +155,7 @@ header p {
     border: 8px solid #111111;
     border-radius: 6px;
     margin: 40px 0 40px 0;
-    background-image: url(projectexample.jpg);
+    background-image: url('projectexample.jpg');
     background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
