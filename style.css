@@ -12,7 +12,7 @@ body {
 nav {
     margin: 0;
     padding: 0;
-    background-color: #111111;
+    background-color: #373d38;
     width: 100%;
     height:auto;
     position: fixed;
@@ -105,7 +105,7 @@ header p {
 .showcase {
     margin: 0;
     padding: 0;
-    background-color: #bbbbbb;
+    background-color: #a8b5ab;
     width: 100%;
 }
 
@@ -155,8 +155,8 @@ header p {
     height: 266px;
     border: 8px solid #111111;
     border-radius: 6px;
-    margin: 40px 0 40px 0;
-    background-image: url('projectexample.jpg');
+    margin:40px 0 40px 0;
+    background-image: url('magiprojectshowcase1.png');
     background-size: 100% auto;
     background-position: center;
     background-repeat: no-repeat;
@@ -195,7 +195,7 @@ header p {
 .contact {
     margin: 0;
     padding: 0;
-    background-color: #222222;
+    background-color: #252826;
     width: 100%;
     color: #ffffff;
 }
@@ -213,6 +213,10 @@ ul li{
     line-height: 0.8rem;
     font-size: 0.8rem;
     font-family: 'Mukta', sans-serif;
+}
+ul li a{
+    text-decoration: none;
+    color: #ffffff;
 }
 
 @media screen and (max-width: 992px) {
