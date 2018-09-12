@@ -96,8 +96,8 @@ header p {
 }
 
 #badges {
-    display: flex;
     -ms-display: flex;
+    display: flex;
     padding: 8px 0 20px 0;
     font-size: 2.6rem;
 }
