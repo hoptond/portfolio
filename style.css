@@ -12,7 +12,7 @@ body {
 nav {
     margin: 0;
     padding: 0;
-    background-color: #111111;
+    background-color: #373d38;
     width: 100%;
     height:auto;
     position: fixed;
@@ -105,7 +105,7 @@ header p {
 .showcase {
     margin: 0;
     padding: 0;
-    background-color: #bbbbbb;
+    background-color: #a8b5ab;
     width: 100%;
 }
 
@@ -195,7 +195,7 @@ header p {
 .contact {
     margin: 0;
     padding: 0;
-    background-color: #222222;
+    background-color: #252826;
     width: 100%;
     color: #ffffff;
 }
