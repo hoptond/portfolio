@@ -157,6 +157,7 @@ header p {
     border: 8px solid #111111;
     border-radius: 6px;
     margin:40px 0 40px 0;
+    background: #000000;
     background-image: url('magiprojectshowcase1.png');
     background-size: 100% auto;
     background-position: center;
