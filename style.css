@@ -7,6 +7,7 @@
 body {
     margin: 0 auto;
     height: 100%;
+    background-color: #a8b5ab;
 }
 
 nav {
@@ -35,13 +36,14 @@ nav {
 
 .navitem {
     margin: 0;
-    padding: 0 20px;
+    padding: 10px 20px 0 20px;
     -ms-flex: 0 1 auto
 }
 
-.navitem h4 {
+.navitem a {
     font-size: 1.4rem;
-    margin: 10px 0 2px 0;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 .navitem p {
@@ -103,10 +105,11 @@ header p {
 }
 
 .showcase {
-    margin: 0;
+    margin: 0 0 74px 0;
     padding: 0;
     background-color: #a8b5ab;
     width: 100%;
+    height: auto;
 }
 
 .showcasewrapper {
@@ -156,6 +159,7 @@ header p {
     border: 8px solid #111111;
     border-radius: 6px;
     margin:40px 0 40px 0;
+    background: #000000;
     background-image: url('magiprojectshowcase1.png');
     background-size: 100% auto;
     background-position: center;
@@ -163,7 +167,8 @@ header p {
 }
 
 .showcasenav {
-    margin: 20% 0 25% 0;
+    top:45%;
+    position:relative;
     background-color: rgba(102, 102, 102, 0.66);
     color: #ffffff;
     width: 40px;
@@ -198,6 +203,8 @@ header p {
     background-color: #252826;
     width: 100%;
     color: #ffffff;
+    position:fixed;
+    bottom: 0;
 }
 .contactwrapper {
     max-width: 65%;
@@ -273,15 +280,14 @@ ul li a{
 
 @media screen and (max-width: 438px) {
     header {
-        margin: 67px 0 0 0;
+        margin: 48px 0 0 0;
     }
     .navitem {
         margin:0;
         padding:0 10px 0 10px;
     }
-    .navitem h4 {
+    .navitem a {
         font-size:1.2rem;
-        margin:10px 0 10px 0;
     }
     .navitem p {
         display: none;
@@ -294,5 +300,49 @@ ul li a{
     .showcasewrapper,
     .contactwrapper {
         width:97.5%;
+    }
+}
+@media only screen and (min-width: 2400px) {
+    .navwrapper,
+    .headerwrapper,
+    .showcasewrapper,
+    .contactwrapper {
+        max-width: 80%;
+    }
+    .navitem a {
+        font-size: 1.85rem;
+    }
+    .navitem p {
+        font-size: 1rem;
+    }
+    header h1 {
+        font-size: 3.4rem;
+    }
+    header h2 {
+        font-size: 2.8rem;
+    }
+    header p {
+        font-size: 1.25rem;
+    }
+    .badges {
+        font-size: 4rem;
+    }
+    .showcasetext h2 {
+        font-size: 2.8rem;
+    }
+    .showcasetext h3 {
+        font-size: 1rem;
+    }
+    .showcasetext p {
+        font-size: 1.3rem;
+    }
+    ul li {
+        font-size: 1.2rem;
+    }
+}
+/* for some reason, on IE there is no margin applied to the bottom of the showcase, so we must return the footer to its default position */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .contact {
+        position: static;
     }
 }
