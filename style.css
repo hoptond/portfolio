@@ -109,6 +109,7 @@ header p {
     padding: 0;
     background-color: #a8b5ab;
     width: 100%;
+    height:auto;
 }
 
 .showcasewrapper {
@@ -337,5 +338,11 @@ ul li a{
     }
     ul li {
         font-size: 1.2rem;
+    }
+}
+/* for some reason, on IE there is no margin applied to the bottom of the showcase, so we must return the footer to its default position */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .contact {
+        position: static;
     }
 }
