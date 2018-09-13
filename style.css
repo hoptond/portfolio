@@ -300,3 +300,41 @@ ul li a{
         width:97.5%;
     }
 }
+@media only screen and (min-width: 2400px) {
+    .navwrapper,
+    .headerwrapper,
+    .showcasewrapper,
+    .contactwrapper {
+        max-width: 80%;
+    }
+    .navitem a{
+        font-size: 1.85rem;
+    }
+    .navitem p{
+        font-size: 1rem;
+    }
+    header h1 {
+        font-size: 3.4rem;
+    }
+    header h2 {
+        font-size: 2.8rem;
+    }
+    header p {
+        font-size: 1.25rem;
+    }
+    .badges {
+        font-size: 4rem;
+    }
+    .showcasetext h2 {
+        font-size: 2.8rem;
+    }
+    .showcasetext h3 {
+        font-size: 1rem;
+    }
+    .showcasetext p {
+        font-size: 1.3rem;
+    }
+    ul li {
+        font-size: 1.2rem;
+    }
+}
