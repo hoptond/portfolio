@@ -166,7 +166,8 @@ header p {
 }
 
 .showcasenav {
-    margin: 20% 0 25% 0;
+    top:45%;
+    position:relative;
     background-color: rgba(102, 102, 102, 0.66);
     color: #ffffff;
     width: 40px;
