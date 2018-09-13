@@ -36,13 +36,12 @@ nav {
 
 .navitem {
     margin: 0;
-    padding: 0 20px;
+    padding: 10px 20px 0 20px;
     -ms-flex: 0 1 auto
 }
 
-.navitem h4 {
+.navitem a {
     font-size: 1.4rem;
-    margin: 10px 0 2px 0;
 }
 
 .navitem p {
@@ -283,9 +282,8 @@ ul li a{
         margin:0;
         padding:0 10px 0 10px;
     }
-    .navitem h4 {
+    .navitem a {
         font-size:1.2rem;
-        margin:10px 0 10px 0;
     }
     .navitem p {
         display: none;
