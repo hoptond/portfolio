@@ -105,7 +105,7 @@ header p {
 }
 
 .showcase {
-    margin: 0 0 73.8px 0;
+    margin: 0 0 74px 0;
     padding: 0;
     background-color: #a8b5ab;
     width: 100%;
@@ -309,10 +309,10 @@ ul li a{
     .contactwrapper {
         max-width: 80%;
     }
-    .navitem a{
+    .navitem a {
         font-size: 1.85rem;
     }
-    .navitem p{
+    .navitem p {
         font-size: 1rem;
     }
     header h1 {
