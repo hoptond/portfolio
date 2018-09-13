@@ -7,6 +7,7 @@
 body {
     margin: 0 auto;
     height: 100%;
+    background-color: #a8b5ab;
 }
 
 nav {
@@ -198,6 +199,8 @@ header p {
     background-color: #252826;
     width: 100%;
     color: #ffffff;
+    position:fixed;
+    bottom: 0;
 }
 .contactwrapper {
     max-width: 65%;
