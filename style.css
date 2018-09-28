@@ -51,8 +51,14 @@ nav {
     margin: 2px 0 10px 0;
 }
 
+.anchor{
+    display: block;
+    height: 61.5px;
+    visibility: hidden;
+}
+
 header {
-    margin: 61.5px 0 0 0;
+    margin: 0 0 0 0;
     padding: 0;
     background-color: #eeeeee;
     height: auto;
@@ -105,7 +111,6 @@ header p {
 }
 
 .showcase {
-    margin: 0 0 74px 0;
     padding: 0;
     background-color: #a8b5ab;
     width: 100%;
@@ -203,8 +208,7 @@ header p {
     background-color: #252826;
     width: 100%;
     color: #ffffff;
-    position:fixed;
-    bottom: 0;
+    bottom: 0px;
 }
 .contactwrapper {
     max-width: 65%;
@@ -227,9 +231,7 @@ ul li a{
 }
 
 @media screen and (max-width: 992px) {
-    header {
-        margin: 61.5px 0 0 0;
-    }
+
     .headertext p {
         width: 70%;
     }
@@ -279,9 +281,6 @@ ul li a{
 }
 
 @media screen and (max-width: 438px) {
-    header {
-        margin: 48px 0 0 0;
-    }
     .navitem {
         margin:0;
         padding:0 10px 0 10px;
