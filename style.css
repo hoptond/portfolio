@@ -301,7 +301,7 @@ ul li a{
         width:97.5%;
     }
 }
-@media only screen and (min-height: 900px) {
+@media only screen and (min-height: 890px) {
     .contact {
         position:fixed;
         bottom: 0px;
