@@ -19,7 +19,7 @@
             </div>
             <div class="longinput">
                 <label>Bio: </label>
-                <input name="desc" type="">
+                <input name="desc" type="text">
             </div>
             <input type="submit" value="Change">
         </form>
