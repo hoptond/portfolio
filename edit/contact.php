@@ -26,7 +26,7 @@
             <label>Text: </label>
             <input name="name" type="text">
         </div>
-        <input type="submit" value="Change">
+        <input type="submit" value="Add/Edit">
     </form>
     <div class="listholder">
         <ul>
