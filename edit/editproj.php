@@ -10,41 +10,28 @@
 </head>
 <body>
     <form>
-        <ul>
-            <li>
-                <div class="longinput">
-                    <label>Name: </label>
-                    <input name="name" type="text">
-                </div>
-            </li>
-            <li>
-                <div class="longinput">
-                    <label>Type: </label>
-                    <input name="type" type="text">
-                </div>
-            </li>
-            <li>
-                <div class="longinput">
-                    <label>Desc: </label>
-                    <input name="desc" type="text">
-                </div>
-            </li>
-            <li>
-                <div class="longinput">
-                    <label>Image: </label>
-                    <input name="img" type="text">
-                </div>
-            </li>
-            <li>
-                <div class="longinput">
-                    <label>Link: </label>
-                    <input name="link" type="text">
-                </div>
-            </li>
-            <li>
-                <input type="submit" value="Edit">
-            </li>
-        </ul>
+        <div class="longinput">
+            <label>Name: </label>
+            <input name="name" type="text">
+        </div>
+        <div class="longinput">
+            <label>Type: </label>
+            <input name="type" type="text">
+        </div>
+        <div class="longinput">
+            <label>Desc: </label>
+            <input name="desc" type="text">
+        </div>
+
+        <div class="longinput">
+            <label>Image: </label>
+            <input name="img" type="text">
+        </div>
+        <div class="longinput">
+            <label>Link: </label>
+            <input name="link" type="text">
+        </div>
+        <input type="submit" value="Edit">
     </form>
     <div class="listholder">
         <ul>

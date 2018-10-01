@@ -18,7 +18,7 @@ function logout() {
         <h3>About</h3>
         <ul>
             <li><a href="about.php">Edit Text</a></li>
-            <li><a href="badges.php">Edit/Delete Icons</a></li>
+            <li><a href="badges.php">Edit/Delete Badges</a></li>
         </ul>
         <h3>Projects</h3>
         <ul>

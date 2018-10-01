@@ -9,13 +9,11 @@
 </head>
     <body>
         <form>
-            <ul>
-                <li>
-                    <label>Icon: </label>
-                    <input name="name" type="text">
-                    <input type="submit" value="Change">
-                </li>
-            </ul>
+            <div>
+                <label>Icon: </label>
+                <input name="name" type="text">
+                <input type="submit" value="Change">
+            </div>
         </form>
         <div class="listholder">
             <ul>

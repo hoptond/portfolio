@@ -21,11 +21,15 @@
                         <button class="edit">EDIT</button>
                         <button class="delete">X</button>
                     </div>
+                </li>
+                <li>
                     <div>
                         <p>devicon-html5-plain</p>
                         <button class="edit">EDIT</button>
                         <button class="delete">X</button>
                     </div>
+                </li>
+                <li>
                     <div>
                         <p>devicon-css3-plain</p>
                         <button class="edit">EDIT</button>
