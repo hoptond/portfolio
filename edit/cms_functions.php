@@ -94,12 +94,12 @@ function getProjectFromDB(int $id) {
  *
  * @return $array Returns an associative array of the project's name, type, description, link and image.
  */
-function getProjectDataFromPost($postData) {
+function getProjectDataFromPOST($postData) {
     $project = [];
     $project['name'] = $postData['name'];
     $project['type'] = $postData['type'];
     $project['desc'] = $postData['desc'];
-    $project['img'] = $postData['img'];
+    $project['image'] = $postData['image'];
     $project['link'] = $postData['link'];
     return $project;
 }
@@ -112,7 +112,7 @@ function getProjectDataFromPost($postData) {
  *
  * @return $array Returns an associative array of the project's name, type, description, link and image.
  */
-function getContactInfoFromPost($postData) {
+function getContactInfoFromPOST($postData) {
     $contact = [];
     $contact['id'] = $postData['id'];
     $contact['link'] = $postData['link'];
@@ -133,7 +133,7 @@ function addProjectToDatabase($project) {
     $stmt->bindParam(':name',$project['name']);
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':desc',$project['desc']);
-    $stmt->bindParam(':image',$project['image']);
+    $stmt->bindParam(':img',$project['img']);
     $stmt->bindParam(':link',$project['link']);
     return $stmt->execute();
 
@@ -154,7 +154,7 @@ function upateProjectInDatabase(int $id, array $project) {
     $stmt->bindParam(':name',$project['name']);
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':desc',$project['desc']);
-    $stmt->bindParam(':image',$project['image']);
+    $stmt->bindParam(':img',$project['img']);
     $stmt->bindParam(':link',$project['link']);
     $stmt->bindParam(':id',$id);
     return $stmt->execute();
