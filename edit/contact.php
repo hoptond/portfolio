@@ -27,18 +27,18 @@
             <li>
                 <div>
                     <p>hoptond848@protonmail.com</p>
-                    <button class="edit">EDIT</button>
                     <button class="delete">X</button>
+                    <button class="edit">EDIT</button>
                 </div>
                 <div>
                     <p>github.com/hoptond/</p>
-                    <button class="edit">EDIT</button>
                     <button class="delete">X</button>
+                    <button class="edit">EDIT</button>
                 </div>
                 <div>
                     <p>linkedin.com/in/daniel-hopton</p>
-                    <button class="edit">EDIT</button>
                     <button class="delete">X</button>
+                    <button class="edit">EDIT</button>
                 </div>
             </li>
         </ul>

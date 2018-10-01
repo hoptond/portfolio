@@ -20,23 +20,25 @@
                 <li>
                     <div>
                         <p>fa fa-circle</p>
-                        <button class="edit">EDIT</button>
                         <button class="delete">X</button>
+                        <button class="edit">EDIT</button>
                     </div>
                     <div>
                         <p>fa fa-github</p>
-                        <button class="edit">EDIT</button>
+
                         <button class="delete">X</button>
+                        <button class="edit">EDIT</button>
                     </div>
                     <div>
                         <p>fa fa-at</p>
-                        <button class="edit">EDIT</button>
+
                         <button class="delete">X</button>
+                        <button class="edit">EDIT</button>
                     </div>
                     <div>
                         <p>fa fa-linkedin</p>
-                        <button class="edit">EDIT</button>
                         <button class="delete">X</button>
+                        <button class="edit">EDIT</button>
                     </div>
                 </li>
             </ul>

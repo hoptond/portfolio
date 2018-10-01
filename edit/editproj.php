@@ -38,13 +38,13 @@
             <li>
                 <div>
                     <p>MAGICIANS</p>
-                    <button class="edit">EDIT</button>
                     <button class="delete">X</button>
+                    <button class="edit">EDIT</button>
                 </div>
                 <div>
                     <p>PORTFOLIO</p>
-                    <button class="edit">EDIT</button>
                     <button class="delete">X</button>
+                    <button class="edit">EDIT</button>
                 </div>
             </li>
         </ul>
