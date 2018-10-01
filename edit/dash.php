@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: academy
- * Date: 01/10/2018
- * Time: 09:17
- */
+
 
 function logout() {
     //TODO: populate this function
@@ -12,6 +7,7 @@ function logout() {
 
 ?>
 
+<!DOCTYPE html>
 <html>
     <head>
         <title>Dash</title>

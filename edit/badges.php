@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: academy
- * Date: 01/10/2018
- * Time: 09:56
- */
-
 
 ?>
-
+<!DOCTYPE html>
 <html>
     <head>
         <title>Edit Badges</title>

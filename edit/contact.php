@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: academy
- * Date: 01/10/2018
- * Time: 10:55
- */
 
 ?>
-
+<!DOCTYPE html>
 <head>
     <title>Edit Contact Info</title>
     <link rel="stylesheet" href="style.css">

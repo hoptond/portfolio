@@ -1,13 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: academy
- * Date: 01/10/2018
- * Time: 11:06
- */
 
 ?>
-
+<!DOCTYPE html>
 <html>
 <head>
     <title>Edit Icons</title>

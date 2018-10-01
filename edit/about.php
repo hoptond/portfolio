@@ -1,15 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: academy
- * Date: 01/10/2018
- * Time: 09:39
- */
-
-
 
 ?>
-
+<!DOCTYPE html>
 <html>
     <head>
         <title>Edit About</title>

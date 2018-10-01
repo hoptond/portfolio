@@ -1,12 +1,8 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: academy
- * Date: 01/10/2018
- * Time: 10:46
- */
+
 
 ?>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Edit/Delete Projects</title>
