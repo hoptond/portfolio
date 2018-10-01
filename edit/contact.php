@@ -18,7 +18,7 @@
         </div>
         <div class="longinput">
             <label>Text: </label>
-            <input name="name" type="text">
+            <input name="text" type="text">
         </div>
         <input type="submit" value="Add/Edit">
     </form>
