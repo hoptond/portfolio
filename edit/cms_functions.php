@@ -1,10 +1,50 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: academy
- * Date: 01/10/2018
- * Time: 12:46
+
+
+
+
+
+
+
+
+
+
+/*
+ * Produces the list of entries on each Edit page, with accompanying edit/delete buttons
+ *
+ * @param string $table The table to get data from.
+ *
+ * @return Returns the list of entries for the given table, formatted as HTML. If we try and do
  */
+function getListHolderData(string $table) {
+    if($table == "name")
+        return "<div>This section cannot be listed.</div>";
+    $output = '<ul><li>';
+    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
+    $stmt = $db->prepare('SELECT `:name` FROM `:table`');
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt->bindParam(':id',$id);
+    $stmt->execute();
+    $array = $stmt->fetchAll();
+    $display = 'value';
+    switch ($table) {
+        case 'contact':
+            $display = 'text';
+            break;
+        case 'projects':
+            $display = 'title';
+            break;
+    }
+    foreach ($array as $entry) {
+        $output .= '<div><form><p>' . $entry[$display] .'</p><button class="delete">X</button><button class="edit">EDIT</button></form></div>';
+    }
+    return $output .= '</li></ul>';
+}
+
+
+
+
+
 
 /*
  * Updates the data in the about table.
@@ -38,7 +78,6 @@ function updateAbout() {
  * project of that ID in the database.
  */
 function getProjectFromDB(int $id) {
-
     $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
     $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id` = :id LIMIT 1');
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
