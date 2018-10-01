@@ -10,7 +10,7 @@
     <body>
         <form>
             <label>New Badge:</label>
-            <input type="text">
+            <input name="badge" type="text">
             <input type="submit" value="Add">
         </form>
         <div class="listholder">
