@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.41)
 # Database: CMS
-# Generation Time: 2018-09-28 15:12:53 +0000
+# Generation Time: 2018-10-01 10:47:53 +0000
 # ************************************************************
 
 
@@ -142,8 +142,8 @@ LOCK TABLES `projects` WRITE;
 
 INSERT INTO `projects` (`id`, `title`, `type`, `desc`, `image`, `link`)
 VALUES
-	(1,'MAGICIANS','A game for PC/Mac/Linux','Magicians is a role playing adventure game, written in C# and developed using the Monogame framework. This project, with the exception of testing, was produced independently: all code, art, writing, and audio was done myself. I maintained this project over a period of around 4 years: making a game is much harder than it looks!','magiprojectshowcase1.png','https://github.com/hoptond'),
-	(2,'Portfolio','Web','This portfolio was the first web project I completed. todo: add more stuff','portfolioprojectshowcase.png','todo: link recursively');
+	(1,'MAGICIANS','A game for PC/Mac/Linux','Magicians is a role playing adventure game, written in C# and developed using the Monogame framework. This project, with the exception of testing, was produced independently: all code, art, writing, and audio was done myself. I maintained this project over a period of around 4 years: making a game is much harder than it looks!','magiprojectshowcase1.png','https://github.com/hoptond/magiciansdemo'),
+	(2,'PORTFOLIO','Web','This portfolio was the first web project I completed. I worked on both the front end (what you\'re seeing now) and the back end, as I implemented a content management system to be able to easily edit my website from within the browser.','portfolioprojectshowcase.png','https://github.com/hoptond/portfolio');
 
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
