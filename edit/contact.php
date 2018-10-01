@@ -2,11 +2,11 @@
 
 ?>
 <!DOCTYPE html>
+<html>
 <head>
     <title>Edit Contact Info</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<html>
     <form>
         <div class="longinput">
             <label>Icon ID: </label>
