@@ -1,5 +1,7 @@
 <?php
 
+require 'cms_functions.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,34 +11,11 @@
     </head>
     <body>
         <form>
-            <label>New Badge:</label>
-            <input name="badge" type="text">
+            <?php echo displaySingleValueInput(0, 'badges') ?>
             <input type="submit" value="Add">
         </form>
         <div class="listholder">
-            <ul>
-                <li>
-                    <div>
-                        <p>devicon-csharp-plain</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <p>devicon-html5-plain</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <p>devicon-css3-plain</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-            </ul>
+            <?php echo displayListHolderData('badges'); ?>
         </div>
         <a href="dash.php">Back</a>
     </body>

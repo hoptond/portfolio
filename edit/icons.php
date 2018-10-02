@@ -1,5 +1,7 @@
 <?php
 
+require 'cms_functions.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,39 +11,11 @@
 </head>
     <body>
         <form>
-            <div>
-                <label>Icon: </label>
-                <input name="name" type="text">
-                <input type="submit" value="Change">
-            </div>
+            <?php echo displaySingleValueInput(0, 'icons') ?>
+            <input type="submit" value="Add">
         </form>
         <div class="listholder">
-            <ul>
-                <li>
-                    <div>
-                        <p>fa fa-circle</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                    <div>
-                        <p>fa fa-github</p>
-
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                    <div>
-                        <p>fa fa-at</p>
-
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                    <div>
-                        <p>fa fa-linkedin</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-            </ul>
+            <?php echo displayListHolderData('icons'); ?>
         </div>
         <a href="dash.php">Back</a>
     </body>

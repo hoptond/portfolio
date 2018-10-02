@@ -1,11 +1,88 @@
 <?php
 
+/*
+ * Gets a PDO object to use for database queries. This PDO's fetch mode is set to FETCH_ASSOC by default.
+ *
+ * @Return returns the PDO object to use for our given queries.
+ */
+function getPDO() {
+    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
+    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    return $db;
+}
 
+/*
+ * Displays the form for editing the About Me section of the portfolio. The value for each input is filled automatically with the current entry
+ * in the database.
+ *
+ * @return Returns the input elements for the About Me form, formatted as HTML. This should be placed inside a form element, before the submit
+ * element.
+ */
+function displayAboutMeInput() {
+    $stmt = getPDO()->prepare('SELECT `name`,`title`,`desc` FROM `about` LIMIT 1');
+    $stmt->execute();
+    $array = $stmt->fetch();
+    $output = '<div class="longinput"><label>Name: </label><input name="name" type="text" value="' . $array['name'] . '"></div>';
+    $output .= '<div class="longinput"><label>Title: </label><input name="title" type="text" value="' . $array['title'] . '"></div>';
+    $output .= '<div class="longinput"><label>Desc: </label><input name="desc" type="text" value="' . $array['desc'] . '"></div>';
+    return $output;
+}
 
+/*
+ * Displays the form for editing a single value table, such as the Badges or Icons table. If there is a given entry to edit, the value
+ * is filled with the current entry.
+ *
+ * @param int $id The given entry to edit. This value is 0 if we are adding a new entry.
+ *
+ * @param int $table The given table to retrieve data from.
+ *
+ * @return Returns the input element for the given table, formatted as HTML. This should be placed inside the form element, before the submit
+ * element.
+ */
+function displaySingleValueInput(int $id, string $table) {
+    $value = '';
+    if($id > -1) {
+        $value = getSingleValueFromDB($id, $table)['value'];
+    }
+    $label = substr(ucfirst($table),0, strlen($table) - 1) . ': ';
+    return '<label>' . $label . ' </label><input name="name" type="text" value="' . $value . '"/>';
+}
 
+/*
+ * Displays the form for editing projects. If there is a valid entry in the database, the values of each input field are filled out
+ * with the appropriate data.
+ *
+ * @param int $id The id of the entry to edit.
+ *
+ * @return Returns the input element for the given table, formatted as HTML. This should be placed inside the form element, before the submit
+ * element.
+ */
+function displayEditProjectInput(int $id) {
+    $array = getProjectFromDB($id);
+    $output = '<div class="longinput"><label>Title: </label><input name="title" type="text" value="' . $array['title'] . '"></div>';
+    $output .= '<div class="longinput"><label>Type: </label><input name="type" type="text" value="' . $array['type'] . '"></div>';
+    $output .= '<div class="longinput"><label>Desc: </label><input name="desc" type="text" value="' . $array['desc'] . '"></div>';
+    $output .= '<div class="longinput"><label>Image: </label><input name="img" type="text" value="' . $array['image'] . '"></div>';
+    $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
+    return $output;
+}
 
-
-
+/*
+ * Displays the form for editing contact information. If there is a valid entry in the database, the values of each input field are filled out
+ * with the appropriate data.
+ *
+ * @param int $id The given entry to edit. This value is 0 if we are adding a new entry.
+ *
+ * @return Returns the input element for the given table, formatted as HTML. This should be placed inside the form element, before the submit
+ * element.
+ */
+function displayEditContactInfo(int $id) {
+    $array = getContactInfoFromDB($id);
+    $output = '<div class="longinput"><label>Icon ID: </label><input name="id" type="text" value="' . $array['icon_id'] . '"></div>';
+    $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
+    $output .= '<div class="longinput"><label>Text: </label><input name="text" type="text" value="' . $array['text'] . '"></div>';
+    return $output;
+}
 
 
 
@@ -14,18 +91,16 @@
  *
  * @param string $table The table to get data from.
  *
- * @return Returns the list of entries for the given table, formatted as HTML. If we try and do
+ * @return Returns the list of entries for the given table, formatted as HTML. If we try a table where there is only a single row,
+ * such as the about table, we will receive an informative message instead.
  */
-function getListHolderData(string $table) {
-    if($table == "name")
+function displayListHolderData(string $table) {
+    if(!validateListTableRequest($table)) {
         return "<div>This section cannot be listed.</div>";
+    }
     $output = '<ul><li>';
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('SELECT `:name` FROM `:table`');
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $stmt->bindParam(':id',$id);
-    $stmt->execute();
-    $array = $stmt->fetchAll();
+    //i am aware using * is a cardinal sin but I see no better way of doing what I want to do
+    $stmt = getPDO()->prepare('SELECT * FROM ' . $table);
     $display = 'value';
     switch ($table) {
         case 'contact':
@@ -35,16 +110,13 @@ function getListHolderData(string $table) {
             $display = 'title';
             break;
     }
+    $stmt->execute();
+    $array = $stmt->fetchAll();
     foreach ($array as $entry) {
         $output .= '<div><form><p>' . $entry[$display] .'</p><button class="delete">X</button><button class="edit">EDIT</button></form></div>';
     }
     return $output .= '</li></ul>';
 }
-
-
-
-
-
 
 /*
  * Updates the data in the about table.
@@ -78,9 +150,7 @@ function updateAbout() {
  * project of that ID in the database.
  */
 function getProjectFromDB(int $id) {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id` = :id LIMIT 1');
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt = getPDO()->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id` = :id LIMIT 1');
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     $project = $stmt->fetch();
@@ -128,8 +198,7 @@ function getContactInfoFromPOST($postData) {
  * @return Returns TRUE if the project was added successfully, FALSE if otherwise.
  */
 function addProjectToDatabase($project) {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`link`) VALUES(:name, :type, :desc, :image, :link)');
+    $stmt = getPDO()->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`link`) VALUES(:name, :type, :desc, :image, :link)');
     $stmt->bindParam(':name',$project['name']);
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':desc',$project['desc']);
@@ -149,8 +218,7 @@ function addProjectToDatabase($project) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function upateProjectInDatabase(int $id, array $project) {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('UPDATE `projects` SET `name`=:name, `type`=:type, `desc`=:desc, `image`=:image, `link`=:link,  WHERE `id`=:id');
+    $stmt = getPDO()->prepare('UPDATE `projects` SET `name`=:name, `type`=:type, `desc`=:desc, `image`=:image, `link`=:link,  WHERE `id`=:id');
     $stmt->bindParam(':name',$project['name']);
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':desc',$project['desc']);
@@ -168,8 +236,7 @@ function upateProjectInDatabase(int $id, array $project) {
  * @return Returns TRUE if the contact info was added successfully, FALSE if otherwise.
  */
 function addContactInfoToDatabase(array $contact) {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('INSERT INTO `contact`(`icon_id`, `link`, `text`) VALUES(:icon_id, :link, :text)');
+    $stmt = getPDO()->prepare('INSERT INTO `contact`(`icon_id`, `link`, `text`) VALUES(:icon_id, :link, :text)');
     $stmt->bindParam(':icon_id',$contact['id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
@@ -186,8 +253,7 @@ function addContactInfoToDatabase(array $contact) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function updateContactInfoInDatabase(int $id, array $contact) {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('UPDATE `contact` SET `icon_id`=:icon_id, `link`=:type, `text`=:text WHERE `id`=:id');
+    $stmt = getPDO()->prepare('UPDATE `contact` SET `icon_id`=:icon_id, `link`=:type, `text`=:text WHERE `id`=:id');
     $stmt->bindParam(':icon_id',$contact['id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
@@ -204,10 +270,7 @@ function updateContactInfoInDatabase(int $id, array $contact) {
  * project of that ID in the database.
  */
 function getContactInfoFromDB(int $id) {
-
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('SELECT `icon_id`,`link`,`text` FROM `contact` WHERE `id` = :id LIMIT 1');
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt = getPDO()->prepare('SELECT `icon_id`,`link`,`text` FROM `contact` WHERE `id` = :id LIMIT 1');
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     $contact = $stmt->fetch();
@@ -225,7 +288,7 @@ function getContactInfoFromDB(int $id) {
  */
 function addSingleValueToTable(string $table, string $value) {
     $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('INSERT INTO `:table`(`value`) VALUES(:value)');
+    $stmt = $db->prepare('INSERT INTO ' . $table. '(`value`) VALUES(:value)');
     $stmt->bindParam(':table',$table);
     $stmt->bindParam(':value',$value);
     return $stmt->execute();
@@ -243,8 +306,10 @@ function addSingleValueToTable(string $table, string $value) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function updateSingleValueInTable(int $id, string $table, string $value) {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('UPDATE `:table` SET `value`=:value WHERE `id`=:id');
+    if(!validateSingleTableRequest($table)) {
+        return FALSE;
+    }
+    $stmt = getPDO()->prepare('UPDATE ' . $table .  ' SET `value`=:value WHERE `id`=:id');
     $stmt->bindParam(':table',$table);
     $stmt->bindParam(':value',$value);
     $stmt->bindParam(':id',$id);
@@ -260,15 +325,50 @@ function updateSingleValueInTable(int $id, string $table, string $value) {
  * project of that ID in the database.
  */
 function getSingleValueFromDB(int $id, string $table) {
-
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('SELECT `value` FROM `:table` WHERE `id` = :id LIMIT 1');
+    if(!validateSingleTableRequest($table)) {
+        return FALSE;
+    }
+    $stmt = getPDO()->prepare('SELECT `value` FROM ' . $table . ' WHERE `id` = :id;');
     $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $stmt->bindParam(':table',$table);
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     $entry = $stmt->fetch();
     return $entry;
+}
+
+/*
+ * Checks if we are editing the correct single column table, since targeting other tables with spoofed POST data is a thing.
+ *
+ * @param string $table The table the user is trying to change.
+ *
+ * return bool Returns TRUE if the table can be accessed in this way, otherwise FALSE.
+ */
+function validateSingleTableRequest($table) {
+    if($table !== 'icons' && $table !== 'badges') {
+        return FALSE;
+    }
+    return TRUE;
+}
+
+/*
+ * Checks if we are editing a valid table.
+ *
+ * @param string $table The given table to validate.
+ *
+ * return bool Returns TRUE if $table is a valid table, otherwise false.
+ */
+function validateListTableRequest(string $table) {
+    $values[0] = 'about';
+    $values[1] = 'badges';
+    $values[2] = 'contact';
+    $values[3] = 'icons';
+    $values[4] = 'projects';
+    foreach ($values as $value) {
+        if($table === $value) {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 /*
@@ -281,8 +381,7 @@ function getSingleValueFromDB(int $id, string $table) {
  * @return Returns TRUE if the deletion was successful, otherwise false
  */
 function deleteEntryInDB(int $id, string $table) {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('DELETE FROM :table WHERE id = :id');
+    $stmt = getPDO()->prepare('DELETE FROM ' . $table .' WHERE id = :id');
     $stmt->bindParam(':table',$table);
     $stmt->bindParam(':id',$id);
     return $stmt->execute();

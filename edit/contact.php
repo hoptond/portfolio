@@ -1,5 +1,7 @@
 <?php
 
+require 'cms_functions.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,40 +10,11 @@
     <link rel="stylesheet" href="style.css">
 </head>
     <form>
-        <div class="longinput">
-            <label>Icon ID: </label>
-            <input name="id" type="text">
-        </div>
-        <div class="longinput">
-            <label>Link: </label>
-            <input name="link" type="text">
-        </div>
-        <div class="longinput">
-            <label>Text: </label>
-            <input name="text" type="text">
-        </div>
+        <?php echo displayEditContactInfo(0) ?>
         <input type="submit" value="Add/Edit">
     </form>
     <div class="listholder">
-        <ul>
-            <li>
-                <div>
-                    <p>hoptond848@protonmail.com</p>
-                    <button class="delete">X</button>
-                    <button class="edit">EDIT</button>
-                </div>
-                <div>
-                    <p>github.com/hoptond/</p>
-                    <button class="delete">X</button>
-                    <button class="edit">EDIT</button>
-                </div>
-                <div>
-                    <p>linkedin.com/in/daniel-hopton</p>
-                    <button class="delete">X</button>
-                    <button class="edit">EDIT</button>
-                </div>
-            </li>
-        </ul>
+    <?php echo displayListHolderData('contact'); ?>
     </div>
     <a href="dash.php">Back</a>
 </html>

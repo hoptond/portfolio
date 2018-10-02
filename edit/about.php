@@ -1,5 +1,7 @@
 <?php
 
+require 'cms_functions.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -9,18 +11,7 @@
     </head>
     <body>
         <form>
-            <div class="longinput">
-                <label>Name: </label>
-                <input name="name" type="text">
-            </div>
-            <div class="longinput">
-                <label>Title: </label>
-                <input name="title" type="text">
-            </div>
-            <div class="longinput">
-                <label>Bio: </label>
-                <input name="desc" type="text">
-            </div>
+            <?php echo displayAboutMeInput(); ?>
             <input type="submit" value="Change">
         </form>
         <a href="dash.php">Back</a>
