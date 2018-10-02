@@ -10,10 +10,15 @@ require 'cms_functions.php';
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <form>
+        <form name="about" method="post" action ='doabout.php'>
             <?php echo displayAboutMeInput(); ?>
             <input type="submit" value="Change">
         </form>
+        <div><?php
+            if(isset($_GET['msg'])) {
+                echo processMessage($_GET['msg']);
+            }
+            ?></div>
         <a href="dash.php">Back</a>
     </body>
 </html>

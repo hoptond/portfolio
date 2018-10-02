@@ -41,12 +41,29 @@ function displayAboutMeInput() {
  */
 function displaySingleValueInput(int $id, string $table) {
     $value = '';
+    $hidden = '';
     if($id > -1) {
         $value = getSingleValueFromDB($id, $table)['value'];
+        $hidden ='<input type="hidden" name="id" value ="' . $id . '">';
     }
     $label = substr(ucfirst($table),0, strlen($table) - 1) . ': ';
-    return '<label>' . $label . ' </label><input name="name" type="text" value="' . $value . '"/>';
+    return $hidden . '<label>' . $label . ' </label><input name="value" type="text" value="' . $value . '"/>';
 }
+
+/*
+ * Called upon loading the main form section of each edit page. This retrieves the edit ID from the GET data, if one is present.
+ *
+ * @param array $getData The $_GET data we are checking.
+ *
+ * @return int Returns the ID of the entry the user wants to edit. If the user is not editing a specific page, return minus -1.
+ */
+function getEditEntryID($getData) : int {
+    if(!key_exists('edit', $getData)) {
+        return -1;
+    }
+    return (int)$getData['id'];
+}
+
 
 /*
  * Displays the form for editing projects. If there is a valid entry in the database, the values of each input field are filled out
@@ -58,12 +75,18 @@ function displaySingleValueInput(int $id, string $table) {
  * element.
  */
 function displayEditProjectInput(int $id) {
+    if($id < 1) {
+        return '';
+    }
     $array = getProjectFromDB($id);
-    $output = '<div class="longinput"><label>Title: </label><input name="title" type="text" value="' . $array['title'] . '"></div>';
+    $output = '<form name="project" action="doeproject.php" method="post">';
+    $output .= '<div class="longinput"><label>Title: </label><input name="title" type="text" value="' . $array['title'] . '"></div>';
     $output .= '<div class="longinput"><label>Type: </label><input name="type" type="text" value="' . $array['type'] . '"></div>';
     $output .= '<div class="longinput"><label>Desc: </label><input name="desc" type="text" value="' . $array['desc'] . '"></div>';
     $output .= '<div class="longinput"><label>Image: </label><input name="img" type="text" value="' . $array['image'] . '"></div>';
     $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
+    $output .= '<input type="hidden" name="id" value ="' . $id . '">';
+    $output .= '<input type="submit" value="Edit"></form>';
     return $output;
 }
 
@@ -78,13 +101,32 @@ function displayEditProjectInput(int $id) {
  */
 function displayEditContactInfo(int $id) {
     $array = getContactInfoFromDB($id);
-    $output = '<div class="longinput"><label>Icon ID: </label><input name="id" type="text" value="' . $array['icon_id'] . '"></div>';
+    $output = '<div class="longinput"><label>Icon ID: </label><input name="icon_id" type="text" value="' . $array['icon_id'] . '"></div>';
     $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
     $output .= '<div class="longinput"><label>Text: </label><input name="text" type="text" value="' . $array['text'] . '"></div>';
     return $output;
 }
 
-
+function processMessage(int $id) {
+    switch ($id){
+        case 1: return 'About Me updated successfully!';
+        case 2: return 'Badge added successfully!';
+        case 3: return 'Badge edited successfully!';
+        case 4: return 'Project added successfully!';
+        case 5: return 'Project edited successfully!';
+        case 6: return 'Contact Info added successfully!';
+        case 7: return 'Contact Info edited successfully!';
+        case 8: return 'Icon added successfully!';
+        case 9: return 'Icon edited successfully!';
+        case 10: return 'Required field missing. Please try again.';
+        case 11: return 'Field not in valid format. Please try again.';
+        case 12: return 'Error adding entry into database. Please try again.';
+        case 13: return 'Error updating entry in database. Please try again.';
+        case 14: return 'Error deleting entry from database.';
+        case 15: return 'Deleted entry from the database';
+    }
+    return'';
+}
 
 /*
  * Produces the list of entries on each Edit page, with accompanying edit/delete buttons
@@ -92,9 +134,9 @@ function displayEditContactInfo(int $id) {
  * @param string $table The table to get data from.
  *
  * @return Returns the list of entries for the given table, formatted as HTML. If we try a table where there is only a single row,
- * such as the about table, we will receive an informative message instead.
+ * such as the about table, we will receive an informative message instead telling us that this operation is not valid.
  */
-function displayListHolderData(string $table) {
+function displayListHolderData(string $table, int $highlight = -1) {
     if(!validateListTableRequest($table)) {
         return "<div>This section cannot be listed.</div>";
     }
@@ -112,10 +154,34 @@ function displayListHolderData(string $table) {
     }
     $stmt->execute();
     $array = $stmt->fetchAll();
-    foreach ($array as $entry) {
-        $output .= '<div><form><p>' . $entry[$display] .'</p><button class="delete">X</button><button class="edit">EDIT</button></form></div>';
+    $action = '';
+    switch ($table)
+    {
+        case 'projects': $action = 'doeproject.php'; break;
+        case 'icons': $action = 'doeicon.php'; break;
+        case 'badges': $action = 'doebadge.php'; break;
+        case 'contact': $action = 'doecontact.php'; break;
+    }
+    foreach($array as $entry) {
+        //I am aware this is overly long
+        $output .= '<div><p' . listTextColor($entry, $highlight) . '>' . $entry[$display] .'</p><div class="listbuttons"><form method="post" action ="' . $action . '"><input class="edit" name="edit_' . $entry['id'] . '" type="submit" value="EDIT"></form><form method="post" action ="' . $action . '"><input class="delete" name="del_' . $entry['id'] . '" type="submit" value="X"></form></div></div>';
     }
     return $output .= '</li></ul>';
+}
+/*
+ * Gets the text color for this list entry. If the highlight ID matches the entry in the database this entry will appear in a different color.
+ *
+ * @param string $entry The entry in the list
+ *
+ * @param int $highlight The ID we are comparing against.
+ *
+ * @return Returns the class to append insert into the HTML if this is the highlighted element. Otherwise, return an empty string.
+ */
+function listTextColor($entry, $highlight) {
+    if((int)$entry['id'] === $highlight) {
+        return ' class="highlight"';
+    }
+    return'';
 }
 
 /*
@@ -123,21 +189,20 @@ function displayListHolderData(string $table) {
  *
  * @return Returns TRUE if the update was successful, FALSE if otherwise.
  */
-function updateAbout() {
-    if (!isset($_POST['name'])) {
+function updateAbout($about) {
+    if (!isset($about['name']) || !isset($about['title']) || !isset($about['desc'])) {
         return FALSE;
     }
-    $name = $_POST['name'];
-    $title = $_POST['title'];
-    $desc = $_POST['desc'];
+    $name = $about['name'];
+    $title = $about['title'];
+    $desc = $about['desc'];
 
     //sanitize all strings
 
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $stmt = $db->prepare('UPDATE `about` SET `name` = :name, `title` = :title, `desc` = :desc');
+    $stmt = getPDO()->prepare('UPDATE `about` SET `name` = :name, `title` = :title, `desc` = :desc');
     $stmt->bindParam(':name',$name);
     $stmt->bindParam(':title',$title);
-    $stmt->bindParam(':name',$desc);
+    $stmt->bindParam(':desc',$desc);
     return $stmt->execute();
 }
 
@@ -157,6 +222,7 @@ function getProjectFromDB(int $id) {
     return $project;
 }
 
+
 /*
  * Gets the project data from the POST and returns it as an associative array.
  *
@@ -166,10 +232,10 @@ function getProjectFromDB(int $id) {
  */
 function getProjectDataFromPOST($postData) {
     $project = [];
-    $project['name'] = $postData['name'];
+    $project['title'] = $postData['title'];
     $project['type'] = $postData['type'];
     $project['desc'] = $postData['desc'];
-    $project['image'] = $postData['image'];
+    $project['img'] = $postData['img'];
     $project['link'] = $postData['link'];
     return $project;
 }
@@ -198,14 +264,13 @@ function getContactInfoFromPOST($postData) {
  * @return Returns TRUE if the project was added successfully, FALSE if otherwise.
  */
 function addProjectToDatabase($project) {
-    $stmt = getPDO()->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`link`) VALUES(:name, :type, :desc, :image, :link)');
-    $stmt->bindParam(':name',$project['name']);
+    $stmt = getPDO()->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`link`) VALUES(:title, :type, :desc, :image, :link)');
     $stmt->bindParam(':title',$project['title']);
+    $stmt->bindParam(':type',$project['type']);
     $stmt->bindParam(':desc',$project['desc']);
-    $stmt->bindParam(':img',$project['img']);
+    $stmt->bindParam(':image',$project['img']);
     $stmt->bindParam(':link',$project['link']);
     return $stmt->execute();
-
 }
 
 /*
@@ -217,10 +282,10 @@ function addProjectToDatabase($project) {
  *
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
-function upateProjectInDatabase(int $id, array $project) {
-    $stmt = getPDO()->prepare('UPDATE `projects` SET `name`=:name, `type`=:type, `desc`=:desc, `image`=:image, `link`=:link,  WHERE `id`=:id');
-    $stmt->bindParam(':name',$project['name']);
+function updateProjectInDatabase(int $id, $project) {
+    $stmt = getPDO()->prepare('UPDATE `projects` SET `title`=:title, `type`=:type, `desc`=:desc, `image`=:img, `link`=:link  WHERE `id`=:id');
     $stmt->bindParam(':title',$project['title']);
+    $stmt->bindParam(':type',$project['type']);
     $stmt->bindParam(':desc',$project['desc']);
     $stmt->bindParam(':img',$project['img']);
     $stmt->bindParam(':link',$project['link']);
@@ -237,9 +302,10 @@ function upateProjectInDatabase(int $id, array $project) {
  */
 function addContactInfoToDatabase(array $contact) {
     $stmt = getPDO()->prepare('INSERT INTO `contact`(`icon_id`, `link`, `text`) VALUES(:icon_id, :link, :text)');
-    $stmt->bindParam(':icon_id',$contact['id']);
+    $stmt->bindParam(':icon_id',$contact['icon_id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
+    var_dump($contact);
     return $stmt->execute();
 }
 
@@ -254,7 +320,7 @@ function addContactInfoToDatabase(array $contact) {
  */
 function updateContactInfoInDatabase(int $id, array $contact) {
     $stmt = getPDO()->prepare('UPDATE `contact` SET `icon_id`=:icon_id, `link`=:type, `text`=:text WHERE `id`=:id');
-    $stmt->bindParam(':icon_id',$contact['id']);
+    $stmt->bindParam(':icon_id',$contact['icon_id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
     $stmt->bindParam(':id',$id);
@@ -286,10 +352,12 @@ function getContactInfoFromDB(int $id) {
  *
  * @return bool Returns TRUE if the entry was added, otherwise false
  */
-function addSingleValueToTable(string $table, string $value) {
+function addSingleValueToTable(string $table, $value) {
+    if(!validateSingleTableRequest($table)) {
+        return FALSE;
+    }
     $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
     $stmt = $db->prepare('INSERT INTO ' . $table. '(`value`) VALUES(:value)');
-    $stmt->bindParam(':table',$table);
     $stmt->bindParam(':value',$value);
     return $stmt->execute();
 }
@@ -382,7 +450,8 @@ function validateListTableRequest(string $table) {
  */
 function deleteEntryInDB(int $id, string $table) {
     $stmt = getPDO()->prepare('DELETE FROM ' . $table .' WHERE id = :id');
-    $stmt->bindParam(':table',$table);
+    var_dump($table);
     $stmt->bindParam(':id',$id);
+    var_dump($id);
     return $stmt->execute();
 }
