@@ -50,8 +50,11 @@ function clampProjectID(int $id) {
     //for int = 0; i < select; i++
     //add $select['id'] to a new array
 
-    //
-
+    //if the project ID matches an entry in the list, return that entry
+    //order the array by the int values
+    //if the value is lower than the lowest, return the lowest
+    //if the value is higher than the highest, return the highest
+    //else, clamp our project ID to the nearest value
 }
 
 clampProjectID(1);
