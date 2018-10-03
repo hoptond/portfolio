@@ -450,7 +450,7 @@ function validateListTableRequest(string $table) {
  *
  * @return Returns TRUE if the field meets our definition of empty, otherwise FALSE.
  */
-function anyFieldEmpty($array) {
+function anyFieldEmpty(array $array) {
     foreach ($array as $entry) {
         $test = str_replace(' ','', $entry);
         if ($test === '') {
