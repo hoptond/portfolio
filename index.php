@@ -49,19 +49,9 @@ require  'frontend.php';
 <span class="anchor" id="showcase"></span>
 <main class="showcase">
   <section class="showcasewrapper">
-    <div class="showcasetext">
-      <h2>MAGICIANS</h2>
-      <h3>A game for PC/Mac/Linux</h3>
-      <p>Magicians is a role playing adventure game, written in C# and developed using the Monogame framework. This project, with the exception of testing, was produced independently: all code, art, writing, and audio was done myself. I maintained this project over a period of around 4 years: making a game is much harder than it looks!</p>
-    </div>
-    <div class="showcaseviewer">
-        <img src="magiprojectshowcase1.png">
-      <button class="showcasenav showcaseprev">&lt;</button>
-      <button class="showcasenav showcasenext">&gt;</button>
-      <div class="showcasebottom">
-        <a class="showcaseview">View Project</a>
-      </div>
-    </div>
+      <?php
+        echo displayProject(2);
+      ?>
   </section>
 </main>
 <footer class="contact" id="contact">
