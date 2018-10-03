@@ -7,9 +7,10 @@ if(!isset($_POST['id'])) {
     } else {
         header('Location: icons.php?msg=12');
     }
-} else {
-    var_dump($_POST);
-    updateSingleValueInTable((int)$_POST['id'],'icons', $_POST['value']);
+}
+if(updateSingleValueInTable($_POST['id'], 'icons', $_POST['value'])) {
     header('Location: icons.php?msg=9');
+} else {
+    header('Location: icons.php?msg=13');
 }
 ?>

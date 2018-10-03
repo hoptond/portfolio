@@ -11,7 +11,7 @@ require 'cms_functions.php';
 </head>
     <body>
         <form name="icons" method="post" action ='doaicon.php'>
-            <?php echo displaySingleValueInput(0, 'icons') ?>
+            <?php echo displaySingleValueInput(getEditEntryID($_GET), 'icons') ?>
             <input type="submit" value="Add">
         </form>
         <div class="listholder">

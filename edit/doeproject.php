@@ -2,8 +2,6 @@
 
 require ('cms_functions.php');
 
-//TODO: kick unathorised individuals off our page
-
 
 if(count($_POST) > 2) {
      if(updateProjectInDatabase($_POST['id'], getProjectDataFromPOST($_POST))) {

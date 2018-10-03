@@ -8,8 +8,10 @@ if(!isset($_POST['id'])) {
         header('Location: badges.php?msg=12');
     }
 } else {
-    var_dump($_POST);
-    updateSingleValueInTable((int)$_POST['id'],'badges', $_POST['value']);
-    header('Location: badges.php?msg=3');
+    if(updateSingleValueInTable($_POST['id'], 'badges', $_POST['value'])) {
+        header('Location: badges.php?msg=3');
+    } else {
+        header('Location: badges.php?msg=13');
+    }
 }
 ?>

@@ -104,6 +104,9 @@ function displayEditContactInfo(int $id) {
     $output = '<div class="longinput"><label>Icon ID: </label><input name="icon_id" type="text" value="' . $array['icon_id'] . '"></div>';
     $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
     $output .= '<div class="longinput"><label>Text: </label><input name="text" type="text" value="' . $array['text'] . '"></div>';
+    if($id != -1) {
+        $output .= '<input type="hidden" name="id" value ="' . $id . '">';
+    }
     return $output;
 }
 
@@ -319,7 +322,7 @@ function addContactInfoToDatabase(array $contact) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function updateContactInfoInDatabase(int $id, array $contact) {
-    $stmt = getPDO()->prepare('UPDATE `contact` SET `icon_id`=:icon_id, `link`=:type, `text`=:text WHERE `id`=:id');
+    $stmt = getPDO()->prepare('UPDATE `contact` SET `icon_id`=:icon_id, `link`=:link, `text`=:text WHERE `id`=:id');
     $stmt->bindParam(':icon_id',$contact['icon_id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
@@ -378,7 +381,6 @@ function updateSingleValueInTable(int $id, string $table, string $value) {
         return FALSE;
     }
     $stmt = getPDO()->prepare('UPDATE ' . $table .  ' SET `value`=:value WHERE `id`=:id');
-    $stmt->bindParam(':table',$table);
     $stmt->bindParam(':value',$value);
     $stmt->bindParam(':id',$id);
     return $stmt->execute();
