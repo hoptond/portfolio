@@ -138,7 +138,7 @@ header p {
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
-    padding: 40px 0 10px 0;
+    padding: 8px 0 10px 0;
 }
 
 .showcasetext h3 {
@@ -163,7 +163,7 @@ header p {
     height: 266px;
     border: 8px solid #111111;
     border-radius: 6px;
-    margin:40px 0 40px 0;
+    margin: 8px 0 40px 0;
     background: #000000;
     background-image: url('magiprojectshowcase1.png');
     background-size: 100% auto;
