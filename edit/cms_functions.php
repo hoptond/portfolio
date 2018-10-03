@@ -55,10 +55,10 @@ function displaySingleValueInput(int $id, string $table) {
  *
  * @param array $getData The $_GET data we are checking.
  *
- * @return int Returns the ID of the entry the user wants to edit. If the user is not editing a specific page, return minus -1.
+ * @return int Returns the ID of the entry the user wants to edit. If the user is not editing a specific entry, return minus -1.
  */
 function getEditEntryID($getData) : int {
-    if(!key_exists('edit', $getData)) {
+    if(!key_exists('edit', $getData) ||!key_exists('id', $getData)) {
         return -1;
     }
     return (int)$getData['id'];
@@ -425,11 +425,10 @@ function validateSingleTableRequest($table) {
  * return bool Returns TRUE if $table is a valid table, otherwise false.
  */
 function validateListTableRequest(string $table) {
-    $values[0] = 'about';
-    $values[1] = 'badges';
-    $values[2] = 'contact';
-    $values[3] = 'icons';
-    $values[4] = 'projects';
+    $values[0] = 'badges';
+    $values[1] = 'contact';
+    $values[2] = 'icons';
+    $values[3] = 'projects';
     foreach ($values as $value) {
         if($table === $value) {
             return TRUE;
