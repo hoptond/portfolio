@@ -1,6 +1,10 @@
 <?php
 
 require ('cms_functions.php');
+if(anyFieldEmpty($_POST)) {
+    header('Location: contact.php?msg=16');
+    exit;
+}
 if(!isset($_POST['id'])) {
     if(addContactInfoToDatabase(getContactInfoFromPOST($_POST))) {
         header('Location: contact.php?msg=6');

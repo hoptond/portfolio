@@ -1,7 +1,10 @@
 <?php
 
 require ('cms_functions.php');
-
+if(anyFieldEmpty($_POST)) {
+    header('Location: contact.php?msg=16');
+    exit;
+}
 $command = explode('_', array_keys($_POST)[0]);
 if($command[0] === 'del') {
     if(deleteEntryInDB((int)$command[1], 'contact')) {

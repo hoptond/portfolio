@@ -127,6 +127,7 @@ function processMessage(int $id) {
         case 13: return 'Error updating entry in database. Please try again.';
         case 14: return 'Error deleting entry from database.';
         case 15: return 'Deleted entry from the database';
+        case 16: return 'Please fill in all fields.';
     }
     return '';
 }
@@ -268,7 +269,7 @@ function getContactInfoFromPOST($postData) {
  * @return Returns TRUE if the project was added successfully, FALSE if otherwise.
  */
 function addProjectToDatabase($project) {
-    $stmt = getPDO()->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`link`) VALUES(:title, :type, :desc, :image, :link)');
+    $stmt = getPDO()->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`link`) VALUES(:title, :type, :desc, :image, :link);');
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':type',$project['type']);
     $stmt->bindParam(':desc',$project['desc']);
@@ -287,7 +288,7 @@ function addProjectToDatabase($project) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function updateProjectInDatabase(int $id, $project) {
-    $stmt = getPDO()->prepare('UPDATE `projects` SET `title`=:title, `type`=:type, `desc`=:desc, `image`=:img, `link`=:link  WHERE `id`=:id');
+    $stmt = getPDO()->prepare('UPDATE `projects` SET `title`=:title, `type`=:type, `desc`=:desc, `image`=:img, `link`=:link  WHERE `id`=:id;');
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':type',$project['type']);
     $stmt->bindParam(':desc',$project['desc']);
@@ -305,7 +306,7 @@ function updateProjectInDatabase(int $id, $project) {
  * @return Returns TRUE if the contact info was added successfully, FALSE if otherwise.
  */
 function addContactInfoToDatabase(array $contact) {
-    $stmt = getPDO()->prepare('INSERT INTO `contact`(`icon_id`, `link`, `text`) VALUES(:icon_id, :link, :text)');
+    $stmt = getPDO()->prepare('INSERT INTO `contact`(`icon_id`, `link`, `text`) VALUES(:icon_id, :link, :text);');
     $stmt->bindParam(':icon_id',$contact['icon_id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
@@ -323,7 +324,7 @@ function addContactInfoToDatabase(array $contact) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function updateContactInfoInDatabase(int $id, array $contact) {
-    $stmt = getPDO()->prepare('UPDATE `contact` SET `icon_id`=:icon_id, `link`=:link, `text`=:text WHERE `id`=:id');
+    $stmt = getPDO()->prepare('UPDATE `contact` SET `icon_id`=:icon_id, `link`=:link, `text`=:text WHERE `id`=:id;');
     $stmt->bindParam(':icon_id',$contact['icon_id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
@@ -340,7 +341,7 @@ function updateContactInfoInDatabase(int $id, array $contact) {
  * project of that ID in the database.
  */
 function getContactInfoFromDB(int $id) {
-    $stmt = getPDO()->prepare('SELECT `icon_id`,`link`,`text` FROM `contact` WHERE `id` = :id LIMIT 1');
+    $stmt = getPDO()->prepare('SELECT `icon_id`,`link`,`text` FROM `contact` WHERE `id` = :id LIMIT 1;');
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     $contact = $stmt->fetch();
@@ -381,7 +382,7 @@ function updateSingleValueInTable(int $id, string $table, string $value) {
     if(!validateSingleTableRequest($table)) {
         return FALSE;
     }
-    $stmt = getPDO()->prepare('UPDATE ' . $table .  ' SET `value`=:value WHERE `id`=:id');
+    $stmt = getPDO()->prepare('UPDATE ' . $table .  ' SET `value`=:value WHERE `id`=:id;');
     $stmt->bindParam(':value',filter_var($value, FILTER_SANITIZE_STRING));
     $stmt->bindParam(':id',$id);
     return $stmt->execute();
@@ -442,6 +443,24 @@ function validateListTableRequest(string $table) {
 }
 
 /*
+ * Goes through each field, determining if it is empty, and returning true if it is. The normal empty function will merrily
+ * say that a comprising of '     ' is not empty, though it effectively appears as such.
+ *
+ * @param array $array The array of fields to check.
+ *
+ * @return Returns TRUE if the field meets our definition of empty, otherwise FALSE.
+ */
+function anyFieldEmpty($array) {
+    foreach ($array as $entry) {
+        $test = str_replace(' ','', $entry);
+        if ($test === '') {
+            RETURN TRUE;
+        }
+    }
+    return FALSE;
+}
+
+/*
  * Deletes the given entry in the database.
  *
  * @param int id The row to delete.
@@ -451,7 +470,7 @@ function validateListTableRequest(string $table) {
  * @return Returns TRUE if the deletion was successful, otherwise false
  */
 function deleteEntryInDB(int $id, string $table) {
-    $stmt = getPDO()->prepare('DELETE FROM ' . $table .' WHERE id = :id');
+    $stmt = getPDO()->prepare('DELETE FROM ' . $table .' WHERE id = :id;');
     var_dump($table);
     $stmt->bindParam(':id',$id);
     var_dump($id);

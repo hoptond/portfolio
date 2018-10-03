@@ -1,8 +1,10 @@
 <?php
 
 require ('cms_functions.php');
-
-
+if(anyFieldEmpty($_POST)) {
+    header('Location: editproj.php?msg=16');
+    exit;
+}
 if(count($_POST) > 2) {
      if(updateProjectInDatabase($_POST['id'], getProjectDataFromPOST($_POST))) {
          header('Location: editproj.php?msg=5');
