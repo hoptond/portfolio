@@ -12,7 +12,7 @@ require 'cms_functions.php';
     <body>
         <form name="badges" method="post" action ='doabadge.php'>
             <?php echo displaySingleValueInput(getEditEntryID($_GET), 'badges') ?>
-            <input type="submit" value="Add">
+            <input type="submit" value="Add/Edit">
         </form>
         <div class="listholder">
             <?php echo displayListHolderData('badges', getEditEntryID($_GET)); ?>
