@@ -196,12 +196,9 @@ function updateAbout($about) {
     if (!isset($about['name']) || !isset($about['title']) || !isset($about['desc'])) {
         return FALSE;
     }
-    $name = $about['name'];
-    $title = $about['title'];
-    $desc = $about['desc'];
-
-    //sanitize all strings
-
+    $name = filter_var($about['name'], FILTER_SANITIZE_STRING);
+    $title = filter_var($about['title'], FILTER_SANITIZE_STRING);
+    $desc = filter_var($about['desc'], FILTER_SANITIZE_STRING);
     $stmt = getPDO()->prepare('UPDATE `about` SET `name` = :name, `title` = :title, `desc` = :desc');
     $stmt->bindParam(':name',$name);
     $stmt->bindParam(':title',$title);
@@ -235,11 +232,11 @@ function getProjectFromDB(int $id) {
  */
 function getProjectDataFromPOST($postData) {
     $project = [];
-    $project['title'] = $postData['title'];
-    $project['type'] = $postData['type'];
-    $project['desc'] = $postData['desc'];
-    $project['img'] = $postData['img'];
-    $project['link'] = $postData['link'];
+    $project['title'] = filter_var($postData['title'], FILTER_SANITIZE_STRING);
+    $project['type'] = filter_var($postData['type'], FILTER_SANITIZE_STRING);
+    $project['desc'] = filter_var($postData['desc'], FILTER_SANITIZE_STRING);
+    $project['img'] = filter_var($postData['img'], FILTER_SANITIZE_STRING);
+    $project['link'] = filter_var($postData['link'], FILTER_SANITIZE_STRING);
     return $project;
 }
 
@@ -253,9 +250,9 @@ function getProjectDataFromPOST($postData) {
  */
 function getContactInfoFromPOST($postData) {
     $contact = [];
-    $contact['id'] = $postData['id'];
-    $contact['link'] = $postData['link'];
-    $contact['text'] = $postData['text'];
+    $contact['icon_id'] = filter_var($postData['icon_id'], FILTER_SANITIZE_STRING);
+    $contact['link'] = filter_var($postData['link'], FILTER_SANITIZE_STRING);
+    $contact['text'] = filter_var($postData['text'], FILTER_SANITIZE_STRING);
     return $contact;
 }
 
@@ -381,7 +378,7 @@ function updateSingleValueInTable(int $id, string $table, string $value) {
         return FALSE;
     }
     $stmt = getPDO()->prepare('UPDATE ' . $table .  ' SET `value`=:value WHERE `id`=:id');
-    $stmt->bindParam(':value',$value);
+    $stmt->bindParam(':value',filter_var($value, FILTER_SANITIZE_STRING));
     $stmt->bindParam(':id',$id);
     return $stmt->execute();
 }

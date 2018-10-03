@@ -1,7 +1,7 @@
 <?php
 
 require ('cms_functions.php');
-updateAbout();
+updateAbout($_POST);
 header('Location: about.php?msg=1');
 
 ?>

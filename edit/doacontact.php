@@ -2,7 +2,7 @@
 
 require ('cms_functions.php');
 if(!isset($_POST['id'])) {
-    if(addContactInfoToDatabase($_POST)) {
+    if(addContactInfoToDatabase(getContactInfoFromPOST($_POST))) {
         header('Location: contact.php?msg=6');
     } else {
         header('Location: contact.php?msg=12');

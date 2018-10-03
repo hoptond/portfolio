@@ -15,7 +15,7 @@ require 'cms_functions.php';
             <input type="submit" value="Add">
         </form>
         <div class="listholder">
-            <?php echo displayListHolderData('icons'); ?>
+            <?php echo displayListHolderData('icons', getEditEntryID($_GET)); ?>
         </div>
         <div><?php
             if(isset($_GET['msg'])) {
