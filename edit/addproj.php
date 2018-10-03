@@ -4,7 +4,7 @@ require 'cms_functions.php';
 
 ?>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Edit Badges</title>
     <link rel="stylesheet" href="style.css">
@@ -19,10 +19,9 @@ require 'cms_functions.php';
                 <label>Type: </label>
                 <input name="type" type="text">
             </div>
-
-            <div class="longinput">
+            <div class="longinputlarge">
                 <label>Desc: </label>
-                <input name="desc" type="text">
+                <textarea name="desc"></textarea>
             </div>
             <div class="longinput">
                 <label>Image: </label>

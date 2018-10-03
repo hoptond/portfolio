@@ -24,7 +24,7 @@ function displayAboutMeInput() {
     $array = $stmt->fetch();
     $output = '<div class="longinput"><label>Name: </label><input name="name" type="text" value="' . $array['name'] . '"></div>';
     $output .= '<div class="longinput"><label>Title: </label><input name="title" type="text" value="' . $array['title'] . '"></div>';
-    $output .= '<div class="longinput"><label>Desc: </label><input name="desc" type="text" value="' . $array['desc'] . '"></div>';
+    $output .= '<div class="longinputlarge"><label>Desc: </label><textarea name="desc">' . $array['desc'] . '</textarea></div></div>';
     return $output;
 }
 
@@ -82,7 +82,7 @@ function displayEditProjectInput(int $id) {
     $output = '<form name="project" action="doeproject.php" method="post">';
     $output .= '<div class="longinput"><label>Title: </label><input name="title" type="text" value="' . $array['title'] . '"></div>';
     $output .= '<div class="longinput"><label>Type: </label><input name="type" type="text" value="' . $array['type'] . '"></div>';
-    $output .= '<div class="longinput"><label>Desc: </label><input name="desc" type="text" value="' . $array['desc'] . '"></div>';
+    $output .= '<div class="longinputlarge"><label>Desc: </label><textarea name="desc">' . $array['desc'] . '</textarea></div>';
     $output .= '<div class="longinput"><label>Image: </label><input name="img" type="text" value="' . $array['image'] . '"></div>';
     $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
     $output .= '<input type="hidden" name="id" value ="' . $id . '">';

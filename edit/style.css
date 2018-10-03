@@ -59,10 +59,20 @@ ul p {
     width: 400px;
     height: 23px;
 }
+.longinputlarge {
+    width: 400px;
+    height: 114px;
+}
 
 .longinput label {
     float: left;
 }
 .longinput input {
+    float: right;
+}
+textarea {
+    resize: none;
+    width: 294px;
+    height: 110px;
     float: right;
 }
