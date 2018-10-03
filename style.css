@@ -168,17 +168,21 @@ header p {
     background-size: 100% auto;
     overflow: hidden;
 }
+.showcaseviewer form {
+    top:45%;
+    position:relative;
+    width: 40px;
+    height: 30px;
+}
+
 .showcaseviewer img {
     max-width: 100%;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
     display: inline;
     position: absolute;
 }
-
-.showcasenav {
-    top:45%;
-    position:relative;
+.showcasenav input {
     background-color: rgba(102, 102, 102, 0.66);
     color: #ffffff;
     width: 40px;
@@ -214,7 +218,7 @@ header p {
     background-color: #252826;
     width: 100%;
     color: #ffffff;
-    bottom: 0px;
+    bottom: 0;
 }
 .contactwrapper {
     max-width: 65%;

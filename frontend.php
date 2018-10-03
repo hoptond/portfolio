@@ -32,10 +32,6 @@ function displayBadges() {
     return $output;
 }
 
-
-
-
-
 /*
  * Clamps the project ID to an existing project in the database. If the ID is higher than any existing number,
  * we loop back around to the first project ID. If it is lower, we loop back around to the last project ID. If
@@ -103,12 +99,32 @@ function displayProject(int $id) {
     $result = $stmt->fetch();
     $output = '<div class="showcasetext"><h2>' . $result['title'] . '</h2><h3>' . $result['type'] . '</h3><p>' . $result['desc'] .'</p></div>';
     $output .= '<div class="showcaseviewer"><img src="' . $result['image'] . '">';
-    $output .= '<form class="showcasenav showcaseprev"><input type="submit" name="prev_" value="&lt" ' . $id . ' class="showcasenav showcaseprev"></form>';
-    $output .= '<form class="showcasenav showcasenext"><input type="submit" name="next_" value="&gt" ' . $id . ' class="showcasenav showcaseprev"></form>';
-    //$output .= '<button class="showcasenav showcaseprev">&lt;</button><button class="showcasenav showcasenext">&gt;</button>';
-    $output .= '<div class="showcasebottom"><a class="showcaseview">View Project</a></div>';
+    $output .= '<form class="showcasenav showcaseprev"><input type="submit" name="prev_' . $id . '" value="&lt" class="showcasenav showcaseprev"></form>';
+    $output .= '<form class="showcasenav showcasenext"><input type="submit" name="next_' . $id . '" value="&gt" class="showcasenav showcaseprev"></form>';
+    $output .= '<div class="showcasebottom"><a href="' .  $result['link'] . '" class="showcaseview">View Project</a></div>';
     return $output;
 }
+
+
+
+function getProjectID($get) {
+    $command = explode('_', array_keys($get)[0]);
+    $id = (int)$command[1];
+    if($command[0] == 'prev') {
+        return clampProjectID($id - 1, FALSE);
+    } else if($command[0] == 'next') {
+        return clampProjectID($id + 1, TRUE);
+    }
+    return getDefaultProject();
+}
+
+function getDefaultProject() {
+    $stmt = getPDO()->prepare('SELECT `id` FROM `projects`');
+    $stmt->execute();
+    $value = $stmt->fetch();
+    return (int)$value['id'];
+}
+
 
 function displayContactInfo() {
     $stmt = getPDO()->prepare('SELECT `value` as icon,`link`,`text` FROM `contact` JOIN `icons` ON `icons`.`id` = `contact`.`icon_id`');
