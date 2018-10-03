@@ -161,6 +161,27 @@ class functions extends TestCase
         $this->assertEquals($id, 0);
     }
 
+    public function test_anyFieldEmpty_success_true(){
+        $array['name'] = 'Steve';
+        $array['age'] = '32';
+        $array['gender'] = '';
+        $result = anyFieldEmpty($array);
+        $this->assertEquals($result, TRUE);
+    }
+
+    public function test_anyFieldEmpty_success_false(){
+        $array['name'] = 'Steve';
+        $array['age'] = '32';
+        $array['gender'] = 'male';
+        $result = anyFieldEmpty($array);
+        $this->assertEquals($result, FALSE);
+    }
+
+    public function test_anyFieldEmpty_malform(){
+        $this->expectException(TypeError::class);
+        $array = 7.5;
+        anyFieldEmpty($array);
+    }
 
 
 }
