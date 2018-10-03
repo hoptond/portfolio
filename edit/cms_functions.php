@@ -166,8 +166,12 @@ function displayListHolderData(string $table, int $highlight = -1) {
         case 'contact': $action = 'doecontact.php'; break;
     }
     foreach($array as $entry) {
+        $disp = $entry[$display];
+        if($table === 'icons') {
+            $disp = $entry['id'] . ': ' . $disp;
+        }
         //I am aware this is overly long
-        $output .= '<div><p' . listTextColor($entry, $highlight) . '>' . $entry[$display] .'</p><div class="listbuttons"><form method="post" action ="' . $action . '"><input class="edit" name="edit_' . $entry['id'] . '" type="submit" value="EDIT"></form><form method="post" action ="' . $action . '"><input class="delete" name="del_' . $entry['id'] . '" type="submit" value="X"></form></div></div>';
+        $output .= '<div><p' . listTextColor($entry, $highlight) . '>' . $disp .'</p><div class="listbuttons"><form method="post" action ="' . $action . '"><input class="edit" name="edit_' . $entry['id'] . '" type="submit" value="EDIT"></form><form method="post" action ="' . $action . '"><input class="delete" name="del_' . $entry['id'] . '" type="submit" value="X"></form></div></div>';
     }
     return $output .= '</li></ul>';
 }
