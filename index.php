@@ -1,5 +1,7 @@
 <?php
 
+require  'frontend.php';
+
 ?>
 
 
@@ -33,14 +35,14 @@
 <header>
   <div class="headerwrapper">
     <div class="headertext">
-      <h1>DANIEL HOPTON</h1>
-      <h2>Full Stack Developer</h2>
-      <p>My name is Dan, and I am a software developer living near Bath and Bristol. I have written a wide variety of applications, from video games to simple command line programs to backend and frontend web applications.</p>
+        <?php
+        echo displayAboutMe();
+        ?>
     </div>
     <div class="badges">
-      <i class="devicon-csharp-plain"></i>
-      <i class="devicon-html5-plain"></i>
-      <i class="devicon-css3-plain"></i>
+        <?php
+            echo displayBadges();
+        ?>
     </div>
   </div>
 </header>
@@ -64,9 +66,9 @@
 <footer class="contact" id="contact">
   <div class="contactwrapper">
     <ul>
-      <li><i class="fa fa-at"></i><a href="mailto:hoptond848@protonmail.com"> hoptond848@protonmail.com</a></li>
-      <li><i class="fa fa-github"></i><a href="https://github.com/hoptond/"> github.com/hoptond/</a></li>
-      <li><i class="fa fa-linkedin"></i><a href="https://www.linkedin.com/in/daniel-hopton-70476816b/"> linkedin.com/in/daniel-hopton</a></li>
+        <?php
+            echo displayContactInfo();
+        ?>
     </ul>
   </div>
 </footer>
