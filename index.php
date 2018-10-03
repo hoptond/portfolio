@@ -55,6 +55,7 @@ require  'frontend.php';
       <p>Magicians is a role playing adventure game, written in C# and developed using the Monogame framework. This project, with the exception of testing, was produced independently: all code, art, writing, and audio was done myself. I maintained this project over a period of around 4 years: making a game is much harder than it looks!</p>
     </div>
     <div class="showcaseviewer">
+        <img src="magiprojectshowcase1.png">
       <button class="showcasenav showcaseprev">&lt;</button>
       <button class="showcasenav showcasenext">&gt;</button>
       <div class="showcasebottom">
