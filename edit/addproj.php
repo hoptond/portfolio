@@ -1,5 +1,7 @@
 <?php
 
+require 'cms_functions.php';
+
 ?>
 <!DOCTYPE html>
 <html>

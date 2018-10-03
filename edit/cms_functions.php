@@ -128,7 +128,7 @@ function processMessage(int $id) {
         case 14: return 'Error deleting entry from database.';
         case 15: return 'Deleted entry from the database';
     }
-    return'';
+    return '';
 }
 
 /*
