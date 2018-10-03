@@ -40,24 +40,46 @@ function displayBadges() {
  *
  * @param int The target project ID recieved from the GET string.
  *
- *
- *
+ * @return int The corrected ID of the project we will be loading.
  */
-function clampProjectID(int $id) {
+function clampProjectID(int $id, bool $up) {
     $stmt = getPDO()->prepare('SELECT `id` FROM `projects`');
     $stmt->execute();
     $select = $stmt->fetchAll();
-    //for int = 0; i < select; i++
-    //add $select['id'] to a new array
+    $array = [];
+    foreach ($select as $entry) {
+        if($entry['id'] == $id) {
+            return $id;
+        }
+        array_push($array, (int)$entry['id']);
+    }
 
-    //if the project ID matches an entry in the list, return that entry
-    //order the array by the int values
-    //if the value is lower than the lowest, return the lowest
-    //if the value is higher than the highest, return the highest
-    //else, clamp our project ID to the nearest value
+    asort($array);
+    if($id < min($array)) {
+        return min($array);
+    } else if($id > max($array)) {
+        return max($array);
+    }
+    return closestValue($array, $id, $up);
 }
 
-clampProjectID(1);
+
+function closestValue(array $array, $val, bool $up) {
+    $closest = null;
+    foreach ($array as $item) {
+        if ($closest === null || abs($val - $closest) > abs($item - $val)) {
+            $closest = $item;
+        }
+    }
+    return $closest;
+}
+
+$array[0] = 1;
+$array[1] = 7;
+$array[2] = 12;
+$array[3] = 13;
+
+var_dump(closestValue($array, 8));
 
 /*
  * Displays the given project. In the grim darkness of the near future, this will be a fancy JS carousel but I looked up how to
