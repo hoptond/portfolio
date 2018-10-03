@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.41)
 # Database: CMS
-# Generation Time: 2018-10-01 10:47:53 +0000
+# Generation Time: 2018-10-03 09:53:40 +0000
 # ************************************************************
 
 
@@ -80,7 +80,7 @@ CREATE TABLE `contact` (
   `text` varchar(255) DEFAULT '',
   PRIMARY KEY (`id`),
   KEY `icon_id` (`icon_id`),
-  CONSTRAINT `icon_id` FOREIGN KEY (`icon_id`) REFERENCES `icons` (`id`)
+  CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`icon_id`) REFERENCES `icons` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `contact` WRITE;
@@ -103,14 +103,14 @@ DROP TABLE IF EXISTS `icons`;
 
 CREATE TABLE `icons` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL DEFAULT 'fa fa-circle',
+  `value` varchar(20) NOT NULL DEFAULT 'fa fa-circle',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `icons` WRITE;
 /*!40000 ALTER TABLE `icons` DISABLE KEYS */;
 
-INSERT INTO `icons` (`id`, `name`)
+INSERT INTO `icons` (`id`, `value`)
 VALUES
 	(1,'fa fa-circle'),
 	(2,'fa fa-at'),
@@ -143,7 +143,7 @@ LOCK TABLES `projects` WRITE;
 INSERT INTO `projects` (`id`, `title`, `type`, `desc`, `image`, `link`)
 VALUES
 	(1,'MAGICIANS','A game for PC/Mac/Linux','Magicians is a role playing adventure game, written in C# and developed using the Monogame framework. This project, with the exception of testing, was produced independently: all code, art, writing, and audio was done myself. I maintained this project over a period of around 4 years: making a game is much harder than it looks!','magiprojectshowcase1.png','https://github.com/hoptond/magiciansdemo'),
-	(2,'PORTFOLIO','Web','This portfolio was the first web project I completed. I worked on both the front end (what you\'re seeing now) and the back end, as I implemented a content management system to be able to easily edit my website from within the browser.','portfolioprojectshowcase.png','https://github.com/hoptond/portfolio');
+	(2,'PORTFOLIO','Web','This portfolio was the first web project I completed. I worked on both the front end (what you&#39;re seeing now) and the back end, as I implemented a content management system to be able to easily edit my website from within the browser.','portfolioprojectshowcase.png','https://git7hub.com/hoptond/portfolio');
 
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
