@@ -219,8 +219,17 @@ function getActionLocation (string $table) {
  * @return A division containing the name of the entry wrapped in a paragraph tag, and the edit/delete buttons each wrapped in a form.
  */
 function getListHolderEntry(int $id, int $highlight, string $action, string $name) {
-    //I am aware this is overly long
-    return '<div><p' . listTextColor($id, $highlight) . '>' . $name .'</p><div class="listbuttons"><form method="post" action ="' . $action . '"><input class="edit" name="edit_' . $id . '" type="submit" value="EDIT"></form><form method="post" action ="' . $action . '"><input class="delete" name="del_' . $id . '" type="submit" value="X"></form></div></div>';
+    return '<div>
+                <p' . listTextColor($id, $highlight) . '>' . $name .'</p>
+                <div class="listbuttons">
+                    <form method="post" action ="' . $action . '">
+                        <input class="edit" name="edit_' . $id . '" type="submit" value="EDIT">
+                    </form>
+                    <form method="post" action ="' . $action . '">
+                        <input class="delete" name="del_' . $id . '" type="submit" value="X">
+                        </form>
+                </div>
+           </div>';
 }
 
 /*
