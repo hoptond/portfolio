@@ -18,7 +18,7 @@ require 'cms_functions.php';
             <?php echo displayListHolderData('icons', getEditEntryID($_GET)); ?>
         </div>
         <div><?php
-            if(isset($_GET['msg'])) {
+            if (isset($_GET['msg'])) {
                 echo processMessage($_GET['msg']);
             }
             ?></div>

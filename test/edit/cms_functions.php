@@ -22,7 +22,7 @@ class functions extends TestCase
         $test = getProjectDataFromPOST($array);
         $empty = 0;
         foreach ($test as $entry) {
-            if(empty($entry)) {
+            if (empty($entry)) {
                 $empty++;
             }
         }

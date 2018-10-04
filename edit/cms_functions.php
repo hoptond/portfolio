@@ -42,7 +42,7 @@ function displayAboutMeInput() {
 function displaySingleValueInput(int $id, string $table) {
     $value = '';
     $hidden = '';
-    if($id > -1) {
+    if ($id > -1) {
         $value = getSingleValueFromDB($id, $table)['value'];
         $hidden ='<input type="hidden" name="id" value ="' . $id . '">';
     }
@@ -58,7 +58,7 @@ function displaySingleValueInput(int $id, string $table) {
  * @return int Returns the ID of the entry the user wants to edit. If the user is not editing a specific entry, return minus -1.
  */
 function getEditEntryID($getData) : int {
-    if(!key_exists('edit', $getData) ||!key_exists('id', $getData)) {
+    if (!key_exists('edit', $getData) ||!key_exists('id', $getData)) {
         return -1;
     }
     return (int)$getData['id'];
@@ -75,7 +75,7 @@ function getEditEntryID($getData) : int {
  * element.
  */
 function displayEditProjectInput(int $id) {
-    if($id < 1) {
+    if ($id < 1) {
         return '';
     }
     $array = getProjectFromDB($id);
@@ -104,12 +104,19 @@ function displayEditContactInfo(int $id) {
     $output = '<div class="longinput"><label>Icon ID: </label><input name="icon_id" type="text" value="' . $array['icon_id'] . '"></div>';
     $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
     $output .= '<div class="longinput"><label>Text: </label><input name="text" type="text" value="' . $array['text'] . '"></div>';
-    if($id != -1) {
+    if ($id != -1) {
         $output .= '<input type="hidden" name="id" value ="' . $id . '">';
     }
     return $output;
 }
 
+/*
+ * The message to display to the user whenever they have submitted a form.
+ *
+ * @param int $id The message ID, obtained from the GET string.
+ *
+ * @return string The message to display to the user.
+ */
 function processMessage(int $id) {
     switch ($id){
         case 1: return 'About Me updated successfully!';
@@ -128,8 +135,8 @@ function processMessage(int $id) {
         case 14: return 'Error deleting entry from database.';
         case 15: return 'Deleted entry from the database';
         case 16: return 'Please fill in all fields.';
+        default: return '';
     }
-    return '';
 }
 
 /*
@@ -141,7 +148,7 @@ function processMessage(int $id) {
  * such as the about table, we will receive an informative message instead telling us that this operation is not valid.
  */
 function displayListHolderData(string $table, int $highlight = -1) {
-    if(!validateListTableRequest($table)) {
+    if (!validateListTableRequest($table)) {
         return "<div>This section cannot be listed.</div>";
     }
     $output = '<ul><li>';
@@ -168,7 +175,7 @@ function displayListHolderData(string $table, int $highlight = -1) {
     }
     foreach($array as $entry) {
         $disp = $entry[$display];
-        if($table === 'icons') {
+        if ($table === 'icons') {
             $disp = $entry['id'] . ': ' . $disp;
         }
         //I am aware this is overly long
@@ -186,7 +193,7 @@ function displayListHolderData(string $table, int $highlight = -1) {
  * @return Returns the class to append insert into the HTML if this is the highlighted element. Otherwise, return an empty string.
  */
 function listTextColor($entry, $highlight) {
-    if((int)$entry['id'] === $highlight) {
+    if ((int)$entry['id'] === $highlight) {
         return ' class="highlight"';
     }
     return'';
@@ -310,7 +317,6 @@ function addContactInfoToDatabase(array $contact) {
     $stmt->bindParam(':icon_id',$contact['icon_id']);
     $stmt->bindParam(':link',$contact['link']);
     $stmt->bindParam(':text',$contact['text']);
-    var_dump($contact);
     return $stmt->execute();
 }
 
@@ -358,7 +364,7 @@ function getContactInfoFromDB(int $id) {
  * @return bool Returns TRUE if the entry was added, otherwise false
  */
 function addSingleValueToTable(string $table, $value) {
-    if(!validateSingleTableRequest($table)) {
+    if (!validateSingleTableRequest($table)) {
         return FALSE;
     }
     $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
@@ -379,7 +385,7 @@ function addSingleValueToTable(string $table, $value) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function updateSingleValueInTable(int $id, string $table, string $value) {
-    if(!validateSingleTableRequest($table)) {
+    if (!validateSingleTableRequest($table)) {
         return FALSE;
     }
     $stmt = getPDO()->prepare('UPDATE ' . $table .  ' SET `value`=:value WHERE `id`=:id;');
@@ -397,15 +403,13 @@ function updateSingleValueInTable(int $id, string $table, string $value) {
  * project of that ID in the database.
  */
 function getSingleValueFromDB(int $id, string $table) {
-    if(!validateSingleTableRequest($table)) {
+    if (!validateSingleTableRequest($table)) {
         return FALSE;
     }
     $stmt = getPDO()->prepare('SELECT `value` FROM ' . $table . ' WHERE `id` = :id;');
-    $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $stmt->bindParam(':id',$id);
     $stmt->execute();
-    $entry = $stmt->fetch();
-    return $entry;
+    return $stmt->fetch();
 }
 
 /*
@@ -416,7 +420,7 @@ function getSingleValueFromDB(int $id, string $table) {
  * return bool Returns TRUE if the table can be accessed in this way, otherwise FALSE.
  */
 function validateSingleTableRequest($table) {
-    if($table !== 'icons' && $table !== 'badges') {
+    if ($table !== 'icons' && $table !== 'badges') {
         return FALSE;
     }
     return TRUE;
@@ -435,7 +439,7 @@ function validateListTableRequest(string $table) {
     $values[2] = 'icons';
     $values[3] = 'projects';
     foreach ($values as $value) {
-        if($table === $value) {
+        if ($table === $value) {
             return TRUE;
         }
     }
@@ -454,7 +458,7 @@ function anyFieldEmpty(array $array) {
     foreach ($array as $entry) {
         $test = str_replace(' ','', $entry);
         if ($test === '') {
-            RETURN TRUE;
+            return TRUE;
         }
     }
     return FALSE;
@@ -471,8 +475,6 @@ function anyFieldEmpty(array $array) {
  */
 function deleteEntryInDB(int $id, string $table) {
     $stmt = getPDO()->prepare('DELETE FROM ' . $table .' WHERE id = :id;');
-    var_dump($table);
     $stmt->bindParam(':id',$id);
-    var_dump($id);
     return $stmt->execute();
 }

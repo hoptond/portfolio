@@ -15,7 +15,7 @@ require 'cms_functions.php';
             <input type="submit" value="Change">
         </form>
         <div><?php
-            if(isset($_GET['msg'])) {
+            if (isset($_GET['msg'])) {
                 echo processMessage($_GET['msg']);
             }
             ?></div>
