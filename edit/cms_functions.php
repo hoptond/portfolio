@@ -81,7 +81,7 @@ function getEditEntryID($getData) : int {
  * element.
  */
 function displayEditProjectInput(PDO $db, int $id) {
-    if ($id < 1) {
+    if ($id == -1) {
         return '';
     }
     $array = getProjectFromDB($db, $id);
@@ -112,7 +112,7 @@ function displayEditContactInfo(PDO $db, int $id) {
     $output = '<div class="longinput"><label>Icon ID: </label><input name="icon_id" type="text" value="' . $array['icon_id'] . '"></div>';
     $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
     $output .= '<div class="longinput"><label>Text: </label><input name="text" type="text" value="' . $array['text'] . '"></div>';
-    if ($id != -1) {
+    if ($id > -1) {
         $output .= '<input type="hidden" name="id" value ="' . $id . '">';
     }
     return $output;
@@ -164,37 +164,65 @@ function displayListHolderData(PDO $db, string $table, int $highlight = -1) {
         return "<div>This section cannot be listed.</div>";
     }
     $output = '<ul><li>';
-    //i am aware using * is a cardinal sin but I see no better way of doing what I want to do
-    $stmt = $db->prepare('SELECT * FROM ' . $table);
-    $display = 'value';
-    switch ($table) {
-        case 'contact':
-            $display = 'text';
-            break;
-        case 'projects':
-            $display = 'title';
-            break;
-    }
+    $tables = [
+        'badges' => ['value'],
+        'projects' => ['title'],
+        'contact' => ['text'],
+        'icons' => ['value']
+    ];
+    $field = $tables[$table][0];
+    $stmt = $db->prepare('SELECT `id`,' . $field . ' FROM ' . $table);
     $stmt->execute();
     $array = $stmt->fetchAll();
-    $action = '';
-    switch ($table)
-    {
-        case 'projects': $action = 'doeproject.php'; break;
-        case 'icons': $action = 'doeicon.php'; break;
-        case 'badges': $action = 'doebadge.php'; break;
-        case 'contact': $action = 'doecontact.php'; break;
-    }
+    $action = getActionLocation($table);
     foreach($array as $entry) {
-        $disp = $entry[$display];
+        $name = $entry[$field];
         if ($table === 'icons') {
-            $disp = $entry['id'] . ': ' . $disp;
+            $name = $entry['id'] . ': ' . $name;
         }
-        //I am aware this is overly long
-        $output .= '<div><p' . listTextColor($entry, $highlight) . '>' . $disp .'</p><div class="listbuttons"><form method="post" action ="' . $action . '"><input class="edit" name="edit_' . $entry['id'] . '" type="submit" value="EDIT"></form><form method="post" action ="' . $action . '"><input class="delete" name="del_' . $entry['id'] . '" type="submit" value="X"></form></div></div>';
+        $output .= getListHolderEntry((int)$entry['id'], $highlight, $action, $name);
     }
     return $output .= '</li></ul>';
 }
+
+
+/*
+ * Gets the target PHP file when the user selects an entry in the list to either edit the entry or delete it.
+ *
+ * @param string $table The table whose entries the user is trying to edit.
+ *
+ * @return string The target.
+ */
+function getActionLocation (string $table) {
+    switch ($table)
+    {
+        case 'projects':return 'doeproject.php';
+        case 'icons': return 'doeicon.php';
+        case 'badges': return 'doebadge.php';
+        case 'contact': return 'doecontact.php';
+        default: return 'dash.php';
+    }
+}
+
+/*
+ * Produces a single 'row' in a list of items.
+ *
+ * @param id $entry The ID of this entry in the table.
+ *
+ * @param int $highlight If this entry is selected, the <p> will have the highlight class added to it.
+ *
+ * @param string $action The location of the PHP file that handles editing/deletion.
+ *
+ * @param string $name The name of this entry in the list. Projects will have their title displayed, Contacts will have their text displayed,
+ * Badges will have their icon
+ *
+ * @return A division containing the name of the entry wrapped in a paragraph tag, and the edit/delete buttons each wrapped in a form.
+ */
+function getListHolderEntry(int $id, int $highlight, string $action, string $name) {
+    //I am aware this is overly long
+    return '<div><p' . listTextColor($id, $highlight) . '>' . $name .'</p><div class="listbuttons"><form method="post" action ="' . $action . '"><input class="edit" name="edit_' . $id . '" type="submit" value="EDIT"></form><form method="post" action ="' . $action . '"><input class="delete" name="del_' . $id . '" type="submit" value="X"></form></div></div>';
+}
+
 /*
  * Gets the text color for this list entry. If the highlight ID matches the entry in the database this entry will appear in a different color.
  *
@@ -204,8 +232,8 @@ function displayListHolderData(PDO $db, string $table, int $highlight = -1) {
  *
  * @return Returns the class to append insert into the HTML if this is the highlighted element. Otherwise, return an empty string.
  */
-function listTextColor($entry, $highlight) {
-    if ((int)$entry['id'] === $highlight) {
+function listTextColor(int $id, int $highlight) {
+    if ($id == $highlight) {
         return ' class="highlight"';
     }
     return'';

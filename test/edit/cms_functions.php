@@ -103,21 +103,21 @@ class functions extends TestCase
     }
 
     public function test_listTextColor_success_match() {
-        $entry['id'] = 1;
-        $test = listTextColor($entry, 1);
+        $id = 1;
+        $test = listTextColor($id, 1);
         $this->assertEquals($test, ' class="highlight"');
     }
 
     public function test_listTextColor_success_nomatch() {
-        $entry['id'] = 8;
-        $test = listTextColor($entry, 1);
+        $id = 8;
+        $test = listTextColor($id, 1);
         $this->assertEquals($test, '');
     }
 
     public function test_listTextColor_malform() {
-        $entry['id'] = 'gorilla';
-        $test = listTextColor($entry, 1);
-        $this->assertEquals($test, '');
+        $this->expectException(TypeError::class);
+        $id = 'gorilla';
+        $test = listTextColor($id, 1);
     }
 
     public function test_processMessage_success() {
@@ -181,6 +181,31 @@ class functions extends TestCase
         $this->expectException(TypeError::class);
         $array = 7.5;
         anyFieldEmpty($array);
+    }
+
+    public function test_getListHolderEntry_success_highlight() {
+        $entry = getListHolderEntry(1,1, 'doeproject.php', 'MAGICIANS');
+        $this->assertContains('class="highlight', $entry);
+    }
+
+    public function test_getListHolderEntry_success_nohighlight() {
+        $entry = getListHolderEntry(1,5, 'doeproject.php', 'MAGICIANS');
+        $this->assertNotContains('class="highlight', $entry);
+    }
+    
+    public function test_getActionLocation_success() {
+        $table = getActionLocation('projects');
+        $this->assertEquals($table, 'doeproject.php');
+    }
+
+    public function test_getActionLocation_error() {
+        $table = getActionLocation('about');
+        $this->assertEquals($table, 'dash.php');
+    }
+
+    public function test_getActionLocation_malform() {
+        $table = getActionLocation(4.8);
+        $this->assertEquals($table, 'dash.php');
     }
 
 
