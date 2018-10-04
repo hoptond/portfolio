@@ -39,7 +39,7 @@ function displayBadges(PDO $db) {
  *
  * @param int The target project ID recieved from the GET string.
  *
- * @return int The corrected ID of the project we will be loading.
+ * @return int The corrected ID of the project we will be displaying.
  */
 function clampProjectID(PDO $db, int $id, bool $up) {
     $stmt = $db->prepare('SELECT `id` FROM `projects`');
@@ -70,9 +70,9 @@ function clampProjectID(PDO $db, int $id, bool $up) {
  * @param bool $up Whether we are rounding up or down.
  */
 function roundValue(array $array, $val, bool $up) {
-    $closest = $array[0];
+    $closest = NULL;
     foreach ($array as $item) {
-        if($item > $val && $up || $item < $val && !$up) {
+        if($item > $val && $up || $item < $val && !$up || $closest === NULL) {
             if (abs($val - $closest) > abs($item - $val)) {
                 $closest = $item;
             }
@@ -84,7 +84,7 @@ function roundValue(array $array, $val, bool $up) {
 /*
  * Displays the given project. In the grim darkness of the near future, this will be a fancy JS carousel but I looked up how to
  * do this in HTML/CSS and I thought to myself 'self, I can't possibly achieve this in a day and a half let alone do the login
- * task after' so we're going to use GET queries for the time being.
+ * task after' so we're going to use horrible hacky POST queries for the time being.
  *
  * @param int id The project ID to get. It is assumed the id corresponds to an actual project beforehand.
  *
