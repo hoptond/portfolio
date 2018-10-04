@@ -517,7 +517,8 @@ function validateListTableRequest(string $table) {
  */
 function anyFieldEmpty(array $array) {
     foreach ($array as $entry) {
-        $test = str_replace(' ','', $entry);
+        $test = trim($entry);
+        //$test = str_replace(' ','', $entry);
         if ($test === '') {
             return TRUE;
         }
