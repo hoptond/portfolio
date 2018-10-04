@@ -50,18 +50,18 @@ function clampProjectID(PDO $db, int $id, bool $up) {
     $stmt->execute();
     $select = $stmt->fetchAll();
     $array = [];
-    if(in_array($id, $array)) {
+    if (in_array($id, $array)) {
         return $id;
     }
     foreach ($select as $entry) {
         array_push($array, (int)$entry['id']);
     }
-    if($id < min($array)) {
+    if ($id < min($array)) {
         return max($array);
-    } else if($id > max($array)) {
+    } else if ($id > max($array)) {
         return min($array);
     }
-    if($up) {
+    if ($up) {
         roundValueUp($array, $id);
     }
     return roundValueDown($array, $id);
@@ -77,11 +77,11 @@ function clampProjectID(PDO $db, int $id, bool $up) {
  * @return int The rounded value.
  */
 function roundValueUp(array $array, $val) {
-    if(!is_numeric($val)) {
+    if (!is_numeric($val)) {
         return $val;
     }
     for($i = $val; $i < max($array); $i++) {
-        if(in_array($i, $array)) {
+        if (in_array($i, $array)) {
             return $i;
         }
     }
@@ -98,11 +98,11 @@ function roundValueUp(array $array, $val) {
  * @return int The rounded value.
  */
 function roundValueDown(array $array, $val) {
-    if(!is_numeric($val)) {
+    if (!is_numeric($val)) {
         return $val;
     }
     for($i = $val; $i > min($array); $i--) {
-        if(in_array($i, $array)) {
+        if (in_array($i, $array)) {
             return $i;
         }
     }
@@ -150,12 +150,12 @@ function displayProject(PDO $db, int $id) {
  * viewing and which navigation button they clicked on.
  */
 function getProjectID(PDO $db, $get) {
-    if(!empty($get)) {
+    if (!empty($get)) {
         $command = explode('_', array_keys($get)[0]);
         $id = (int)$command[1];
-        if($command[0] == 'prev') {
+        if ($command[0] == 'prev') {
             return clampProjectID($db,$id - 1, FALSE);
-        } else if($command[0] == 'next') {
+        } else if ($command[0] == 'next') {
             return clampProjectID($db,$id + 1, TRUE);
         }
     }
