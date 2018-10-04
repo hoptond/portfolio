@@ -46,10 +46,10 @@ function clampProjectID(PDO $db, int $id, bool $up) {
     $stmt->execute();
     $select = $stmt->fetchAll();
     $array = [];
+    if(in_array($id, $array)) {
+        return $id;
+    }
     foreach ($select as $entry) {
-        if($entry['id'] == $id) {
-            return $id;
-        }
         array_push($array, (int)$entry['id']);
     }
     if($id < min($array)) {
@@ -57,29 +57,54 @@ function clampProjectID(PDO $db, int $id, bool $up) {
     } else if($id > max($array)) {
         return min($array);
     }
-    return roundValue($array, $id, $up);
+    if($up) {
+        roundValueUp($array, $id);
+    }
+    return roundValueDown($array, $id);
 }
 
 /*
- * This function rounds the value in the array that is closest to the given value based on a certain direction.
+ * This function rounds the given value upward to the nearest existing value in the array.
  *
  * @param array $array The array to search.
  *
  * @param numeric $val The value to find the closest match for.
  *
- * @param bool $up Whether we are rounding up or down.
+ * @return int The rounded value.
  */
-function roundValue(array $array, $val, bool $up) {
-    $closest = NULL;
-    foreach ($array as $item) {
-        if($item > $val && $up || $item < $val && !$up || $closest === NULL) {
-            if (abs($val - $closest) > abs($item - $val)) {
-                $closest = $item;
-            }
+function roundValueUp(array $array, $val) {
+    if(!is_numeric($val)) {
+        return $val;
+    }
+    for($i = $val; $i < max($array); $i++) {
+        if(in_array($i, $array)) {
+            return $i;
         }
     }
-    return $closest;
+    return $val;
 }
+
+/*
+ * This function rounds the given value downward to the nearest existing value in the array.
+ *
+ * @param array $array The array to search.
+ *
+ * @param numeric $val The value to find the closest match for.
+ *
+ * @return int The rounded value.
+ */
+function roundValueDown(array $array, $val) {
+    if(!is_numeric($val)) {
+        return $val;
+    }
+    for($i = $val; $i > min($array); $i--) {
+        if(in_array($i, $array)) {
+            return $i;
+        }
+    }
+    return $val;
+}
+
 
 /*
  * Displays the given project. In the grim darkness of the near future, this will be a fancy JS carousel but I looked up how to
