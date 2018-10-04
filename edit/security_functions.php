@@ -4,21 +4,36 @@ function verifyLogin($username, $password) : bool {
     session_start();
     if(loginExists($username)) {
         if(correctPassword($username, $password)) {
+            unset($_SESSION['badname']);
+            unset($_SESSION['badpass']);
             return true;
         }
     }
     return false;
 }
 
+function verifyUser() {
+    session_start();
+    if($_COOKIE['id'] != session_id()) {
+        setcookie('id',0, time() - 1);
+        header('Location: index.php');
+    }
+    session_destroy();
+}
+
 function loginFailMessage() : string {
-    if(array_key_exists('badname' , $_POST)) {
+    session_start();
+    if(array_key_exists('badname' , $_SESSION)) {
+        session_destroy();
         return 'User not in database. Please try again';
     }
-    if(array_key_exists('badpass', $_POST)) {
+    if(array_key_exists('badpass', $_SESSION)) {
+        session_destroy();
         return 'Wrong password. Please try again.';
     }
     return '';
 }
+
 
 
 function loginExists($username) : bool {

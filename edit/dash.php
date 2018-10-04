@@ -1,9 +1,8 @@
 <?php
 
+require 'security_functions.php';
 
-function logout() {
-    //TODO: populate this function
-}
+verifyUser()
 
 ?>
 
@@ -30,6 +29,6 @@ function logout() {
             <li><a href="contact.php">Edit Contact Info</a></li>
             <li><a href="icons.php">Edit FA Icons</a></li>
         </ul>
-        <a href="../">Logout</a>
+        <a href="logout.php">Logout</a>
     </body>
 </html>
