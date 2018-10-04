@@ -192,7 +192,7 @@ class functions extends TestCase
         $entry = getListHolderEntry(1,5, 'doeproject.php', 'MAGICIANS');
         $this->assertNotContains('class="highlight', $entry);
     }
-    
+
     public function test_getActionLocation_success() {
         $table = getActionLocation('projects');
         $this->assertEquals($table, 'doeproject.php');
