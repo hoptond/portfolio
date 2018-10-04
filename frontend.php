@@ -1,16 +1,13 @@
 <?php
 
-/*
- * Gets a database object to use for database queries. This database's fetch mode is set to FETCH_ASSOC by default.
- *
- * @Return returns the object to use for our given queries.
- */
-function getDBConnection() {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    return $db;
-}
 
+/*
+ * Outputs the HTML required to display the text in the about me section.
+ *
+ * @param PDO $db The database object to retrieve the about me information from.
+ *
+ * @return string Returns the Name, Title and Description wrapped in the correct html tags.
+ */
 function displayAboutMe(PDO $db) {
     $stmt = $db->prepare('SELECT `name`,`title`,`desc` FROM `about`');
     $stmt->execute();
@@ -21,6 +18,13 @@ function displayAboutMe(PDO $db) {
     return $name . $title . $desc;
 }
 
+/*
+ * Outputs the HTML required to display the badges in the about me section.
+ *
+ * @param PDO $db The database object to retrieve the about me information from.
+ *
+ * @return string Returns each badge in the database, wrapped in an <i> tag.
+ */
 function displayBadges(PDO $db) {
     $stmt = $db->prepare('SELECT `value` FROM `badges`');
     $stmt->execute();
@@ -120,16 +124,31 @@ function displayProject(PDO $db, int $id) {
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     $result = $stmt->fetch();
-    $output = '<div class="showcasetext"><h2>' . $result['title'] . '</h2><h3>' . $result['type'] . '</h3><p>' . $result['desc'] .'</p></div>';
+    $output = '<div class="showcasetext">
+                <h2>' . $result['title'] . '</h2>
+                <h3>' . $result['type'] . '</h3>
+                <p>' . $result['desc'] .'</p>
+               </div>';
     $output .= '<div class="showcaseviewer"><img src="' . $result['image'] . '">';
-    $output .= '<form class="showcasenav showcaseprev" method="post"><input type="submit" name="prev_' . $id . '" value="&lt" class="showcasenav showcaseprev"></form>';
-    $output .= '<form class="showcasenav showcasenext" method="post"><input type="submit" name="next_' . $id . '" value="&gt" class="showcasenav showcaseprev"></form>';
+    $output .= '<form class="showcasenav showcaseprev" method="post">
+                    <input type="submit" name="prev_' . $id . '" value="&lt" class="showcasenav showcaseprev">
+                </form>';
+    $output .= '<form class="showcasenav showcasenext" method="post">
+                    <input type="submit" name="next_' . $id . '" value="&gt" class="showcasenav showcaseprev">
+                </form>';
     $output .= '<div class="showcasebottom"><a href="' .  $result['link'] . '" class="showcaseview">View Project</a></div>';
     return $output;
 }
 
 
-
+/*
+ * Gets the intended project ID when the user has clicked on either of the nav buttons on the showcase viewer.
+ *
+ * @param PDO $db The database object to retrieve the project information from.
+ *
+ * @return int Returns the next, previous, lowest, highest, or default ID depending upon which project the user was currently
+ * viewing and which navigation button they clicked on.
+ */
 function getProjectID(PDO $db, $get) {
     if(!empty($get)) {
         $command = explode('_', array_keys($get)[0]);
@@ -143,6 +162,13 @@ function getProjectID(PDO $db, $get) {
     return getDefaultProject($db);
 }
 
+/*
+ * Gets the default project, or the first ID in the database.
+ *
+ * @param PDO $db The database object to retrieve the project information from.
+ *
+ * @return int Returns the ID of the first entry in the database.
+ */
 function getDefaultProject(PDO $db) {
     $stmt = $db->prepare('SELECT `id` FROM `projects`');
     $stmt->execute();
@@ -150,9 +176,17 @@ function getDefaultProject(PDO $db) {
     return (int)$value['id'];
 }
 
-
+/*
+ * Outputs the HTML required to display each entry in the Contact Me section.
+ *
+ * @param PDO $db The database object to retrieve the contact information from.
+ *
+ * @return string Returns a number of <li> elements, enclosing an icon from `icons` and an anchor whose href is set to
+ * `link`. `text` is displayed in the place of link.
+ */
 function displayContactInfo(PDO $db) {
-    $stmt = $db->prepare('SELECT `value` as icon,`link`,`text` FROM `contact` JOIN `icons` ON `icons`.`id` = `contact`.`icon_id`');
+    $stmt = $db->prepare('SELECT `value` as icon,`link`,`text` FROM `contact` JOIN `icons` ON `icons`.`id` = 
+                          `contact`.`icon_id`');
     $stmt->execute();
     $entries = $stmt->fetchAll();
     $output = '';
