@@ -2,7 +2,7 @@
 
 require 'cms_functions.php';
 
-
+$db = getDBConnection();
 
 ?>
 <!DOCTYPE html>
@@ -12,11 +12,11 @@ require 'cms_functions.php';
     <link rel="stylesheet" href="style.css">
 </head>
     <form name ='contact' method='post' action='doacontact.php'>
-        <?php echo displayEditContactInfo(getEditEntryID($_GET)) ?>
+        <?php echo displayEditContactInfo($db, getEditEntryID($_GET)) ?>
         <input type="submit" value="Add/Edit">
     </form>
     <div class="listholder">
-        <?php echo displayListHolderData('contact', getEditEntryID($_GET)); ?>
+        <?php echo displayListHolderData($db,'contact', getEditEntryID($_GET)); ?>
     </div>
     <div><?php
         if (isset($_GET['msg'])) {

@@ -1,12 +1,15 @@
 <?php
 
 require ('cms_functions.php');
+
+$db = getDBConnection();
+
 if (anyFieldEmpty($_POST)) {
     header('Location: editproj.php?msg=16');
     exit;
 }
 if (count($_POST) > 2) {
-     if (updateProjectInDatabase($_POST['id'], getProjectDataFromPOST($_POST))) {
+     if (updateProjectInDatabase($db, $_POST['id'], getProjectDataFromPOST($_POST))) {
          header('Location: editproj.php?msg=5');
      } else {
          header('Location: editproj.php?msg=13');
@@ -14,7 +17,7 @@ if (count($_POST) > 2) {
 } else {
     $command = explode('_', array_keys($_POST)[0]);
     if ($command[0] === 'del') {
-        if (deleteEntryInDB((int)$command[1], 'projects')) {
+        if (deleteEntryInDB($db, (int)$command[1], 'projects')) {
             header('Location: editproj.php?msg=15');
         } else {
             header('Location: editproj.php?msg=14');

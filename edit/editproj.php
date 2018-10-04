@@ -3,6 +3,8 @@
 
 require 'cms_functions.php';
 
+$db = getDBConnection();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -12,9 +14,9 @@ require 'cms_functions.php';
     </head>
     <body>
         <?php
-        echo displayEditProjectInput(getEditEntryID($_GET)); ?>
+        echo displayEditProjectInput($db, getEditEntryID($_GET)); ?>
         <div class="listholder">
-            <?php echo displayListHolderData('projects', getEditEntryID($_GET)); ?>
+            <?php echo displayListHolderData($db,'projects', getEditEntryID($_GET)); ?>
         </div>
         <div><?php
             if (isset($_GET['msg'])) {

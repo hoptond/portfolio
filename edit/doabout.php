@@ -5,7 +5,7 @@ if (anyFieldEmpty($_POST)) {
     header('Location: about.php?msg=16');
     exit;
 }
-updateAbout($_POST);
+updateAbout(getDBConnection(), $_POST);
 header('Location: about.php?msg=1');
 
 ?>

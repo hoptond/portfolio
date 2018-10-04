@@ -1,13 +1,16 @@
 <?php
 
 require ('cms_functions.php');
+
+$db = getDBConnection();
+
 if (anyFieldEmpty($_POST)) {
     header('Location: contact.php?msg=16');
     exit;
 }
 $command = explode('_', array_keys($_POST)[0]);
 if ($command[0] === 'del') {
-    if (deleteEntryInDB((int)$command[1], 'contact')) {
+    if (deleteEntryInDB($db, (int)$command[1], 'contact')) {
         header('Location: contact.php?msg=15');
     } else {
         header('Location: contact.php?msg=14');

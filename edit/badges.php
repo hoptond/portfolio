@@ -2,6 +2,8 @@
 
 require 'cms_functions.php';
 
+$db = getDBConnection();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,11 +13,11 @@ require 'cms_functions.php';
     </head>
     <body>
         <form name="badges" method="post" action ='doabadge.php'>
-            <?php echo displaySingleValueInput(getEditEntryID($_GET), 'badges') ?>
+            <?php echo displaySingleValueInput($db, getEditEntryID($_GET), 'badges') ?>
             <input type="submit" value="Add/Edit">
         </form>
         <div class="listholder">
-            <?php echo displayListHolderData('badges', getEditEntryID($_GET)); ?>
+            <?php echo displayListHolderData($db,'badges', getEditEntryID($_GET)); ?>
         </div>
         <div><?php
             if (isset($_GET['msg'])) {

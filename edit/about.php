@@ -11,7 +11,7 @@ require 'cms_functions.php';
     </head>
     <body>
         <form name="about" method="post" action ='doabout.php'>
-            <?php echo displayAboutMeInput(); ?>
+            <?php echo displayAboutMeInput(getDBConnection()); ?>
             <input type="submit" value="Change">
         </form>
         <div><?php

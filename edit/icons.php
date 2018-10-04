@@ -2,6 +2,8 @@
 
 require 'cms_functions.php';
 
+$db = getDBConnection();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,11 +13,11 @@ require 'cms_functions.php';
 </head>
     <body>
         <form name="icons" method="post" action ='doaicon.php'>
-            <?php echo displaySingleValueInput(getEditEntryID($_GET), 'icons') ?>
+            <?php echo displaySingleValueInput($db, getEditEntryID($_GET), 'icons') ?>
             <input type="submit" value="Add">
         </form>
         <div class="listholder">
-            <?php echo displayListHolderData('icons', getEditEntryID($_GET)); ?>
+            <?php echo displayListHolderData($db,'icons', getEditEntryID($_GET)); ?>
         </div>
         <div><?php
             if (isset($_GET['msg'])) {
