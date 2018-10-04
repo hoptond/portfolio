@@ -78,7 +78,7 @@ function displayProject(PDO $db, int $id, int $index) {
  * @return int Returns the next, previous, lowest, highest, or default ID depending upon which project the user was currently
  * viewing and which navigation button they clicked on.
  */
-function getProjectIndex($post, $array) {
+function getProjectIndex(array $post, array $array) {
     if (empty($array)) {
         return 0;
     }
