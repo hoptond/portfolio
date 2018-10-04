@@ -1,18 +1,18 @@
 <?php
 
 /*
- * Gets a PDO object to use for database queries. This PDO's fetch mode is set to FETCH_ASSOC by default.
+ * Gets a database object to use for database queries. This database's fetch mode is set to FETCH_ASSOC by default.
  *
- * @Return returns the PDO object to use for our given queries.
+ * @Return returns the object to use for our given queries.
  */
-function getPDO() {
+function getDBConnection() {
     $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $db;
 }
 
-function displayAboutMe() {
-    $stmt = getPDO()->prepare('SELECT `name`,`title`,`desc` FROM `about`');
+function displayAboutMe(PDO $db) {
+    $stmt = $db->prepare('SELECT `name`,`title`,`desc` FROM `about`');
     $stmt->execute();
     $result = $stmt->fetch();
     $name = '<h1>' . $result['name'] . '</h1>';
@@ -21,8 +21,8 @@ function displayAboutMe() {
     return $name . $title . $desc;
 }
 
-function displayBadges() {
-    $stmt = getPDO()->prepare('SELECT `value` FROM `badges`');
+function displayBadges(PDO $db) {
+    $stmt = $db->prepare('SELECT `value` FROM `badges`');
     $stmt->execute();
     $entries = $stmt->fetchAll();
     $output = '';
@@ -41,8 +41,8 @@ function displayBadges() {
  *
  * @return int The corrected ID of the project we will be loading.
  */
-function clampProjectID(int $id, bool $up) {
-    $stmt = getPDO()->prepare('SELECT `id` FROM `projects`');
+function clampProjectID(PDO $db, int $id, bool $up) {
+    $stmt = $db->prepare('SELECT `id` FROM `projects`');
     $stmt->execute();
     $select = $stmt->fetchAll();
     $array = [];
@@ -52,12 +52,10 @@ function clampProjectID(int $id, bool $up) {
         }
         array_push($array, (int)$entry['id']);
     }
-
-    asort($array);
     if($id < min($array)) {
-        return min($array);
-    } else if($id > max($array)) {
         return max($array);
+    } else if($id > max($array)) {
+        return min($array);
     }
     return roundValue($array, $id, $up);
 }
@@ -92,42 +90,44 @@ function roundValue(array $array, $val, bool $up) {
  *
  * @return string The HTML to output on the page.
  */
-function displayProject(int $id) {
-    $stmt = getPDO()->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id`=:id');
+function displayProject(PDO $db, int $id) {
+    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id`=:id');
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     $result = $stmt->fetch();
     $output = '<div class="showcasetext"><h2>' . $result['title'] . '</h2><h3>' . $result['type'] . '</h3><p>' . $result['desc'] .'</p></div>';
     $output .= '<div class="showcaseviewer"><img src="' . $result['image'] . '">';
-    $output .= '<form class="showcasenav showcaseprev"><input type="submit" name="prev_' . $id . '" value="&lt" class="showcasenav showcaseprev"></form>';
-    $output .= '<form class="showcasenav showcasenext"><input type="submit" name="next_' . $id . '" value="&gt" class="showcasenav showcaseprev"></form>';
+    $output .= '<form class="showcasenav showcaseprev" method="post"><input type="submit" name="prev_' . $id . '" value="&lt" class="showcasenav showcaseprev"></form>';
+    $output .= '<form class="showcasenav showcasenext" method="post"><input type="submit" name="next_' . $id . '" value="&gt" class="showcasenav showcaseprev"></form>';
     $output .= '<div class="showcasebottom"><a href="' .  $result['link'] . '" class="showcaseview">View Project</a></div>';
     return $output;
 }
 
 
 
-function getProjectID($get) {
-    $command = explode('_', array_keys($get)[0]);
-    $id = (int)$command[1];
-    if($command[0] == 'prev') {
-        return clampProjectID($id - 1, FALSE);
-    } else if($command[0] == 'next') {
-        return clampProjectID($id + 1, TRUE);
+function getProjectID(PDO $db, $get) {
+    if(!empty($get)) {
+        $command = explode('_', array_keys($get)[0]);
+        $id = (int)$command[1];
+        if($command[0] == 'prev') {
+            return clampProjectID($db,$id - 1, FALSE);
+        } else if($command[0] == 'next') {
+            return clampProjectID($db,$id + 1, TRUE);
+        }
     }
-    return getDefaultProject();
+    return getDefaultProject($db);
 }
 
-function getDefaultProject() {
-    $stmt = getPDO()->prepare('SELECT `id` FROM `projects`');
+function getDefaultProject(PDO $db) {
+    $stmt = $db->prepare('SELECT `id` FROM `projects`');
     $stmt->execute();
     $value = $stmt->fetch();
     return (int)$value['id'];
 }
 
 
-function displayContactInfo() {
-    $stmt = getPDO()->prepare('SELECT `value` as icon,`link`,`text` FROM `contact` JOIN `icons` ON `icons`.`id` = `contact`.`icon_id`');
+function displayContactInfo(PDO $db) {
+    $stmt = $db->prepare('SELECT `value` as icon,`link`,`text` FROM `contact` JOIN `icons` ON `icons`.`id` = `contact`.`icon_id`');
     $stmt->execute();
     $entries = $stmt->fetchAll();
     $output = '';

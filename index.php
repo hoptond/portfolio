@@ -2,6 +2,8 @@
 
 require  'frontend.php';
 
+$db = getDBConnection();
+
 ?>
 
 
@@ -36,12 +38,12 @@ require  'frontend.php';
   <div class="headerwrapper">
     <div class="headertext">
         <?php
-        echo displayAboutMe();
+        echo displayAboutMe($db);
         ?>
     </div>
     <div class="badges">
         <?php
-            echo displayBadges();
+            echo displayBadges($db);
         ?>
     </div>
   </div>
@@ -50,7 +52,7 @@ require  'frontend.php';
 <main class="showcase">
   <section class="showcasewrapper">
       <?php
-        echo displayProject(2);
+        echo displayProject($db, getProjectID($db, $_POST));
       ?>
   </section>
 </main>
@@ -58,7 +60,7 @@ require  'frontend.php';
   <div class="contactwrapper">
     <ul>
         <?php
-            echo displayContactInfo();
+            echo displayContactInfo($db);
         ?>
     </ul>
   </div>
