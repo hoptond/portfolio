@@ -5,8 +5,10 @@ require  'frontend.php';
 $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
 $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
-?>
+$array = getProjectIDArray($db);
+$index = getProjectIndex($_POST, $array);
 
+?>
 
 <!DOCTYPE html>
 <html lang ="en">
@@ -53,7 +55,7 @@ $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 <main class="showcase">
   <section class="showcasewrapper">
       <?php
-        echo displayProject($db, getProjectID($db, $_POST));
+        echo displayProject($db, $array[$index], $index);
       ?>
   </section>
 </main>
