@@ -1,5 +1,9 @@
 <?php
 
+require 'cms_functions.php';
+
+$db = getDBConnection();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,36 +12,18 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <form>
-            <label>New Badge:</label>
-            <input name="badge" type="text">
-            <input type="submit" value="Add">
+        <form name="badges" method="post" action ='doabadge.php'>
+            <?php echo displaySingleValueInput($db, getEditEntryID($_GET), 'badges') ?>
+            <input type="submit" value="Add/Edit">
         </form>
         <div class="listholder">
-            <ul>
-                <li>
-                    <div>
-                        <p>devicon-csharp-plain</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <p>devicon-html5-plain</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-                <li>
-                    <div>
-                        <p>devicon-css3-plain</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-            </ul>
+            <?php echo displayListHolderData($db,'badges', getEditEntryID($_GET)); ?>
         </div>
+        <div><?php
+            if (isset($_GET['msg'])) {
+                echo processMessage($_GET['msg']);
+            }
+            ?></div>
         <a href="dash.php">Back</a>
     </body>
 </html>

@@ -1,5 +1,7 @@
 <?php
 
+require 'cms_functions.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,21 +10,15 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <form>
-            <div class="longinput">
-                <label>Name: </label>
-                <input name="name" type="text">
-            </div>
-            <div class="longinput">
-                <label>Title: </label>
-                <input name="title" type="text">
-            </div>
-            <div class="longinput">
-                <label>Bio: </label>
-                <input name="desc" type="text">
-            </div>
+        <form name="about" method="post" action ='doabout.php'>
+            <?php echo displayAboutMeInput(getDBConnection()); ?>
             <input type="submit" value="Change">
         </form>
+        <div><?php
+            if (isset($_GET['msg'])) {
+                echo processMessage($_GET['msg']);
+            }
+            ?></div>
         <a href="dash.php">Back</a>
     </body>
 </html>

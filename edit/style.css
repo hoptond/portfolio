@@ -22,6 +22,14 @@ ul {
     margin: 0;
 }
 
+ul .listbuttons {
+    float: right;
+}
+
+ul form {
+    display: inline;
+}
+
 ul li {
     height: 26px;
 }
@@ -30,10 +38,9 @@ ul p {
     display: inline-block;
     margin: 4px 4px;
 }
-ul button {
-    display: inline-block;
-    float: right;
-    margin: 4px 4px;
+
+.highlight {
+    color: #88854c;
 }
 
 .edit {
@@ -44,14 +51,28 @@ ul button {
     color: #f44242;
 }
 
+.hidden {
+    display: none;
+}
+
 .longinput {
     width: 400px;
     height: 23px;
+}
+.longinputlarge {
+    width: 400px;
+    height: 114px;
 }
 
 .longinput label {
     float: left;
 }
 .longinput input {
+    float: right;
+}
+textarea {
+    resize: none;
+    width: 294px;
+    height: 110px;
     float: right;
 }

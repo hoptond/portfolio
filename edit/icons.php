@@ -1,5 +1,9 @@
 <?php
 
+require 'cms_functions.php';
+
+$db = getDBConnection();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -8,41 +12,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
     <body>
-        <form>
-            <div>
-                <label>Icon: </label>
-                <input name="name" type="text">
-                <input type="submit" value="Change">
-            </div>
+        <form name="icons" method="post" action ='doaicon.php'>
+            <?php echo displaySingleValueInput($db, getEditEntryID($_GET), 'icons') ?>
+            <input type="submit" value="Add">
         </form>
         <div class="listholder">
-            <ul>
-                <li>
-                    <div>
-                        <p>fa fa-circle</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                    <div>
-                        <p>fa fa-github</p>
-
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                    <div>
-                        <p>fa fa-at</p>
-
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                    <div>
-                        <p>fa fa-linkedin</p>
-                        <button class="delete">X</button>
-                        <button class="edit">EDIT</button>
-                    </div>
-                </li>
-            </ul>
+            <?php echo displayListHolderData($db,'icons', getEditEntryID($_GET)); ?>
         </div>
+        <div><?php
+            if (isset($_GET['msg'])) {
+                echo processMessage($_GET['msg']);
+            }
+            ?></div>
         <a href="dash.php">Back</a>
     </body>
 </html>

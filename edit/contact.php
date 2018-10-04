@@ -1,5 +1,9 @@
 <?php
 
+require 'cms_functions.php';
+
+$db = getDBConnection();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -7,41 +11,17 @@
     <title>Edit Contact Info</title>
     <link rel="stylesheet" href="style.css">
 </head>
-    <form>
-        <div class="longinput">
-            <label>Icon ID: </label>
-            <input name="id" type="text">
-        </div>
-        <div class="longinput">
-            <label>Link: </label>
-            <input name="link" type="text">
-        </div>
-        <div class="longinput">
-            <label>Text: </label>
-            <input name="name" type="text">
-        </div>
+    <form name ='contact' method='post' action='doacontact.php'>
+        <?php echo displayEditContactInfo($db, getEditEntryID($_GET)) ?>
         <input type="submit" value="Add/Edit">
     </form>
     <div class="listholder">
-        <ul>
-            <li>
-                <div>
-                    <p>hoptond848@protonmail.com</p>
-                    <button class="delete">X</button>
-                    <button class="edit">EDIT</button>
-                </div>
-                <div>
-                    <p>github.com/hoptond/</p>
-                    <button class="delete">X</button>
-                    <button class="edit">EDIT</button>
-                </div>
-                <div>
-                    <p>linkedin.com/in/daniel-hopton</p>
-                    <button class="delete">X</button>
-                    <button class="edit">EDIT</button>
-                </div>
-            </li>
-        </ul>
+        <?php echo displayListHolderData($db,'contact', getEditEntryID($_GET)); ?>
     </div>
+    <div><?php
+        if (isset($_GET['msg'])) {
+            echo processMessage($_GET['msg']);
+        }
+        ?></div>
     <a href="dash.php">Back</a>
 </html>
