@@ -2,7 +2,7 @@
 
 require 'security_functions.php';
 
-verifyUser()
+verifyUser();
 
 ?>
 
