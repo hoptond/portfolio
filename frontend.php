@@ -1,16 +1,11 @@
 <?php
-
 /*
- * Gets a database object to use for database queries. This database's fetch mode is set to FETCH_ASSOC by default.
+ * Outputs the HTML required to display the text in the about me section.
  *
- * @Return returns the object to use for our given queries.
+ * @param PDO $db The database object to retrieve the about me information from.
+ *
+ * @return string Returns the Name, Title and Description wrapped in the correct html tags.
  */
-function getDBConnection() {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
-    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    return $db;
-}
-
 function displayAboutMe(PDO $db) {
     $stmt = $db->prepare('SELECT `name`,`title`,`desc` FROM `about`');
     $stmt->execute();
@@ -20,7 +15,13 @@ function displayAboutMe(PDO $db) {
     $desc = '<p>' . $result['desc'] . '</p>';
     return $name . $title . $desc;
 }
-
+/*
+ * Outputs the HTML required to display the badges in the about me section.
+ *
+ * @param PDO $db The database object to retrieve the about me information from.
+ *
+ * @return string Returns each badge in the database, wrapped in an <i> tag.
+ */
 function displayBadges(PDO $db) {
     $stmt = $db->prepare('SELECT `value` FROM `badges`');
     $stmt->execute();
@@ -31,81 +32,6 @@ function displayBadges(PDO $db) {
     }
     return $output;
 }
-
-/*
- * Clamps the project ID to an existing project in the database. If the ID is higher than any existing number,
- * we loop back around to the first project ID. If it is lower, we loop back around to the last project ID. If
- * in the event the autoincrement screws up and we have missing numbers we will round to the nearest existing number.
- *
- * @param int The target project ID recieved from the GET string.
- *
- * @return int The corrected ID of the project we will be displaying.
- */
-function clampProjectID(PDO $db, int $id, bool $up) {
-    $stmt = $db->prepare('SELECT `id` FROM `projects`');
-    $stmt->execute();
-    $select = $stmt->fetchAll();
-    $array = [];
-    if(in_array($id, $array)) {
-        return $id;
-    }
-    foreach ($select as $entry) {
-        array_push($array, (int)$entry['id']);
-    }
-    if($id < min($array)) {
-        return max($array);
-    } else if($id > max($array)) {
-        return min($array);
-    }
-    if($up) {
-        roundValueUp($array, $id);
-    }
-    return roundValueDown($array, $id);
-}
-
-/*
- * This function rounds the given value upward to the nearest existing value in the array.
- *
- * @param array $array The array to search.
- *
- * @param numeric $val The value to find the closest match for.
- *
- * @return int The rounded value.
- */
-function roundValueUp(array $array, $val) {
-    if(!is_numeric($val)) {
-        return $val;
-    }
-    for($i = $val; $i < max($array); $i++) {
-        if(in_array($i, $array)) {
-            return $i;
-        }
-    }
-    return $val;
-}
-
-/*
- * This function rounds the given value downward to the nearest existing value in the array.
- *
- * @param array $array The array to search.
- *
- * @param numeric $val The value to find the closest match for.
- *
- * @return int The rounded value.
- */
-function roundValueDown(array $array, $val) {
-    if(!is_numeric($val)) {
-        return $val;
-    }
-    for($i = $val; $i > min($array); $i--) {
-        if(in_array($i, $array)) {
-            return $i;
-        }
-    }
-    return $val;
-}
-
-
 /*
  * Displays the given project. In the grim darkness of the near future, this will be a fancy JS carousel but I looked up how to
  * do this in HTML/CSS and I thought to myself 'self, I can't possibly achieve this in a day and a half let alone do the login
@@ -115,44 +41,87 @@ function roundValueDown(array $array, $val) {
  *
  * @return string The HTML to output on the page.
  */
-function displayProject(PDO $db, int $id) {
+function displayProject(PDO $db, int $id, int $index) {
     $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id`=:id');
     $stmt->bindParam(':id',$id);
     $stmt->execute();
     $result = $stmt->fetch();
-    $output = '<div class="showcasetext"><h2>' . $result['title'] . '</h2><h3>' . $result['type'] . '</h3><p>' . $result['desc'] .'</p></div>';
+    if(empty($result)) {
+        return '';
+    }
+    $output = '<div class="showcasetext">
+                <h2>' . $result['title'] . '</h2>
+                <h3>' . $result['type'] . '</h3>
+                <p>' . $result['desc'] .'</p>
+               </div>';
     $output .= '<div class="showcaseviewer"><img src="' . $result['image'] . '">';
-    $output .= '<form class="showcasenav showcaseprev" method="post"><input type="submit" name="prev_' . $id . '" value="&lt" class="showcasenav showcaseprev"></form>';
-    $output .= '<form class="showcasenav showcasenext" method="post"><input type="submit" name="next_' . $id . '" value="&gt" class="showcasenav showcaseprev"></form>';
+    $output .= '<form class="showcasenav showcaseprev" method="post">
+                    <input type="submit" name="prev_' . $index . '" value="&lt" class="showcasenav showcaseprev">
+                </form>';
+    $output .= '<form class="showcasenav showcasenext" method="post">
+                    <input type="submit" name="next_' . $index . '" value="&gt" class="showcasenav showcaseprev">
+                </form>';
     $output .= '<div class="showcasebottom"><a href="' .  $result['link'] . '" class="showcaseview">View Project</a></div>';
     return $output;
 }
 
-
-
-function getProjectID(PDO $db, $get) {
-    if(!empty($get)) {
-        $command = explode('_', array_keys($get)[0]);
-        $id = (int)$command[1];
-        if($command[0] == 'prev') {
-            return clampProjectID($db,$id - 1, FALSE);
-        } else if($command[0] == 'next') {
-            return clampProjectID($db,$id + 1, TRUE);
+/*
+ * Gets the index of the project ID when the user has clicked on either of the nav buttons on the showcase viewer.
+ *
+ * @param array $array The list of project IDs in the database.
+ *
+ * @return int Returns the next, previous, lowest, highest, or default ID depending upon which project the user was currently
+ * viewing and which navigation button they clicked on.
+ */
+function getProjectIndex(array $post, array $array) {
+    if (empty($array)) {
+        return 0;
+    }
+    if (!empty($post)) {
+        $command = explode('_', array_keys($post)[0]);
+        $index = (int)$command[1];
+        if ($command[0] == 'prev') {
+            if (0 > $index - 1) {
+                return max(array_keys($array));
+            }
+            return $index - 1;
+        } else if ($command[0] == 'next') {
+            if (count($array) <= $index + 1) {
+                return 0;
+            }
+            return $index + 1;
         }
     }
-    return getDefaultProject($db);
+    return 0;
 }
-
-function getDefaultProject(PDO $db) {
+/*
+ * Gets a numeric array of project IDs from the database.
+ *
+ * @param PDO $db The database object to retrieve the project information from.
+ *
+ * @return int Returns a numeric array of project IDs from the database.
+ */
+function getProjectIDArray(PDO $db) {
     $stmt = $db->prepare('SELECT `id` FROM `projects`');
     $stmt->execute();
-    $value = $stmt->fetch();
-    return (int)$value['id'];
+    $result = $stmt->fetchAll();
+    $array = [];
+    foreach($result as $entry) {
+        array_push($array, (int)$entry['id']);
+    }
+    return $array;
 }
-
-
+/*
+ * Outputs the HTML required to display each entry in the Contact Me section.
+ *
+ * @param PDO $db The database object to retrieve the contact information from.
+ *
+ * @return string Returns a number of <li> elements, enclosing an icon from `icons` and an anchor whose href is set to
+ * `link`. `text` is displayed in the place of link.
+ */
 function displayContactInfo(PDO $db) {
-    $stmt = $db->prepare('SELECT `value` as icon,`link`,`text` FROM `contact` JOIN `icons` ON `icons`.`id` = `contact`.`icon_id`');
+    $stmt = $db->prepare('SELECT `value` as icon,`link`,`text` FROM `contact` JOIN `icons` ON `icons`.`id` = 
+                          `contact`.`icon_id`');
     $stmt->execute();
     $entries = $stmt->fetchAll();
     $output = '';

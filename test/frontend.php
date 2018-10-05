@@ -1,87 +1,47 @@
 <?php
 require('../frontend.php');
-
 use PHPUnit\Framework\TestCase;
 class functions extends TestCase
 {
-    public function test_roundValueUp_success() {
-        $array[0] = 2;
-        $array[1] = 3;
-        $array[2] = 4;
-        $array[3] = 9;
-        $array[4] = 14;
-        $array[5] = 17;
-        $array[6] = 19;
-        $array[7] = 29;
-        $value = roundValueUp($array, 18);
-        $this->assertEquals(19, $value);
+    function test_getProjectIndex_success_next() {
+        $post['next_1'] = '';
+        $array[0] = 4;
+        $array[1] = 2;
+        $array[2] = 9;
+        $value = getProjectIndex($post, $array);
+        $this->assertEquals($value, 2);
     }
-
-    public function test_roundValueUp_error() {
-        $array[0] = 2;
-        $array[1] = 3;
-        $array[2] = 4;
-        $array[3] = 9;
-        $array[4] = 14;
-        $array[5] = 17;
-        $array[6] = 19;
-        $array[7] = 29;
-        $value = roundValueUp($array, 31);
-        $this->assertEquals(31, $value);
+    function test_getProjectIndex_success_prev() {
+        $post['prev_1'] = '';
+        $array[0] = 4;
+        $array[1] = 2;
+        $array[2] = 9;
+        $value = getProjectIndex($post, $array);
+        $this->assertEquals($value, 0);
     }
-
-    public function test_roundValueUp_malform() {
-        $array[0] = 2;
-        $array[1] = 3;
-        $array[2] = 4;
-        $array[3] = 9;
-        $array[4] = 14;
-        $array[5] = 17;
-        $array[6] = 19;
-        $array[7] = 29;
-        $value = roundValueUp($array, 'NO!');
-        $this->assertEquals('NO!', $value);
+    function test_getProjectIndex_success_overflow() {
+        $post['next_2'] = '';
+        $array[0] = 4;
+        $array[1] = 2;
+        $array[2] = 9;
+        $value = getProjectIndex($post, $array);
+        $this->assertEquals($value, 0);
     }
-
-    public function test_roundValueDown_success() {
-        $array[0] = 2;
-        $array[1] = 3;
-        $array[2] = 4;
-        $array[3] = 9;
-        $array[4] = 14;
-        $array[5] = 17;
-        $array[6] = 19;
-        $array[7] = 29;
-        $value = roundValueDown($array, 18);
-        $this->assertEquals(17, $value);
+    function test_getProjectIndex_success_underflow() {
+        $post['prev_0'] = '';
+        $array[0] = 4;
+        $array[1] = 2;
+        $array[2] = 9;
+        $value = getProjectIndex($post, $array);
+        $this->assertEquals($value, 2);
     }
-
-    public function test_roundValueDown_error() {
-        $array[0] = 2;
-        $array[1] = 3;
-        $array[2] = 4;
-        $array[3] = 9;
-        $array[4] = 14;
-        $array[5] = 17;
-        $array[6] = 19;
-        $array[7] = 29;
-        $value = roundValueDown($array, 5);
-        $this->assertEquals(4, $value);
+    function test_getProjectIndex_malform() {
+        $this->expectException(TypeError::class);
+        $post = '4';
+        $array[0] = 4;
+        $array[1] = 2;
+        $array[2] = 9;
+        $value = getProjectIndex($post, $array);
     }
-
-    public function test_roundValueDown_malform() {
-        $array[0] = 2;
-        $array[1] = 3;
-        $array[2] = 4;
-        $array[3] = 9;
-        $array[4] = 14;
-        $array[5] = 17;
-        $array[6] = 19;
-        $array[7] = 29;
-        $value = roundValueUp($array, 'NO!');
-        $this->assertEquals('NO!', $value);
-    }
-
 }
-
 ?>
