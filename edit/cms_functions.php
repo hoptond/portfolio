@@ -6,7 +6,7 @@
  * @Return returns the object to use for our given queries.
  */
 function getDBConnection() : PDO {
-    $db = new PDO('mysql:dbname=CMS;host=127.0.0.1','root');
+    $db = new PDO('mysql:dbname=danH_CMS;host=127.0.0.1','root');
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     return $db;
 }

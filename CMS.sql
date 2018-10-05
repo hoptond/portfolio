@@ -6,8 +6,8 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.6.41)
-# Database: CMS
-# Generation Time: 2018-10-03 09:53:40 +0000
+# Database: danH_CMS
+# Generation Time: 2018-10-05 09:52:37 +0000
 # ************************************************************
 
 
@@ -31,7 +31,7 @@ CREATE TABLE `about` (
   `title` varchar(255) DEFAULT 'TITLE MISSING!',
   `desc` varchar(255) DEFAULT 'DESCRIPTION MISSING!',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `about` WRITE;
 /*!40000 ALTER TABLE `about` DISABLE KEYS */;
@@ -53,7 +53,7 @@ CREATE TABLE `badges` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `value` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `badges` WRITE;
 /*!40000 ALTER TABLE `badges` DISABLE KEYS */;
@@ -61,7 +61,7 @@ LOCK TABLES `badges` WRITE;
 INSERT INTO `badges` (`id`, `value`)
 VALUES
 	(1,'devicon-csharp-plain'),
-	(2,'devicon-csharp-html5'),
+	(2,'devicon-html5-plain'),
 	(3,'devicon-css3-plain');
 
 /*!40000 ALTER TABLE `badges` ENABLE KEYS */;
@@ -81,15 +81,15 @@ CREATE TABLE `contact` (
   PRIMARY KEY (`id`),
   KEY `icon_id` (`icon_id`),
   CONSTRAINT `contact_ibfk_1` FOREIGN KEY (`icon_id`) REFERENCES `icons` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `contact` WRITE;
 /*!40000 ALTER TABLE `contact` DISABLE KEYS */;
 
 INSERT INTO `contact` (`id`, `icon_id`, `link`, `text`)
 VALUES
-	(1,2,'mailto:hoptond848@protonmail.com','hoptond848@protonmail.com'),
-	(2,3,'https://github.com/hoptond','github.com/hoptond/'),
+	(1,3,'mailto:hoptond848@protonmail.com','hoptond848@protonmail.com'),
+	(2,2,'https://github.com/hoptond','github.com/hoptond/'),
 	(3,4,'https://www.linkedin.com/in/daniel-hopton-70476816b/','linkedin.com/in/daniel-hopton');
 
 /*!40000 ALTER TABLE `contact` ENABLE KEYS */;
@@ -105,7 +105,7 @@ CREATE TABLE `icons` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `value` varchar(20) NOT NULL DEFAULT 'fa fa-circle',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `icons` WRITE;
 /*!40000 ALTER TABLE `icons` DISABLE KEYS */;
@@ -135,7 +135,7 @@ CREATE TABLE `projects` (
   `image` varchar(255) NOT NULL DEFAULT 'todo: add placeholder image for projects not provided',
   `link` varchar(255) NOT NULL DEFAULT 'https://github.com/hoptond',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
@@ -143,7 +143,7 @@ LOCK TABLES `projects` WRITE;
 INSERT INTO `projects` (`id`, `title`, `type`, `desc`, `image`, `link`)
 VALUES
 	(1,'MAGICIANS','A game for PC/Mac/Linux','Magicians is a role playing adventure game, written in C# and developed using the Monogame framework. This project, with the exception of testing, was produced independently: all code, art, writing, and audio was done myself. I maintained this project over a period of around 4 years: making a game is much harder than it looks!','magiprojectshowcase1.png','https://github.com/hoptond/magiciansdemo'),
-	(2,'PORTFOLIO','Web','This portfolio was the first web project I completed. I worked on both the front end (what you&#39;re seeing now) and the back end, as I implemented a content management system to be able to easily edit my website from within the browser.','portfolioprojectshowcase.png','https://git7hub.com/hoptond/portfolio');
+	(2,'PORTFOLIO','Web','This portfolio was the first web project I completed. I worked on both the front end (what you&#39;re seeing now) and the back end, as I implemented a content management system to be able to easily edit my website from within the browser.','portfolioprojectshowcase.png','https://github.com/hoptond/portfolio');
 
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
