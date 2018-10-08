@@ -40,9 +40,10 @@ function verifyUser() {
  */
 function loginFailMessage() : string {
     session_start();
-    if (array_key_exists('badname' , $_SESSION) || array_key_exists('badpass', $_SESSION)) {
+    if (array_key_exists('badname' , $_SESSION) || array_key_exists('badpass', $_SESSION) ||
+        array_key_exists('badfields', $_SESSION)) {
         session_destroy();
-        return 'Incorrect credentials. PLease try again.';
+        return 'Incorrect credentials. Please try again.';
     }
     return '';
 }

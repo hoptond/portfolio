@@ -1,6 +1,10 @@
 <?php require 'security_functions.php';
 
 session_start();
+if (!isset($_POST['username']) || !isset($_POST['username'])) {
+    $_SESSION['badfields'] = TRUE;
+    header('Location: index.php');
+}
 if (verifyLogin($_POST['username'], $_POST['password'])) {
     setcookie('id', session_id());
     header('Location: dash.php');
