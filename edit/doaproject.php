@@ -5,6 +5,7 @@ require 'security_functions.php';
 
 verifyUser();
 
+
 $db = getDBConnection();
 
 if (anyFieldEmpty($_POST)) {

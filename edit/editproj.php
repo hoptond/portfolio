@@ -10,6 +10,8 @@ verifyUser();
 
 $db = getDBConnection();
 
+$db = getDBConnection();
+
 ?>
 <!DOCTYPE html>
 <html>
