@@ -9,7 +9,6 @@
  * @return bool Returns TRUE if the credentials match, otherwise FALSE.
  */
 function verifyLogin($username, $password) : bool {
-    session_start();
     if (loginExists($username)) {
         if (correctPassword($username, $password)) {
             unset($_SESSION['badname']);
@@ -21,15 +20,13 @@ function verifyLogin($username, $password) : bool {
 }
 
 /*
- * If the cookie ID does not match the session ID, the user is punted out of the session. GET OUTTA HERE
+ * If the user does not have the correct _SESSION variable, the user is removed from the portfolio. GET OUTTA HERE
  */
 function verifyUser() {
     session_start();
-    if ($_COOKIE['id'] != session_id()) {
-        setcookie('id',0, time() - 1);
+    if (!$_SESSION['loggedin']) {
         header('Location: index.php');
     }
-    session_destroy();
 }
 
 /*

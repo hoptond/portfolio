@@ -2,6 +2,11 @@
 
 require 'security_functions.php';
 
+session_start();
+if($_SESSION['loggedin']) {
+    header('Location: dash.php');
+}
+
 
 ?>
 <!DOCTYPE html>

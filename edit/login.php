@@ -6,7 +6,7 @@ if (!isset($_POST['username']) || !isset($_POST['username'])) {
     header('Location: index.php');
 }
 if (verifyLogin($_POST['username'], $_POST['password'])) {
-    setcookie('id', session_id());
+    $_SESSION['loggedin'] = TRUE;
     header('Location: dash.php');
 } else {
     session_start();

@@ -1,6 +1,8 @@
 <?php require 'security_functions.php';
 
-setcookie('id',0, time() - 1);
+session_start();
+session_unset();
+session_destroy();
 header('Location: index.php');
 
 ?>
