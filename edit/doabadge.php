@@ -1,7 +1,9 @@
 <?php
 
 require ('cms_functions.php');
+require 'security_functions.php';
 
+verifyUser();
 $db = getDBConnection();
 
 if (anyFieldEmpty($_POST)) {

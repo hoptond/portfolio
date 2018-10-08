@@ -2,6 +2,13 @@
 
 
 require 'cms_functions.php';
+require 'security_functions.php';
+
+verifyUser();
+
+
+
+$db = getDBConnection();
 
 $db = getDBConnection();
 
