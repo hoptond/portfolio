@@ -11,7 +11,7 @@ $db = getDBConnection();
 <html>
 <head>
     <title>Edit Contact Info</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
     <form name ='contact' method='post' action='doacontact.php'>
         <?php echo displayEditContactInfo($db, getEditEntryID($_GET)) ?>

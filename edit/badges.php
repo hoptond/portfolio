@@ -14,7 +14,7 @@ $db = getDBConnection();
 <html>
     <head>
         <title>Edit Badges</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <form name="badges" method="post" action ='doabadge.php'>

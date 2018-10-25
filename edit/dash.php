@@ -10,7 +10,7 @@ verifyUser();
 <html>
     <head>
         <title>Dash</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <h1>DASH</h1>

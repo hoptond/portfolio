@@ -14,7 +14,7 @@ $db = getDBConnection();
 <html>
 <head>
     <title>Edit Icons</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
     <body>
         <form name="icons" method="post" action ='doaicon.php'>

@@ -10,7 +10,7 @@ verifyUser();
 <html>
     <head>
         <title>Edit About</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
         <form name="about" method="post" action ='doabout.php'>

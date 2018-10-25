@@ -10,7 +10,7 @@ verifyUser();
 <html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Add Project</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
     <body>
         <form name="badges" method="post" action ='doaproject.php'>
