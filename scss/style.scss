@@ -31,12 +31,19 @@ $primary-font: 'Mukta', sans-serif;
 $secondary-font: 'Poppins', sans-serif;
 $tertiary-font: 'Lato', sans-serif;
 
+
 $header-font: $primary-font;
 $subheader-font: $secondary-font;
 $paragraph-font: $primary-font;
-$header-item-font: $tertiary-font;
+$header-link-font: $secondary-font;
+$header-subtext-font: $tertiary-font;
 $project-view-font: $primary-font;
 $contact-info-font: $primary-font;
+
+$name-font-size: 2.4rem;
+$header-font-size: 1.8rem;
+$paragraph-font-size: 0.9rem;
+$list-item-font-size: 0.8rem;
 
 * {
   -webkit-box-sizing: border-box;
@@ -59,7 +66,7 @@ nav {
   position: fixed;
   top: 0;
   color: $nav-subtext-color;
-  font-family: $header-font;
+  font-family: $header-subtext-font;
   z-index: 5;
 }
 
@@ -122,13 +129,13 @@ header {
 header h1 {
   font-family: $header-font;
   margin: 0;
-  font-size: 2.4rem;
+  font-size: $name-font-size;
   padding-top: 40px;
 }
 
 header h2 {
   font-family: $subheader-font;
-  font-size: 1.8rem;
+  font-size: $header-font-size;
   font-weight: 600;
   margin: 0;
   padding: 20px 0 10px 0;
@@ -136,7 +143,7 @@ header h2 {
 
 header p {
   font-family: $paragraph-font;
-  font-size: 0.8rem;
+  font-size: $paragraph-font-size;
   width: 50%;
   margin: 0;
   padding: 0 0 10px 0;
@@ -174,7 +181,7 @@ header p {
 
 .showcasetext h2 {
   font-family: $subheader-font;
-  font-size: 1.8rem;
+  font-size: $header-font-size;
   font-weight: 600;
   margin: 0;
   padding: 8px 0 10px 0;
@@ -182,7 +189,7 @@ header p {
 
 .showcasetext h3 {
   font-family: $subheader-font;
-  font-size: 0.75rem;
+  font-size: $header-font-size - 0.75rem;
   width: 90%;
   margin: 0;
   padding: 4px 0 4px 0;
@@ -277,8 +284,8 @@ ul {
 
 ul li {
   padding: 2px 0 2px 0;
-  line-height: 0.8rem;
-  font-size: 0.8rem;
+  line-height: $list-item-font-size;
+  font-size: $list-item-font-size;
   font-family: $contact-info-font;
 }
 
