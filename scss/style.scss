@@ -1,108 +1,163 @@
+$alto-grey: #dddddd;
+$gallery-grey: #eeeeee;
+$edward-green: #A8B5AB;
+$lunar-green: #373d38;
+$heavy-metal-grey: #252826;
+
+$black: #000000;
+$cod-gray: #111111;
+$transparent-lightgrey: rgba(102, 102, 102, 0.66);
+$transparent-darkgrey: rgba(51, 51, 51, 0.66);
+$white: #ffffff;
+
+$nav-background: $lunar-green;
+$nav-link-color: $white;
+$nav-subtext-color: $alto-grey;
+
+$header-background-color: $gallery-grey;
+
+$project-background-color: $edward-green;
+$project-view-background-color: $black;
+$project-view-border-color: $cod-gray;
+$project-input-background-color: $transparent-darkgrey;
+$project-input-text-color: $white;
+
+$footer-background-color: $heavy-metal-grey;
+$footer-link-color: $white;
+
+$wrap-width-wide: 65%;
+
+$primary-font: 'Mukta', sans-serif;
+$secondary-font: 'Poppins', sans-serif;
+$tertiary-font: 'Lato', sans-serif;
+
+$header-font: $primary-font;
+$subheader-font: $secondary-font;
+$paragraph-font: $primary-font;
+$header-item-font: $tertiary-font;
+$project-view-font: $primary-font;
+$contact-info-font: $primary-font;
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+}
 
 body {
   margin: 0 auto;
   height: 100%;
-  background-color: #a8b5ab; }
+  background-color: $project-background-color;
+}
 
 nav {
   margin: 0;
   padding: 0;
-  background-color: #373d38;
+  background-color: $nav-background;
   width: 100%;
   height: auto;
   position: fixed;
   top: 0;
-  color: #dddddd;
-  font-family: 'Lato', sans-serif;
-  z-index: 5; }
+  color: $nav-subtext-color;
+  font-family: $header-font;
+  z-index: 5;
+}
 
 .navwrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 65%;
+  max-width: $wrap-width-wide;
   margin: 0 auto;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
-  justify-content: space-between; }
+  justify-content: space-between;
+}
 
 .navitem {
   margin: 0;
   padding: 10px 20px 0 20px;
-  -ms-flex: 0 1 auto; }
+  -ms-flex: 0 1 auto;
+}
 
 .navitem a {
   font-size: 1.4rem;
-  color: #ffffff;
-  text-decoration: none; }
+  color: $nav-link-color;
+  text-decoration: none;
+}
 
 .navitem p {
   font-size: 0.6rem;
-  margin: 2px 0 10px 0; }
+  margin: 2px 0 10px 0;
+}
 
 .anchor {
   display: block;
-  height: 58.8px;
-  visibility: hidden; }
+  height: 59px;
+  visibility: hidden;
+}
 
 header {
   margin: 0 0 0 0;
   padding: 0;
-  background-color: #eeeeee;
+  background-color: $header-background-color;
   height: auto;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 .headerwrapper {
-  max-width: 65%;
+  max-width: $wrap-width-wide;
   height: 100%;
   margin: 0 auto;
   background-size: auto 100%;
   background-image: url("../img/headerbackground.png");
   background-repeat: no-repeat;
   background-position: right;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 .headertext {
   width: 100%; }
 
 header h1 {
-  font-family: 'Mukta', sans-serif;
+  font-family: $header-font;
   margin: 0;
   font-size: 2.4rem;
-  padding-top: 40px; }
+  padding-top: 40px;
+}
 
 header h2 {
-  font-family: 'Poppins', sans-serif;
+  font-family: $subheader-font;
   font-size: 1.8rem;
   font-weight: 600;
   margin: 0;
-  padding: 20px 0 10px 0; }
+  padding: 20px 0 10px 0;
+}
 
 header p {
-  font-family: 'Mukta', sans-serif;
+  font-family: $paragraph-font;
   font-size: 0.8rem;
   width: 50%;
   margin: 0;
-  padding: 0 0 10px 0; }
+  padding: 0 0 10px 0;
+}
 
 .badges {
   -ms-display: flex;
   display: flex;
   padding: 8px 0 20px 0;
-  font-size: 2.6rem; }
+  font-size: 2.6rem;
+}
 
 .showcase {
   padding: 0;
-  background-color: #a8b5ab;
+  background-color: $project-background-color;
   width: 100%;
-  height: auto; }
+  height: auto;
+}
 
 .showcasewrapper {
-  max-width: 65%;
+  max-width: $wrap-width-wide;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -110,69 +165,80 @@ header p {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
-  margin: 0 auto; }
+  margin: 0 auto;
+}
 
 .showcasetext {
-  width: 40%; }
+  width: 40%;
+}
 
 .showcasetext h2 {
-  font-family: 'Poppins', sans-serif;
+  font-family: $subheader-font;
   font-size: 1.8rem;
   font-weight: 600;
   margin: 0;
-  padding: 8px 0 10px 0; }
+  padding: 8px 0 10px 0;
+}
 
 .showcasetext h3 {
-  font-family: 'Poppins', sans-serif;
+  font-family: $subheader-font;
   font-size: 0.75rem;
   width: 90%;
   margin: 0;
-  padding: 4px 0 4px 0; }
+  padding: 4px 0 4px 0;
+}
 
 .showcasetext p {
-  font-family: 'Mukta', sans-serif;
+  font-family: $paragraph-font;
   font-size: 0.9rem;
   width: 90%;
   margin: 0;
-  padding: 4px 0 40px 0; }
+  padding: 4px 0 40px 0;
+}
 
 .showcaseviewer {
   position: relative;
   width: 60%;
   height: 266px;
-  border: 8px solid #111111;
+  border: 8px solid $project-view-border-color;
   border-radius: 6px;
   margin: 0 0 40px 0;
-  background: #000000;
+  background: $project-view-background-color;
   background-size: 100% auto;
-  overflow: hidden; }
+  overflow: hidden;
+}
 
 .showcaseviewer form {
   top: 45%;
   position: relative;
   width: 40px;
-  height: 30px; }
+  height: 30px;
+}
 
 .showcaseviewer img {
   max-width: 100%;
   top: 0;
   left: 0;
   display: inline;
-  position: absolute; }
+  position: absolute;
+}
 
 .showcasenav input {
-  background-color: rgba(102, 102, 102, 0.66);
-  color: #ffffff;
+  background-color: $project-input-background-color;
+  color: $project-input-text-color;
   width: 40px;
   height: 30px;
   border: 0;
-  display: inline; }
+  display: inline;
+}
 
 .showcaseprev {
-  float: left; }
+  float: left;
+}
 
 .showcasenext {
-  float: right; }
+  float: right;
+}
 
 .showcasebottom {
   position: absolute;
@@ -180,125 +246,164 @@ header p {
   width: 100%;
   background-color: rgba(51, 51, 51, 0.66);
   text-align: center;
-  padding: 2px 0; }
+  padding: 2px 0;
+}
 
 .showcaseview {
-  font-family: 'Mukta', sans-serif;
+  font-family: $project-view-font;
   color: #ffffff;
-  font-size: 1.4rem; }
+  font-size: 1.4rem;
+}
 
 .contact {
   margin: 0;
   padding: 0;
-  background-color: #252826;
+  background-color: $footer-background-color;
   width: 100%;
-  color: #ffffff;
-  bottom: 0; }
+  color: $footer-link-color;
+  bottom: 0;
+}
 
 .contactwrapper {
-  max-width: 65%;
-  margin: 0 auto; }
+  max-width: $wrap-width-wide;
+  margin: 0 auto;
+}
 
 ul {
   list-style-type: none;
   margin: 0 auto;
-  padding: 10px 0 10px 0; }
+  padding: 10px 0 10px 0;
+}
 
 ul li {
   padding: 2px 0 2px 0;
   line-height: 0.8rem;
   font-size: 0.8rem;
-  font-family: 'Mukta', sans-serif; }
+  font-family: $contact-info-font;
+}
 
 ul li a {
   text-decoration: none;
-  color: #ffffff; }
+  color: #ffffff;
+}
 
 @media screen and (max-width: 992px) {
   .headertext p {
-    width: 70%; }
+    width: 70%;
+  }
   .showcasewrapper {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
-    flex-direction: column; }
+    flex-direction: column;
+  }
   .showcasetext {
-    width: 100%; }
+    width: 100%;
+  }
   .showcasetext p {
     padding: 4px 0 20px 0; }
   .showcaseviewer {
     width: 100%;
-    margin: 20px 0 40px 0; } }
+    margin: 20px 0 40px 0;
+  }
+}
 
 @media screen and (max-width: 688px) {
   .headerwrapper {
     background-position: center;
     -webkit-background-size: auto 100%;
-    background-size: auto 100%; } }
+    background-size: auto 100%;
+  }
+}
 
 @media screen and (max-width: 674px) {
   .navwrapper,
   .headerwrapper,
   .showcasewrapper,
   .contactwrapper {
-    width: 78.5%; } }
+    width: 78.5%;
+  }
+}
 
 @media screen and (max-width: 576px) {
   .navwrapper,
   .headerwrapper,
   .showcasewrapper,
   .contactwrapper {
-    width: 90%; }
+    width: 90%;
+  }
   .navitem p {
-    display: none; } }
+    display: none;
+  }
+}
 
 @media screen and (max-width: 438px) {
   .navitem {
     margin: 0;
-    padding: 0 10px 0 10px; }
+    padding: 0 10px 0 10px;
+  }
   .navitem a {
-    font-size: 1.2rem; }
+    font-size: 1.2rem;
+  }
   .navitem p {
-    display: none; }
+    display: none;
+  }
   .showcaseviewer {
-    background-size: auto 100%; }
+    background-size: auto 100%;
+  }
   .navwrapper,
   .headerwrapper,
   .showcasewrapper,
   .contactwrapper {
-    width: 97.5%; } }
+    width: 97.5%;
+  }
+}
 
 @media only screen and (min-height: 890px) {
   .contact {
     position: fixed;
-    bottom: 0; } }
+    bottom: 0;
+  }
+}
 
 @media only screen and (min-width: 2400px) {
   .navwrapper,
   .headerwrapper,
   .showcasewrapper,
   .contactwrapper {
-    max-width: 80%; }
+    max-width: 80%;
+  }
   .navitem a {
-    font-size: 1.85rem; }
+    font-size: 1.85rem;
+  }
   .navitem p {
-    font-size: 1rem; }
+    font-size: 1rem;
+  }
   header h1 {
-    font-size: 3.4rem; }
+    font-size: 3.4rem;
+  }
   header h2 {
-    font-size: 2.8rem; }
+    font-size: 2.8rem;
+  }
   header p {
-    font-size: 1.25rem; }
+    font-size: 1.25rem;
+  }
   .badges {
-    font-size: 4rem; }
+    font-size: 4rem;
+  }
   .showcasetext h2 {
-    font-size: 2.8rem; }
+    font-size: 2.8rem;
+  }
   .showcasetext h3 {
-    font-size: 1rem; }
+    font-size: 1rem;
+  }
   .showcasetext p {
-    font-size: 1.3rem; }
+    font-size: 1.3rem;
+  }
   ul li {
-    font-size: 1.2rem; } }
+    font-size: 1.2rem;
+  }
+}
 
 /* for some reason, on IE there is no margin applied to the bottom of the showcase, so we must return the footer to its default position */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
