@@ -26,11 +26,11 @@ $footer-background-color: $heavy-metal-grey;
 $footer-link-color: $white;
 
 $wrap-width-wide: 65%;
+$nav-bar-height: 59px;
 
 $primary-font: 'Mukta', sans-serif;
 $secondary-font: 'Poppins', sans-serif;
 $tertiary-font: 'Lato', sans-serif;
-
 
 $header-font: $primary-font;
 $subheader-font: $secondary-font;
@@ -62,7 +62,7 @@ nav {
   padding: 0;
   background-color: $nav-background;
   width: 100%;
-  height: auto;
+  height: $nav-bar-height;
   position: fixed;
   top: 0;
   color: $nav-subtext-color;
@@ -100,7 +100,7 @@ nav {
 
 .anchor {
   display: block;
-  height: 59px;
+  height: $nav-bar-height;
   visibility: hidden;
 }
 
