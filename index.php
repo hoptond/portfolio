@@ -23,17 +23,23 @@ $index = getProjectIndex($_POST, $array);
 <body>
 <nav>
     <div class="navwrapper">
-        <div class="navitem">
+        <div class="navitem collapsenavitem">
             <a href="#header">ABOUT ME</a>
             <p>Who I am</p>
+        </div>
+        <div class="navitem shortnavitem">
+            <a href="#header">ABOUT</a>
         </div>
         <div class="navitem">
             <a href="#showcase">PROJECTS</a>
             <p>See my work</p>
         </div>
-        <div class="navitem">
+        <div class="navitem collapsenavitem">
             <a href="#contact">CONTACT INFO</a>
             <p>Get in touch</p>
+        </div>
+        <div class="navitem shortnavitem">
+            <a href="#contact">CONTACT</a>
         </div>
     </div>
 </nav>
