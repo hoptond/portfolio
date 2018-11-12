@@ -74,7 +74,7 @@ nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: $wrap-width-wide;
+  width: $wrap-width-wide;
   margin: 0 auto;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -99,6 +99,10 @@ nav {
   margin: 2px 0 10px 0;
 }
 
+.shortnavitem {
+  display: none;
+}
+
 .anchor {
   display: block;
   height: $nav-bar-height;
@@ -114,7 +118,7 @@ header {
 }
 
 .headerwrapper {
-  max-width: $wrap-width-wide;
+  width: $wrap-width-wide;
   height: 100%;
   margin: 0 auto;
   background-size: auto 100%;
@@ -165,7 +169,7 @@ header p {
 }
 
 .showcasewrapper {
-  max-width: $wrap-width-wide;
+  width: $wrap-width-wide;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -273,7 +277,7 @@ header p {
 }
 
 .contactwrapper {
-  max-width: $wrap-width-wide;
+  width: $wrap-width-wide;
   margin: 0 auto;
 }
 
@@ -309,52 +313,32 @@ ul li a {
     width: 100%;
   }
   .showcasetext p {
-    padding: 4px 0 20px 0; }
+    padding: 4px 0 20px 0;
+    width: 100%;
+  }
   .showcaseviewer {
     width: 100%;
     margin: 20px 0 40px 0;
   }
 }
 
-@media screen and (max-width: 688px) {
-  .headerwrapper {
-    background-position: center;
-    -webkit-background-size: auto 100%;
-    background-size: auto 100%;
-  }
-}
-
-@media screen and (max-width: 674px) {
-  .navwrapper,
-  .headerwrapper,
-  .showcasewrapper,
-  .contactwrapper {
-    width: 78.5%;
-  }
-}
-
-@media screen and (max-width: 576px) {
-  .navwrapper,
-  .headerwrapper,
-  .showcasewrapper,
-  .contactwrapper {
-    width: 90%;
-  }
-  .navitem p {
-    display: none;
-  }
-}
-
-@media screen and (max-width: 438px) {
+@media screen and (max-width: 768px) {
   .navitem {
     margin: 0;
-    padding: 0 10px 0 10px;
+    padding: 8px;
   }
   .navitem a {
-    font-size: 1.2rem;
+    font-size: 2.3rem;
   }
   .navitem p {
     display: none;
+  }
+  .collapsenavitem {
+    display: none;
+  }
+
+  .shortnavitem {
+    display: initial;
   }
   .showcaseviewer {
     background-size: auto 100%;
@@ -364,6 +348,16 @@ ul li a {
   .showcasewrapper,
   .contactwrapper {
     width: 97.5%;
+  }
+
+  .headerwrapper {
+    background-position: center;
+    -webkit-background-size: auto 100%;
+    background-size: auto 100%;
+  }
+
+  .navitem p {
+    display: none;
   }
 }
 
