@@ -62,7 +62,7 @@ $index = getProjectIndex($_POST, $array);
 <main class="showcase">
     <section class="showcasewrapper">
         <?php
-        echo displayProject($db, $array[$index], $index);
+        echo displayProject($db);
         ?>
     </section>
 </main>

@@ -227,7 +227,7 @@ header p {
   height: 30px;
 }
 
-.showcaseviewer img {
+.projectimage {
   max-width: 100%;
   top: 0;
   left: 0;
@@ -266,6 +266,16 @@ header p {
   color: #ffffff;
   font-size: 1.4rem;
 }
+
+.hidden {
+  display: none;
+
+  img {
+    display: none;
+  }
+}
+
+
 
 .contact {
   margin: 0;

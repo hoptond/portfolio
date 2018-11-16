@@ -41,27 +41,52 @@ function displayBadges(PDO $db) {
  *
  * @return string The HTML to output on the page.
  */
-function displayProject(PDO $db, int $id, int $index) {
-    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id`=:id');
-    $stmt->bindParam(':id',$id);
+function displayProject(PDO $db) {
+    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects`');
     $stmt->execute();
-    $result = $stmt->fetch();
-    if(empty($result)) {
-        return '';
-    }
-    $output = '<div class="showcasetext">
-                <h2>' . $result['title'] . '</h2>
-                <h3>' . $result['type'] . '</h3>
-                <p>' . $result['desc'] .'</p>
-               </div>';
-    $output .= '<div class="showcaseviewer"><img src="' . $result['image'] . '">';
+    $results = $stmt->fetchAll();
+    $output = getProjectTexts($results);
+    $output .= '<div class="showcaseviewer">';
+    $output .= getProjectImages($results);
     $output .= '<form class="showcasenav showcaseprev" method="post">
-                    <input type="submit" name="prev_' . $index . '" value="&lt" class="showcasenav showcaseprev">
+                    <input type="submit" name="prev" value="&lt" class="showcasenav showcaseprev">
                 </form>';
     $output .= '<form class="showcasenav showcasenext" method="post">
-                    <input type="submit" name="next_' . $index . '" value="&gt" class="showcasenav showcaseprev">
+                    <input type="submit" name="next_" value="&gt" class="showcasenav showcaseprev">
                 </form>';
-    $output .= '<div class="showcasebottom"><a href="' .  $result['link'] . '" class="showcaseview">View Project</a></div>';
+    $output .= '<div class="showcasebottom"><a href="' . $results[0]['link'] . '" class="showcaseview">View Project</a></div>';
+    return $output;
+}
+
+function getProjectTexts(array $projects) {
+    $output = '';
+    for ($i = 0; $i < count($projects); $i++) {
+        if($i === 0) {
+            $output .= '<div class="showcasetext">
+                <h2>' . $projects[$i]['title'] . '</h2>
+                <h3>' . $projects[$i]['type'] . '</h3>
+                <p>' . $projects[$i]['desc'] .'</p>
+               </div>';
+        } else {
+            $output .= '<div class="hidden showcasetext">
+                <h2>' . $projects[$i]['title'] . '</h2>
+                <h3>' . $projects[$i]['type'] . '</h3>
+                <p>' . $projects[$i]['desc'] .'</p>
+               </div>';
+        }
+    }
+    return $output;
+}
+
+function getProjectImages(array $projects) {
+    $output = '';
+    for ($i = 0; $i < count($projects); $i++) {
+        if($i === 0) {
+            $output .= '<img class="projectimage" src="' . $projects[$i]['image'] . '">';
+        } else {
+            $output .= '<img class="projectimage hidden" src="' . $projects[$i]['image'] . '">';
+        }
+    }
     return $output;
 }
 
