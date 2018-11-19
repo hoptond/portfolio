@@ -33,6 +33,14 @@ function displayBadges(PDO $db) {
     return $output;
 }
 
+/*
+ * Outputs the HTML required to display the project details in the showcasetext section. Only the first entry
+ * is visible by default
+ *
+ * @param array $projects: An array contaning an associative array of information for each project.
+ *
+ * @return string Returns the information for each project, wrapped in the appropriate tags.
+ */
 function getProjectTexts(array $projects) {
     $output = '';
     for ($i = 0; $i < count($projects); $i++) {
@@ -53,6 +61,14 @@ function getProjectTexts(array $projects) {
     return $output;
 }
 
+/*
+ * Outputs the HTML required to display the project images in the carousel. Only the first entry
+ * is visible by default
+ *
+ * @param array $projects: An array contaning an associative array of information for each project.
+ *
+ * @return string Returns the HTML to display images for each project, wrapped in the appropriate tags.
+ */
 function getProjectImages(array $projects) {
     $output = '';
     for ($i = 0; $i < count($projects); $i++) {
@@ -81,52 +97,6 @@ function getProjectLinks(array $projects) {
     return $output;
 }
 
-/*
- * Gets the index of the project ID when the user has clicked on either of the nav buttons on the showcase viewer.
- *
- * @param array $array The list of project IDs in the database.
- *
- * @return int Returns the next, previous, lowest, highest, or default ID depending upon which project the user was currently
- * viewing and which navigation button they clicked on.
- */
-function getProjectIndex(array $post, array $array) {
-    if (empty($array)) {
-        return 0;
-    }
-    if (!empty($post)) {
-        $command = explode('_', array_keys($post)[0]);
-        $index = (int)$command[1];
-        if ($command[0] == 'prev') {
-            if (0 > $index - 1) {
-                return max(array_keys($array));
-            }
-            return $index - 1;
-        } else if ($command[0] == 'next') {
-            if (count($array) <= $index + 1) {
-                return 0;
-            }
-            return $index + 1;
-        }
-    }
-    return 0;
-}
-/*
- * Gets a numeric array of project IDs from the database.
- *
- * @param PDO $db The database object to retrieve the project information from.
- *
- * @return int Returns a numeric array of project IDs from the database.
- */
-function getProjectIDArray(PDO $db) {
-    $stmt = $db->prepare('SELECT `id` FROM `projects`');
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-    $array = [];
-    foreach($result as $entry) {
-        array_push($array, (int)$entry['id']);
-    }
-    return $array;
-}
 /*
  * Outputs the HTML required to display each entry in the Contact Me section.
  *

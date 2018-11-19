@@ -4,10 +4,6 @@ require  'frontend.php';
 require 'edit/cms_functions.php';
 
 $db = getDBConnection();
-
-$array = getProjectIDArray($db);
-$index = getProjectIndex($_POST, $array);
-
 $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects`');
 $stmt->execute();
 $projects = $stmt->fetchAll();
