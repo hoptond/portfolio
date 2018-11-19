@@ -3,7 +3,7 @@
 require 'security_functions.php';
 
 session_start();
-if($_SESSION['loggedin']) {
+if(in_array('loggedin', $_SESSION)) {
     header('Location: dash.php');
 }
 

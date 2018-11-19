@@ -2,6 +2,8 @@ var activeProjectIndex = 0
 var carouselImagesCount = document.querySelectorAll('.carouselrow img').length
 var imageWidth = 900
 
+let projectLink = document.querySelectorAll('.showcasebottom')[0].classList.remove('hidden')
+
 document.getElementById('carouselnext').addEventListener('click', function (e) {
     slide(1)
 })

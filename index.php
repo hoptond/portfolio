@@ -4,7 +4,7 @@ require  'frontend.php';
 require 'edit/cms_functions.php';
 
 $db = getDBConnection();
-$stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects`');
+$stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`repo_link`,`use_link` FROM `projects`');
 $stmt->execute();
 $projects = $stmt->fetchAll();
 

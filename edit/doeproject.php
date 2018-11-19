@@ -7,8 +7,10 @@ verifyUser();
 $db = getDBConnection();
 
 if (anyFieldEmpty($_POST)) {
-    header('Location: editproj.php?msg=16');
-    exit;
+    if (empty($_POST['repo_link']) && empty($_POST['use_link'])) {
+        header('Location: editproj.php?msg=16');
+        exit;
+    }
 }
 if (count($_POST) > 2) {
      if (updateProjectInDatabase($db, $_POST['id'], getProjectDataFromPOST($_POST))) {
