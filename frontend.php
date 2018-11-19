@@ -32,31 +32,6 @@ function displayBadges(PDO $db) {
     }
     return $output;
 }
-/*
- * Displays the given project. In the grim darkness of the near future, this will be a fancy JS carousel but I looked up how to
- * do this in HTML/CSS and I thought to myself 'self, I can't possibly achieve this in a day and a half let alone do the login
- * task after' so we're going to use horrible hacky POST queries for the time being.
- *
- * @param int id The project ID to get. It is assumed the id corresponds to an actual project beforehand.
- *
- * @return string The HTML to output on the page.
- */
-function displayProject(PDO $db) {
-    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects`');
-    $stmt->execute();
-    $results = $stmt->fetchAll();
-    $output = getProjectTexts($results);
-    $output .= '<div class="showcaseviewer">';
-    $output .= getProjectImages($results);
-    $output .= '<form class="showcasenav showcaseprev" method="post">
-                    <input type="submit" name="prev" value="&lt" class="showcasenav showcaseprev">
-                </form>';
-    $output .= '<form class="showcasenav showcasenext" method="post">
-                    <input type="submit" name="next_" value="&gt" class="showcasenav showcaseprev">
-                </form>';
-    $output .= '<div class="showcasebottom"><a href="' . $results[0]['link'] . '" class="showcaseview">View Project</a></div>';
-    return $output;
-}
 
 function getProjectTexts(array $projects) {
     $output = '';

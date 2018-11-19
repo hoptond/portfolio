@@ -8,6 +8,10 @@ $db = getDBConnection();
 $array = getProjectIDArray($db);
 $index = getProjectIndex($_POST, $array);
 
+$stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects`');
+$stmt->execute();
+$projects = $stmt->fetchAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +23,7 @@ $index = getProjectIndex($_POST, $array);
     <link rel="stylesheet" href="https://cdn.rawgit.com/konpa/devicon/df6431e323547add1b4cf45992913f15286456d3/devicon.min.css">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/carousel.css">
 </head>
 <body>
 <nav>
@@ -62,8 +67,20 @@ $index = getProjectIndex($_POST, $array);
 <main class="showcase">
     <section class="showcasewrapper">
         <?php
-        echo displayProject($db);
+            echo getProjectTexts($projects);
         ?>
+        <div class="showcaseviewer">
+            <?php
+                echo getProjectImages($projects);
+            ?>
+            <form class="showcasenav showcaseprev" method="post">
+                <input type="submit" name="prev" value="&lt" class="showcasenav showcaseprev">
+            </form>
+            <form class="showcasenav showcasenext" method="post">
+                <input type="submit" name="next_" value="&gt" class="showcasenav showcaseprev">
+            </form>
+            <div class="showcasebottom"><a href="<?php $projects[0]['link'] ?>" class="showcaseview">View Project</a></div>
+        </div>
     </section>
 </main>
 <footer class="contact" id="contact">
@@ -75,5 +92,6 @@ $index = getProjectIndex($_POST, $array);
         </ul>
     </div>
 </footer>
+<script src="js/carousel.js" defer></script>
 </body>
 </html>
