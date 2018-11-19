@@ -95,8 +95,8 @@ function getProjectLinkSpanContent(array $project) {
     $output = '';
     if (!empty($project['repo_link'])) {
         if (!empty($project['use_link'])) {
-           $output .= '<a class="showcaseview" href="' . $project['repo_link'] . '">View Project / </a>' .
-               '<a class="showcaseview" href="' . $project['use_link'] . '"> / Demo</a>';
+           $output .= '<a class="showcaseview" href="' . $project['repo_link'] . '">View Project</a><a> / </a>' .
+               '<a class="showcaseview" href="' . $project['use_link'] . '">Demo</a>';
            return $output;
         } else {
             $output .= '<a class="showcaseview" href="' . $project['repo_link'] . '">View Project</a>';
