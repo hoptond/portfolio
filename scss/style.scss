@@ -220,13 +220,6 @@ header p {
   overflow: hidden;
 }
 
-.showcaseviewer form {
-  top: 45%;
-  position: relative;
-  width: 40px;
-  height: 30px;
-}
-
 .projectimage {
   max-width: 100%;
   top: 0;
@@ -235,7 +228,8 @@ header p {
   position: absolute;
 }
 
-.showcasenav input {
+button {
+  position: relative;
   background-color: $project-input-background-color;
   color: $project-input-text-color;
   width: 40px;
@@ -245,11 +239,15 @@ header p {
 }
 
 .showcaseprev {
-  float: left;
+  transform: translate(0%, -50%);
+  top: 50%;
+  left: 0;
 }
 
 .showcasenext {
-  float: right;
+  transform: translate(-200%, -50%);
+  left: 100%;
+  top: 50%;
 }
 
 .showcasebottom {

@@ -73,12 +73,8 @@ $projects = $stmt->fetchAll();
             <?php
                 echo getProjectImages($projects);
             ?>
-            <form class="showcasenav showcaseprev" method="post">
-                <input type="submit" name="prev" value="&lt" class="showcasenav showcaseprev">
-            </form>
-            <form class="showcasenav showcasenext" method="post">
-                <input type="submit" name="next_" value="&gt" class="showcasenav showcaseprev">
-            </form>
+            <button id="prev" class="showcasenav showcaseprev">&lt;</button>
+            <button id="next" class="showcasenav showcasenext">&gt;</button>
             <div class="showcasebottom"><a href="<?php $projects[0]['link'] ?>" class="showcaseview">View Project</a></div>
         </div>
     </section>
