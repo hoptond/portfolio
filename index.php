@@ -70,12 +70,16 @@ $projects = $stmt->fetchAll();
             echo getProjectTexts($projects);
         ?>
         <div class="showcaseviewer">
-            <?php
-                echo getProjectImages($projects);
-            ?>
-            <button id="prev" class="showcasenav showcaseprev">&lt;</button>
-            <button id="next" class="showcasenav showcasenext">&gt;</button>
-            <div class="showcasebottom"><a href="<?php $projects[0]['link'] ?>" class="showcaseview">View Project</a></div>
+            <div class="carouselrow">
+                <?php
+                    echo getProjectImages($projects);
+                ?>
+            </div>
+            <div class="carouselbuttons">
+                <button id="carouselprev" class="prev">&lt;</button>
+                <button id="carouselnext" class="next">&gt;</button>
+            </div>
+            <div class="showcasebottom"><a href="<?php echo $projects[0]['link'] ?>" class="showcaseview">View Project</a></div>
         </div>
     </section>
 </main>

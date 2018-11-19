@@ -57,9 +57,9 @@ function getProjectImages(array $projects) {
     $output = '';
     for ($i = 0; $i < count($projects); $i++) {
         if($i === 0) {
-            $output .= '<img class="projectimage" src="' . $projects[$i]['image'] . '">';
+            $output .= '<img class="active" src="' . $projects[$i]['image'] . '">';
         } else {
-            $output .= '<img class="projectimage hidden" src="' . $projects[$i]['image'] . '">';
+            $output .= '<img class="inactive" src="' . $projects[$i]['image'] . '">';
         }
     }
     return $output;
