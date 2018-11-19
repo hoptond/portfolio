@@ -65,6 +65,22 @@ function getProjectImages(array $projects) {
     return $output;
 }
 
+function getProjectLinks(array $projects) {
+    $output = '';
+    for ($i = 0; $i < count($projects); $i++) {
+        if($i === 0) {
+            $output .= '<div class="showcasebottom">
+                            <a class="showcaseview" href="' . $projects[$i]['link'] . '">View Project</a>
+                        </div>';
+        } else {
+            $output .= '<div class="showcasebottom hidden">
+                            <a class="showcaseview" href="' . $projects[$i]['link'] . '">View Project</a>
+                        </div>';
+        }
+    }
+    return $output;
+}
+
 /*
  * Gets the index of the project ID when the user has clicked on either of the nav buttons on the showcase viewer.
  *

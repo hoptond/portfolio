@@ -79,7 +79,7 @@ $projects = $stmt->fetchAll();
                 <button id="carouselprev" class="prev">&lt;</button>
                 <button id="carouselnext" class="next">&gt;</button>
             </div>
-            <div class="showcasebottom"><a href="<?php echo $projects[0]['link'] ?>" class="showcaseview">View Project</a></div>
+           <?php echo getProjectLinks($projects);?>
         </div>
     </section>
 </main>

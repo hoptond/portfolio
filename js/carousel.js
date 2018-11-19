@@ -23,6 +23,8 @@ function slide(dir) {
     }
     clearAnimations(images[lastImageIndex])
     clearAnimations(images[activeProjectIndex])
+    switchProjectLink(activeProjectIndex, true)
+    switchProjectLink(lastImageIndex, false)
     fadeText(activeProjectIndex, true)
     fadeText(lastImageIndex, false)
     if(images[activeProjectIndex].classList.contains('inactive')) {
@@ -51,6 +53,18 @@ function fadeText(textID, fadeIn) {
             break;
         case false:
             showcaseText.classList.add('hidden');
+            break;
+    }
+}
+
+function switchProjectLink(projectID, visible) {
+    let projectLink = document.querySelectorAll('.showcasebottom')[projectID]
+    switch (visible) {
+        case true:
+            projectLink.classList.remove('hidden');
+            break;
+        case false:
+            projectLink.classList.add('hidden');
             break;
     }
 }
