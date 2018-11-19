@@ -8,15 +8,6 @@ $fullsize: 100%;
   width: $fullsize;
 }
 
-.carousel {
-  position: relative;
-  margin: 0 auto;
-  width: $fullsize;
-  min-width: 40px;
-  text-align: center;
-  overflow: hidden;
-}
-
 .carouselbuttons {
   z-index: 330;
   position: absolute;

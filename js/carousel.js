@@ -1,4 +1,4 @@
-var activeImageIndex = 0
+var activeProjectIndex = 0
 var carouselImagesCount = document.querySelectorAll('.carouselrow img').length
 var imageWidth = 900
 
@@ -12,26 +12,28 @@ document.getElementById('carouselprev').addEventListener('click', function (e) {
 
 function slide(dir) {
     let images = document.querySelectorAll('.carouselrow img')
-    images[activeImageIndex].classList.remove('active')
-    images[activeImageIndex].classList.remove('inactive')
-    let lastImageIndex = activeImageIndex
-    activeImageIndex += dir
-    if (activeImageIndex === -1) {
-        activeImageIndex = carouselImagesCount - 1
-    } else if (activeImageIndex === carouselImagesCount) {
-        activeImageIndex = 0
+    images[activeProjectIndex].classList.remove('active')
+    images[activeProjectIndex].classList.remove('inactive')
+    let lastImageIndex = activeProjectIndex
+    activeProjectIndex += dir
+    if (activeProjectIndex === -1) {
+        activeProjectIndex = carouselImagesCount - 1
+    } else if (activeProjectIndex === carouselImagesCount) {
+        activeProjectIndex = 0
     }
     clearAnimations(images[lastImageIndex])
-    clearAnimations(images[activeImageIndex])
-    if(images[activeImageIndex].classList.contains('inactive')) {
-        images[activeImageIndex].classList.remove('inactive')
+    clearAnimations(images[activeProjectIndex])
+    fadeText(activeProjectIndex, true)
+    fadeText(lastImageIndex, false)
+    if(images[activeProjectIndex].classList.contains('inactive')) {
+        images[activeProjectIndex].classList.remove('inactive')
     }
     if(dir === 1) {
         images[lastImageIndex].classList.add('offscreenleft')
-        images[activeImageIndex].classList.add('onscreenright')
+        images[activeProjectIndex].classList.add('onscreenright')
     } else if(dir === -1) {
         images[lastImageIndex].classList.add('offscreenright')
-        images[activeImageIndex].classList.add('onscreenleft')
+        images[activeProjectIndex].classList.add('onscreenleft')
     }
 }
 
@@ -40,17 +42,15 @@ function clearAnimations(image) {
 
 }
 
-function sizeCarousel() {
-
-    let width = window.innerWidth
-    let carousel = document.getElementById('carousel')
-    if(width < imageWidth) {
-        carousel.style.width = width + 'px'
-    } else {
-        carousel.style.width = imageWidth + 'px'
+function fadeText(textID, fadeIn) {
+    let showcaseText = document.querySelectorAll('.showcasetext')[textID]
+    showcaseText.classList.remove('textfadein', 'textfadeout', 'hidden')
+    switch (fadeIn) {
+        case true:
+            showcaseText.classList.add('textfadein');
+            break;
+        case false:
+            showcaseText.classList.add('hidden');
+            break;
     }
-    carousel.style.height = (parseFloat(getComputedStyle(carousel).width) * 0.75) + 'px'
 }
-
-sizeCarousel()
-window.addEventListener('resize', sizeCarousel)
