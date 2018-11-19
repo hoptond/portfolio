@@ -86,11 +86,11 @@ function getProjectLinks(array $projects) {
     for ($i = 0; $i < count($projects); $i++) {
         if($i === 0) {
             $output .= '<div class="showcasebottom">
-                            <a class="showcaseview" href="' . $projects[$i]['link'] . '">View Project</a>
+                            <a class="showcaseview" href="' . $projects[$i]['repo_link'] . '">View Project</a>
                         </div>';
         } else {
             $output .= '<div class="showcasebottom hidden">
-                            <a class="showcaseview" href="' . $projects[$i]['link'] . '">View Project</a>
+                            <a class="showcaseview" href="' . $projects[$i]['repo_link'] . '">View Project</a>
                         </div>';
         }
     }

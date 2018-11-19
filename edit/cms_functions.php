@@ -90,7 +90,8 @@ function displayEditProjectInput(PDO $db, int $id) {
     $output .= '<div class="longinput"><label>Type: </label><input name="type" type="text" value="' . $array['type'] . '"></div>';
     $output .= '<div class="longinputlarge"><label>Desc: </label><textarea name="desc">' . $array['desc'] . '</textarea></div>';
     $output .= '<div class="longinput"><label>Image: </label><input name="img" type="text" value="' . $array['image'] . '"></div>';
-    $output .= '<div class="longinput"><label>Link: </label><input name="link" type="text" value="' . $array['link'] . '"></div>';
+    $output .= '<div class="longinput"><label>Code Link: </label><input name="repo_link" type="text" value="' . $array['repo_link'] . '"></div>';
+    $output .= '<div class="longinput"><label>Usable Link: </label><input name="use_link" type="text" value="' . $array['use_link'] . '"></div>';
     $output .= '<input type="hidden" name="id" value ="' . $id . '">';
     $output .= '<input type="submit" value="Edit"></form>';
     return $output;
@@ -282,7 +283,7 @@ function updateAbout(PDO $db, $about) {
  * project of that ID in the database.
  */
 function getProjectFromDB(PDO $db, int $id) {
-    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id` = :id LIMIT 1');
+    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`repo_link`,`use_link` FROM `projects` WHERE `id` = :id LIMIT 1');
     $stmt->bindParam(':id', $id);
     $stmt->execute();
     $project = $stmt->fetch();
@@ -303,7 +304,8 @@ function getProjectDataFromPOST($postData) {
     $project['type'] = filter_var($postData['type'], FILTER_SANITIZE_STRING);
     $project['desc'] = filter_var($postData['desc'], FILTER_SANITIZE_STRING);
     $project['img'] = filter_var($postData['img'], FILTER_SANITIZE_STRING);
-    $project['link'] = filter_var($postData['link'], FILTER_SANITIZE_STRING);
+    $project['repo_link'] = filter_var($postData['repo_link'], FILTER_SANITIZE_STRING);
+    $project['use_link'] = filter_var($postData['use_link'], FILTER_SANITIZE_STRING);
     return $project;
 }
 
@@ -333,12 +335,13 @@ function getContactInfoFromPOST($postData) {
  * @return Returns TRUE if the project was added successfully, FALSE if otherwise.
  */
 function addProjectToDatabase(PDO $db, $project) {
-    $stmt = $db->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`link`) VALUES(:title, :type, :desc, :image, :link);');
+    $stmt = $db->prepare('INSERT INTO `projects`(`title`, `type`, `desc`,`image`,`repo_link`,`use_link`) VALUES(:title, :type, :desc, :image, :repo_link, :use_link);');
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':type',$project['type']);
     $stmt->bindParam(':desc',$project['desc']);
     $stmt->bindParam(':image',$project['img']);
-    $stmt->bindParam(':link',$project['link']);
+    $stmt->bindParam(':repo_link',$project['repo_link']);
+    $stmt->bindParam(':use_link', $project['use_link']);
     return $stmt->execute();
 }
 
@@ -354,12 +357,13 @@ function addProjectToDatabase(PDO $db, $project) {
  * @return Returns TRUE if the project was edited successfully, FALSE if otherwise.
  */
 function updateProjectInDatabase(PDO $db, int $id, $project) {
-    $stmt = $db->prepare('UPDATE `projects` SET `title`=:title, `type`=:type, `desc`=:desc, `image`=:img, `link`=:link  WHERE `id`=:id;');
+    $stmt = $db->prepare('UPDATE `projects` SET `title`=:title, `type`=:type, `desc`=:desc, `image`=:img, `repo_link`=:repo, `use_link`= :link WHERE `id`=:id;');
     $stmt->bindParam(':title',$project['title']);
     $stmt->bindParam(':type',$project['type']);
     $stmt->bindParam(':desc',$project['desc']);
     $stmt->bindParam(':img',$project['img']);
-    $stmt->bindParam(':link',$project['link']);
+    $stmt->bindParam(':repo',$project['repo_link']);
+    $stmt->bindParam(':link',$project['use_link']);
     $stmt->bindParam(':id',$id);
     return $stmt->execute();
 }

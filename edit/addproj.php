@@ -31,8 +31,12 @@ verifyUser();
                 <input name="img" type="text">
             </div>
             <div class="longinput">
-                <label>Link: </label>
-                <input name="link" type="text">
+                <label>Repo Link: </label>
+                <input name="repo_link" type="text">
+            </div>
+            <div class="longinput">
+                <label>Demo Link: </label>
+                <input name="use_link" type="text">
             </div>
             <input type="submit" value="Add">
         </form>
