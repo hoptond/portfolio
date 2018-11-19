@@ -1,0 +1,94 @@
+$fullsize: 100%;
+
+* {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: $fullsize;
+}
+
+.carouselbuttons {
+  z-index: 330;
+  position: absolute;
+  width: $fullsize;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carouselrow {
+  font-size: 0;
+  display: inline-block;
+  white-space: nowrap;
+  margin: 0 auto;
+  padding: 0;
+  width: $fullsize;
+  height: $fullsize;
+}
+
+img {
+  left: 0;
+  width: $fullsize;
+  display: inline;
+  position: absolute;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-duration: 800ms;
+  animation-fill-mode: forwards;
+}
+
+.prev {
+  float: left;
+}
+
+.next {
+  float: right;
+}
+
+.active {
+  left: 0;
+}
+
+.inactive {
+  display: none;
+}
+
+img.offscreenleft {
+  animation-name: offscreenleft;
+}
+
+img.onscreenleft {
+  animation-name: onscreenleft;
+}
+
+img.offscreenright{
+  animation-name: offscreenright;
+}
+
+img.onscreenright {
+  animation-name: onscreenright;
+}
+
+@keyframes offscreenleft {
+  0%   {left: 0;}
+  50%  {left: -50%;}
+  100% {left: -100%;}
+}
+
+@keyframes offscreenright {
+  0%   {left: 0;}
+  50%  {left: 50%;}
+  100% {left: 100%;}
+}
+
+@keyframes onscreenright {
+  0%   {left: 100%;}
+  50%  {left: 50%;}
+  100% {left: 0;}
+}
+
+@keyframes onscreenleft {
+  0%   {left: -100%;}
+  50%  {left: -50%;}
+  100% {left: 0;}
+}

@@ -182,6 +182,18 @@ header p {
 
 .showcasetext {
   width: 40%;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-duration: 800ms;
+  animation-fill-mode: forwards;
+}
+
+.showcasetext.textfadein {
+  animation-name: textfadein;
+}
+
+.showcasetext.textfadeout {
+  animation-name: textfadein;
 }
 
 .showcasetext h2 {
@@ -220,14 +232,7 @@ header p {
   overflow: hidden;
 }
 
-.showcaseviewer form {
-  top: 45%;
-  position: relative;
-  width: 40px;
-  height: 30px;
-}
-
-.showcaseviewer img {
+.projectimage {
   max-width: 100%;
   top: 0;
   left: 0;
@@ -235,7 +240,7 @@ header p {
   position: absolute;
 }
 
-.showcasenav input {
+button {
   background-color: $project-input-background-color;
   color: $project-input-text-color;
   width: 40px;
@@ -245,11 +250,15 @@ header p {
 }
 
 .showcaseprev {
-  float: left;
+  transform: translate(0%, -50%);
+  top: 50%;
+  left: 0;
 }
 
 .showcasenext {
-  float: right;
+  transform: translate(-200%, -50%);
+  left: 100%;
+  top: 50%;
 }
 
 .showcasebottom {
@@ -265,6 +274,14 @@ header p {
   font-family: $project-view-font;
   color: #ffffff;
   font-size: 1.4rem;
+}
+
+.hidden {
+  display: none;
+
+  img {
+    display: none;
+  }
 }
 
 .contact {
@@ -297,6 +314,17 @@ ul li {
 ul li a {
   text-decoration: none;
   color: #ffffff;
+}
+
+
+@keyframes textfadein {
+  0% {color: transparent;}
+  100% {color: black;}
+}
+
+@keyframes textfadeout {
+  0% {color: black;}
+  100% {color: transparent;}
 }
 
 @media screen and (max-width: 992px) {

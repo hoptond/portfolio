@@ -32,36 +32,52 @@ function displayBadges(PDO $db) {
     }
     return $output;
 }
-/*
- * Displays the given project. In the grim darkness of the near future, this will be a fancy JS carousel but I looked up how to
- * do this in HTML/CSS and I thought to myself 'self, I can't possibly achieve this in a day and a half let alone do the login
- * task after' so we're going to use horrible hacky POST queries for the time being.
- *
- * @param int id The project ID to get. It is assumed the id corresponds to an actual project beforehand.
- *
- * @return string The HTML to output on the page.
- */
-function displayProject(PDO $db, int $id, int $index) {
-    $stmt = $db->prepare('SELECT `title`,`type`,`desc`,`image`,`link` FROM `projects` WHERE `id`=:id');
-    $stmt->bindParam(':id',$id);
-    $stmt->execute();
-    $result = $stmt->fetch();
-    if(empty($result)) {
-        return '';
-    }
-    $output = '<div class="showcasetext">
-                <h2>' . $result['title'] . '</h2>
-                <h3>' . $result['type'] . '</h3>
-                <p>' . $result['desc'] .'</p>
+
+function getProjectTexts(array $projects) {
+    $output = '';
+    for ($i = 0; $i < count($projects); $i++) {
+        if($i === 0) {
+            $output .= '<div class="showcasetext">
+                <h2>' . $projects[$i]['title'] . '</h2>
+                <h3>' . $projects[$i]['type'] . '</h3>
+                <p>' . $projects[$i]['desc'] .'</p>
                </div>';
-    $output .= '<div class="showcaseviewer"><img src="' . $result['image'] . '">';
-    $output .= '<form class="showcasenav showcaseprev" method="post">
-                    <input type="submit" name="prev_' . $index . '" value="&lt" class="showcasenav showcaseprev">
-                </form>';
-    $output .= '<form class="showcasenav showcasenext" method="post">
-                    <input type="submit" name="next_' . $index . '" value="&gt" class="showcasenav showcaseprev">
-                </form>';
-    $output .= '<div class="showcasebottom"><a href="' .  $result['link'] . '" class="showcaseview">View Project</a></div>';
+        } else {
+            $output .= '<div class="hidden showcasetext">
+                <h2>' . $projects[$i]['title'] . '</h2>
+                <h3>' . $projects[$i]['type'] . '</h3>
+                <p>' . $projects[$i]['desc'] .'</p>
+               </div>';
+        }
+    }
+    return $output;
+}
+
+function getProjectImages(array $projects) {
+    $output = '';
+    for ($i = 0; $i < count($projects); $i++) {
+        if($i === 0) {
+            $output .= '<img class="active" src="' . $projects[$i]['image'] . '">';
+        } else {
+            $output .= '<img class="inactive" src="' . $projects[$i]['image'] . '">';
+        }
+    }
+    return $output;
+}
+
+function getProjectLinks(array $projects) {
+    $output = '';
+    for ($i = 0; $i < count($projects); $i++) {
+        if($i === 0) {
+            $output .= '<div class="showcasebottom">
+                            <a class="showcaseview" href="' . $projects[$i]['link'] . '">View Project</a>
+                        </div>';
+        } else {
+            $output .= '<div class="showcasebottom hidden">
+                            <a class="showcaseview" href="' . $projects[$i]['link'] . '">View Project</a>
+                        </div>';
+        }
+    }
     return $output;
 }
 
