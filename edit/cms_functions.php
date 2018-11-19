@@ -539,24 +539,6 @@ function anyFieldEmpty(array $array) {
 }
 
 /*
- * Goes through each field, determining if it is empty, and returning true if it is AND if the field was not included
- * among the arguments.
- *
- * @param array $array The array of fields to check.
- *
- * @return Returns TRUE if the field meets our definition of empty, otherwise FALSE.
- */
-function fieldsNotEmpty(array $array, array $fields) {
-    foreach ($array as $key => $value) {
-        $test = trim($value);
-        if ($test === '' && !in_array($key, $fields)) {
-            return TRUE;
-        }
-    }
-    return FALSE;
-}
-
-/*
  * Deletes the given entry in the database.
  *
  * @param PDO $db The database object to use for our queries.
