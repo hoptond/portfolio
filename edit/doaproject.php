@@ -9,8 +9,10 @@ verifyUser();
 $db = getDBConnection();
 
 if (anyFieldEmpty($_POST)) {
-    header('Location: addproj.php?msg=16');
-    exit;
+    if (empty($_POST['repo_link']) && empty($_POST['use_link'])) {
+        header('Location: addproj.php?msg=16');
+        exit;
+    }
 }
 if (addProjectToDatabase($db, getProjectDataFromPOST($_POST))) {
     header('Location: addproj.php?msg=4');

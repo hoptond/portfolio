@@ -143,7 +143,7 @@ function processMessage(int $id) {
         case 13: return 'Error updating entry in database. Please try again.';
         case 14: return 'Error deleting entry from database.';
         case 15: return 'Deleted entry from the database';
-        case 16: return 'Please fill in all fields.';
+        case 16: return 'Please fill in all non link fields, and either one or both link fields.';
         default: return '';
     }
 }
@@ -532,6 +532,24 @@ function anyFieldEmpty(array $array) {
     foreach ($array as $entry) {
         $test = trim($entry);
         if ($test === '') {
+            return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+/*
+ * Goes through each field, determining if it is empty, and returning true if it is AND if the field was not included
+ * among the arguments.
+ *
+ * @param array $array The array of fields to check.
+ *
+ * @return Returns TRUE if the field meets our definition of empty, otherwise FALSE.
+ */
+function fieldsNotEmpty(array $array, array $fields) {
+    foreach ($array as $key => $value) {
+        $test = trim($value);
+        if ($test === '' && !in_array($key, $fields)) {
             return TRUE;
         }
     }
